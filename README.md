@@ -18,6 +18,14 @@ ETCFs from exponential to polynomial when the system contains multiple optical c
 
 ## Use
 
+```python
+from QuantumCorrelationSolver import QCS
+# creat the effective Hamiltonian
+...
+Heff
+
+```
+
 For more details and examples on the use of *QCS* see the documentation and example notebooks folder.
 
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="735px">
