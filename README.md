@@ -5,11 +5,15 @@ in driven-dissipative quantum systems. The documentation for the package and exa
 Here, the system needs to meet two conditions. One is that the system Hamiltonian that does't include the coherent driving part must satisfy U(1) symmetry, namely the 
 total excitation number conservation. The other is that the driving strength must be small enough. Based on the two points, we could reduce the computation complexity of 
 ETCFs from exponential to polynomial when the system contains multiple optical cavities, emitters, and both.
-## Some applications in quantum optics
-* Transmission and reflectance spectrums
-* Multiphoton blockade and antibunching
-* Dynamical photon blockade
-* Cross-correlation
+
+## Computable physical quantites and quantum effects in quantum optics
+* Transmission and reflectance spectrums, ETCFs, and cross-correlation function.
+* Photon blockade, antibunching and bunching effects.
+* Dynamical photon blockade effects.
+## The commonest systems
+* Cavity QED system.
+* Waveguide QED system.
+
 ## Installation
 
 ## Use
