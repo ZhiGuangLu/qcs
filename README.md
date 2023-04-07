@@ -16,7 +16,7 @@ ETCFs from exponential to polynomial when the system contains multiple optical c
 
 For more details and examples on the use of ***QCS*** see the documentation and example notebooks folder.
 ## License
-
+QCS is licensed under the terms of the BSD license.
 ## Documentation
 
 ## Notebooks
