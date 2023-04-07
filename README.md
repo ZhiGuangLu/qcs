@@ -14,7 +14,7 @@ ETCFs from exponential to polynomial when the system contains multiple optical c
 
 ## Use
 
-For more details and examples on the use of ***QCS*** see the documentation and example notebooks folder.
+For more details and examples on the use of *QCS* see the documentation and example notebooks folder.
 
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="735px">
 
