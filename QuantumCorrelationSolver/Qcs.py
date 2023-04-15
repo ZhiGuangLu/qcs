@@ -209,9 +209,9 @@ class qcs:
 
         "a"  ==> bosonic annilihlation operator, such as cavity field mode
 
-        "sp" ==> raising operator: |e><g|, such as two-level spin
+        "sp" ==> raising operator: |e><g\|, such as two-level spin
 
-        "sm" ==> lowering operator: |g><e|, such as two-level spin
+        "sm" ==> lowering operator: |g><e\|, such as two-level spin
 
         "Sp_N" ==> Sp_N = \sum_{i=1}^{N}{sp_i}, N collective two-level spins
 
@@ -568,11 +568,33 @@ class qcs:
                 return -4  # multiple-to-multiple-differnt
 
     def calculate_quantity(self, Quantity: str, tlist=0, zp=0):
-        """
+        """Calculating a series of physical quantities. For example,
+        \-----------------------------------------------------------------------------------------------\
+        Quantity = "c1" ==> single-photon transmission
 
-        :param Quantity:
-        :param tlist:
-        :param zp:
+        Quantity = "c1c1" ==> 2nd-order equal-time correlation function
+
+        Quantity = "c1c2" ==> 2nd-order equal-time cross-correlation function
+
+        Quantity = "c1c1c1" ==> 3rd-order equal-time correlation function
+
+        ...
+        \-----------------------------------------------------------------------------------------------\
+        Note that these physical quantities describe the statistical properties of output light in the output channel.
+
+        When input channel is different from the output channel, e.g., input channel "b1" and output channel "c1", the
+        physical quantity can represent the correlation function about system's modes based on the input-output formalism.
+        For example, the input-output relation about output channel "c1" is given by c1_{out} = c1_{in} - i * mode,
+        and we assume that mode = \\\sqrt{\\\kappa} * a_1 and Quantity = "c1c1". The 2nd-order equal-time correlation function
+        is equivalent to the correlation function of mode a_1.
+
+        Here, we consider the presence of tlist only when the frequencies of incoming coherent states are not identical, and consider
+        zp only when the effective Hamiltonian is irreversible, i.e.,
+
+            inv(Heff^{(n)} - ome - i0^{+}) ≠ 0 ==> zp = i0^{+}
+        :param Quantity: physical quantity
+        :param tlist: a time lsit
+        :param zp: an infinitely small quantity
         :return: the corresponding physical quantity
         """
         inv, exp, abs = nlg.inv, np.exp, np.abs
@@ -882,12 +904,17 @@ class qcs:
             print("This function is not yet available")
 
     def calculate_2nd_uETCF(self, channel_name: str, tau=0, zp=0):
-        """
+        """Calculating the 2nd-order unequal-time coreelation function . For example,
+                \-----------------------------------------------------------------------------------------------\
+                channel_name = "c1" ==>
 
-        :param channel_name:
-        :param tau:
-        :param zp:
-        :return:
+                g^{(2)}(\\\ tau) = <c1^{\\\dagger}(0)c1^{\\\dagger}(\\\ tau)c1(\\\ tau) c1(0)> / <c1^{\\\dagger} c1>^2
+
+                \-----------------------------------------------------------------------------------------------\
+                :param channel_name: the name of output channel
+                :param tau: the delay time
+                :param zp: an infinitely small quantity
+                :return: the 2nd-order unequal-time coreelation function (uETCF)
         """
         inv, abs, expm = nlg.inv, np.abs, slg.expm  # Assign to a local variable
         key_out = [channel_name for _ in range(2)]
