@@ -19,6 +19,9 @@ Download the whole files
 ## Use
 
 ```python
+import sys
+path = "xxx" # the path of directory where the "main" file is stored
+sys.path.append(path) 
 from main.Qcs import qcs
 # creat the effective Hamiltonian
 ...
