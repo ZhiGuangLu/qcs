@@ -32,13 +32,13 @@ result = qcs(Heff, Input, Output)
 gn_0 = result.calculate_quantity(Quantity)
 ```
 
-For more details and examples on the use of *QCS* see the documentation and example folder.
+For more details and examples on the use of *QCS* see the handbook and example folder.
 
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="735px">
 
 ## License
 QCS is licensed under the terms of the BSD license.
-## Documentation
+## Handbook
 
 ## Notebooks
 
