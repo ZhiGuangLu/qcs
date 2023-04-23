@@ -26,7 +26,7 @@ Heff
 
 ```
 
-For more details and examples on the use of *QCS* see the documentation and example notebooks folder.
+For more details and examples on the use of *QCS* see the documentation and example folder.
 
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="735px">
 
