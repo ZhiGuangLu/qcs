@@ -49,5 +49,5 @@ QCS is licensed under the terms of the BSD license.
 
 ## Supplementary instruction
 Due to the limited level of my programming ability, I can't provide a professional python package, so user first must download the whole files, 
-and then call the Qcs.py file. On the one hand, I try my best to reduce the runtime and provide the performance, and I guarantee its corectness
-(see the tests folder). On the other hand, If there are some bugs running the code, please immediately contact me.
+and then call the Qcs.py file. Meanwhile, I've optimized the code to the best of my ability, and I guarantee its corectness
+(see the tests folder). Finally, If there are some bugs running the code, please immediately contact me.
