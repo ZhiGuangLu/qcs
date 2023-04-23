@@ -47,4 +47,3 @@ QCS is licensed under the terms of the BSD license.
 
 ## Citation
 
-## Resources
