@@ -14,6 +14,9 @@ ETCFs from exponential to polynomial when the system contains multiple optical c
 * Cavity QED system.
 * Waveguide QED system.
 
+## Citation
+We will have a paper on arXiv.
+
 ## Installation
 Download the whole files
 ## Use
@@ -44,8 +47,6 @@ QCS is licensed under the terms of the BSD license.
 ## Handbook
 
 ## Notebooks
-
-## Citation
 
 ## Supplementary instruction
 Due to the limited level of my programming ability, I can't provide a professional python package, so user first must download the whole files, 
