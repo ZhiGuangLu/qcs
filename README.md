@@ -16,14 +16,14 @@ ETCFs from exponential to polynomial when the system contains multiple optical c
 
 
 ## Installation
-Download the whole files
+```python
+
+pip install phy_qcs
+```
 ## Use
 
 ```python
-import sys
-path = "xxx" # the path of directory where the "main" file is stored
-sys.path.append(path) 
-from main.Qcs import qcs
+from phy_qcs import qcs
 # creat the effective Hamiltonian
 ...
 Heff
