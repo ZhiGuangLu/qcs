@@ -53,4 +53,4 @@ and then call the Qcs.py file. Meanwhile, I've optimized the code to the best of
 QCS is licensed under the terms of the BSD license.
 
 ## Update log
-`1.0.0` first release
+`1.0.1` first release
