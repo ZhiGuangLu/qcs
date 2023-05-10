@@ -50,7 +50,7 @@ result = system.calculate_quantity(Quantity)
 For more details and examples on the use of *QCS* see the handbook and [example](https://github.com/ZhiGuangLu/qcs/tree/main/examples) folder. Besides, 
 we've provided the numerical comparision results in [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder.
 
-<img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="980px">
+<img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="965px">
 
 ## Citation
 
