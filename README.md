@@ -34,7 +34,7 @@ Input
 Output
 # calculate physical quantity
 system = qcs(Heff, Input, Output)
-gn_0 = system.calculate_quantity(Quantity)
+result = system.calculate_quantity(Quantity)
 ```
 
 For more details and examples on the use of *QCS* see the handbook and [example](https://github.com/ZhiGuangLu/qcs/tree/main/examples) folder. Besides, 
