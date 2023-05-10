@@ -57,9 +57,8 @@ we've provided the numerical comparision results in [tests](https://github.com/Z
 We will have a paper on arXiv.
 
 ## Supplementary instruction
-Due to the limited level of my programming ability, I can't provide a professional python package, so user first must download the whole files, 
-and then call the Qcs.py file. Meanwhile, I've optimized the code to the best of my ability, and I guarantee its corectness
-(see the tests folder). Finally, If there are some bugs running the code, please immediately contact me.
+Due to the limited level of my programming ability, I've optimized the code to the best of my ability, and I guarantee its corectness
+(see the [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder). Finally, If there are some bugs running the code, please immediately contact me.
 
 ## License
 QCS is licensed under the terms of the BSD license.
