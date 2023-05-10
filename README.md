@@ -4,6 +4,7 @@
 [![PyPI - Status](https://img.shields.io/pypi/status/qcs_phy)](https://pypi.org/project/qcs-phy/)
 [![PyPI - License](https://img.shields.io/pypi/l/qcs_phy)](https://pypi.org/project/qcs-phy/)
 [![GitHub repo size](https://img.shields.io/github/repo-size/ZhiGuangLu/qcs)](https://github.com/ZhiGuangLu/qcs)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ZhiGuangLu/qcs)](https://github.com/ZhiGuangLu/qcs)
 [![GitHub Repo stars](https://img.shields.io/github/stars/ZhiGuangLu/qcs)](https://github.com/ZhiGuangLu/qcs)
 
 QCS is an open-source Python code that allows to study the single-photon transmission and reflection, as well as the  *n*th-order equal-time correlation functions (ETCFs)
