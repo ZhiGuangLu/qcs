@@ -1,5 +1,10 @@
 # Quantum Correlation Solver (QCS)
-[![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://pypi.org/project/qcs-phy)
+[![PyPI](https://img.shields.io/pypi/v/qcs_phy)](https://pypi.org/project/qcs-phy/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/qcs_phy)](https://pypi.org/project/qcs-phy/)
+[![PyPI - Status](https://img.shields.io/pypi/status/qcs_phy)](https://pypi.org/project/qcs-phy/)
+[![PyPI - License](https://img.shields.io/pypi/l/qcs_phy)](https://pypi.org/project/qcs-phy/)
+[![GitHub repo size](https://img.shields.io/github/repo-size/ZhiGuangLu/qcs)](https://github.com/ZhiGuangLu/qcs)
+[![GitHub Repo stars](https://img.shields.io/github/stars/ZhiGuangLu/qcs)](https://github.com/ZhiGuangLu/qcs)
 
 QCS is an open-source Python code that allows to study the single-photon transmission and reflection, as well as the  *n*th-order equal-time correlation functions (ETCFs)
 in driven-dissipative quantum systems. The handbook about the package and example notebooks can be found in the current directory.
