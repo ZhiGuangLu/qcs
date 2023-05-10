@@ -20,7 +20,7 @@ We've uploaded the open source package to [PyPI](https://pypi.org/project/qcs-ph
 ```
 pip install qcs_phy
 ```
-Before installing, please ensure you've added the Python packages: ``` numpy, scipy ```.
+Before installing, please ensure you've added the Python packages: ``` numpy, scipy ```
 ## Use
 
 ```python
