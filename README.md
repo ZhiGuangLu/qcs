@@ -16,11 +16,11 @@ ETCFs from exponential to polynomial when the system contains multiple optical c
 
 
 ## Installation
-We've uploaded the open source package to *[PyPI](https://pypi.org/project/qcs-phy)*.
-```python
-
+We've uploaded the open source package to *[PyPI](https://pypi.org/project/qcs-phy)*, and you can add this package into your Python with the command,
+```
 pip install qcs_phy
 ```
+Before installing, please ensure you've added the Python packages: ``` numpy, scipy ```.
 ## Use
 
 ```python
