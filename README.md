@@ -1,4 +1,6 @@
 # Quantum Correlation Solver (QCS)
+[![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://pypi.org/project/qcs-phy)
+
 QCS is an open-source Python code that allows to study the single-photon transmission and reflection, as well as the  *n*th-order equal-time correlation functions (ETCFs)
 in driven-dissipative quantum systems. The handbook about the package and example notebooks can be found in the current directory.
 ## Applicable conditions
