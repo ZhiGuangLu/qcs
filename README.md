@@ -16,7 +16,7 @@ ETCFs from exponential to polynomial when the system contains multiple optical c
 
 
 ## Installation
-We've uploaded the open source package to *[PyPI](https://pypi.org/project/qcs-phy)*, and you can add this package into your Python with the command,
+We've uploaded the open source package to [PyPI](https://pypi.org/project/qcs-phy), and you can add this package into your Python with the command,
 ```
 pip install qcs_phy
 ```
@@ -37,7 +37,7 @@ system = qcs(Heff, Input, Output)
 gn_0 = system.calculate_quantity(Quantity)
 ```
 
-For more details and examples on the use of *QCS* see the handbook and example folder.
+For more details and examples on the use of *QCS* see the handbook and [example](https://github.com/ZhiGuangLu/qcs/tree/main/examples) folder.
 
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="735px">
 
