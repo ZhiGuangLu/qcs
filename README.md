@@ -36,12 +36,10 @@ If you have any problems installing the tool, please open an issue or write to u
 ```python
 from qcs_phy import qcs
 # creat the effective Hamiltonian
-...
-Heff
+...Heff
 # creat the input and output channels
-...
-Input
-Output
+...Input
+...Output
 # calculate physical quantity
 system = qcs(Heff, Input, Output)
 result = system.calculate_quantity(Quantity)
