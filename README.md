@@ -52,7 +52,9 @@ we've provided the numerical comparision results in [tests](https://github.com/Z
 
 ## Citation
 
-We will have a paper on arXiv.
+We will have a paper on arXiv. 
+
+http://arxiv.org/abs/2305.08923
 
 ## Supplementary instruction
 Due to the limited level of my programming ability, I've optimized the code to the best of my ability, and I guarantee its corectness
