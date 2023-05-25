@@ -215,7 +215,7 @@ def update_H(H: list) -> list:
 
 
 class qcs:
-    __Dim = {}
+    __Dim = dict()
     __BasisList = dict()
     __HeffList = dict()
     __InOutList = dict()
@@ -520,74 +520,67 @@ class qcs:
             Out_m[key] = sum_sparse([qcs.__InOutList[n_exc][x[1]] * x[0] for x in value])
         return Out_m
 
-    def print_Dim(self, n_exc: int, p=1):
+    def print_Dim(self, n_exc: int):
         """
         This function is used to print the dimension, which corresponds to excitation number n_exc.
         :param n_exc: the excitation number
-        :param p: print (p=1) or return (p=0), the default is printing
         """
         self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__Dim.clear()
+            qcs.__Judge_Heff = self.__Heff_v
         if n_exc not in qcs.__Dim.keys():
             self.__basis(n_exc)
-        if p == 1:
-            print(self.__Dim[n_exc])
-        else:
-            return self.__Dim[n_exc]
+        return self.__Dim[n_exc]
 
-    def print_basis(self, n_exc: int, p=1):
+    def print_basis(self, n_exc: int):
         """
         This function is used to print the basis vectors, which corresponds to excitation number (n_exc).
         :param n_exc: the excitation number
-        :param p: print (p=1) or return (p=0), the default is printing
         """
         self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__BasisList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
         if n_exc not in qcs.__BasisList.keys():
             self.__basis(n_exc)
-        if p == 1:
-            print(qcs.__BasisList[n_exc])
-        else:
-            return qcs.__BasisList[n_exc]
+        return qcs.__BasisList[n_exc]
 
-    def print_InOutput(self, n_exc: int, channel_name: str, p=1):
+    def print_InOutput(self, n_exc: int, channel_name: str):
         """
         This function is used to print the matrix, which corresponds to the projections of the input/output mode
         onto the direct sum of the (n_exc-1)-th abd (n_exc)-th excitation subspace.
         :param n_exc: the excitation number
         :param channel_name: the name of channel
-        :param p: print (p=1) or return (p=0), the default is printing
         """
         self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__InOutList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
         if n_exc not in qcs.__InOutList.keys():
             self.__basis(n_exc - 1)
             self.__basis(n_exc)
             self.__prestore_InOutList(n_exc)
         if channel_name in self.__Input:
-            if p == 1:
-                print(self.__Input_Matrix(n_exc)[channel_name])
-            else:
-                return self.__Input_Matrix(n_exc)[channel_name]
+            return self.__Input_Matrix(n_exc)[channel_name]
         elif channel_name in self.__Output:
-            if p == 1:
-                print(self.__Output_Matrix(n_exc)[channel_name])
-            else:
-                return self.__Output_Matrix(n_exc)[channel_name]
+            return self.__Output_Matrix(n_exc)[channel_name]
         else:
             print("Sorry, the channel name %s does not exist." % channel_name)
 
-    def print_Heff(self, n_exc: int, p=1):
+    def print_Heff(self, n_exc: int):
         """
-        This function is used to print the correspondint effective Hamiltonian in the excitation subspace (n_exc).
+        This function is used to input the correspondint effective Hamiltonian in the excitation subspace (n_exc).
         :param n_exc: the excitation number
-        :param p: print (p=1), return (p=0), the default is printing
         """
         self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__HeffList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
         if n_exc not in qcs.__HeffList.keys():
             self.__basis(n_exc)
             self.__prestore_HeffList(n_exc)
-        if p == 1:
-            print(self.__Heff_Matrix(n_exc))
-        else:
-            return self.__Heff_Matrix(n_exc)
+        return self.__Heff_Matrix(n_exc)
 
     def __classification(self, photons: list):
         """
