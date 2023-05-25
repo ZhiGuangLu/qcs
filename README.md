@@ -65,3 +65,5 @@ QCS is licensed under the terms of the BSD license.
 
 ## Update log
 `1.0.0` first release
+
+`1.0.1` fix functions: `print_Dim`,`print_basis`,`print_InOutput`,`print_Heff`
