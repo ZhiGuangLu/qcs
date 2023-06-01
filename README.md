@@ -66,4 +66,6 @@ QCS is licensed under the terms of the BSD license.
 ## Update log
 `1.0.0` first release
 
-`1.0.1` fix functions: `print_Dim`,`print_basis`,`print_InOutput`,`print_Heff`
+`1.0.1` fixed functions: `print_Dim`,`print_basis`,`print_InOutput`,`print_Heff`
+
+`1.0.2` fixed the problem of the denominator about calculating the single-photon transimsion and reflection when the collective spins are coherently driven 
