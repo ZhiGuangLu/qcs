@@ -51,10 +51,7 @@ we've provided the numerical comparision results in [tests](https://github.com/Z
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="965px">
 
 ## Citation
-
-We will have a paper on arXiv. 
-
-http://arxiv.org/abs/2305.08923
+The article is available at: http://arxiv.org/abs/2305.08923.
 
 ## Supplementary instruction
 Due to the limited level of my programming ability, I've optimized the code to the best of my ability, and I guarantee its corectness(see the [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder). Finally, If there are some bugs running the code, please immediately contact me.
@@ -67,7 +64,6 @@ QCS is licensed under the terms of the BSD license.
 
 `1.0.1` fixed functions: `print_Dim`,`print_basis`,`print_InOutput`,`print_Heff`
 
-`1.0.2` fixed the problem of the denominator about calculating the single-photon transmission and reflection when the collective spins are 
-`       ` coherently driven 
+`1.0.2` fixed the problem of the denominator about calculating the single-photon transmission and reflection when the collective spins are coherently driven 
 
 `1.0.3` fixed the formula of the single-photon transmission and reflection
