@@ -681,12 +681,14 @@ class qcs:
             key_in = list(self.__Input.keys())[0]
             ome_list = self.__Frequency[key_in]
             if n_exc == 1:
+                k_str = [''.join(list(filter(str.isdigit, self.__Input[key_in][0][1][0])))]
+                k_int = [int(ks) if ks != '' else 1 for ks in k_str]
                 B, C, H0 = self.__Input_Matrix(1)[key_in].conj().T, self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
                 I = np.eye(qcs.__Dim[n_exc])
                 if type(ome_list) not in number_type:
-                    return [(abs(C @ inv(H0 - (ome + zp) * I) @ B) ** 2)[0, 0] for ome in ome_list]
+                    return [(abs(C @ inv(H0 - (ome + zp) * I) @ B) ** 2 / k_int[0])[0, 0] for ome in ome_list]
                 else:
-                    return (abs(C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2)[0, 0]
+                    return (abs(C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2 / k_int[0])[0, 0]
             else:
                 B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
                 C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
@@ -702,12 +704,14 @@ class qcs:
             key_in = list(self.__Input.keys())[0]
             ome_list = self.__Frequency[key_in]
             if n_exc == 1:
+                k_str = [''.join(list(filter(str.isdigit, self.__Input[key_in][0][1][0])))]
+                k_int = [int(ks) if ks != '' else 1 for ks in k_str]
                 B, C, H0 = self.__Input_Matrix(1)[key_in].conj().T, self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
                 I = np.eye(qcs.__Dim[n_exc])
                 if type(ome_list) not in number_type:
-                    return [(abs(1 + 1j * C @ inv(H0 - (ome + zp) * I) @ B) ** 2)[0, 0] for ome in ome_list]
+                    return [(abs(1 + 1j * C @ inv(H0 - (ome + zp) * I) @ B) ** 2 / k_int[0])[0, 0] for ome in ome_list]
                 else:
-                    return (abs(1 + 1j * C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2)[0, 0]
+                    return (abs(1 + 1j * C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2 / k_int[0])[0, 0]
             else:
                 B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
                 C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
@@ -729,12 +733,15 @@ class qcs:
                 ome_list = ome_list[0]
                 if n_exc == 1:
                     B, C, H0 = sum([self.__ratio[key] * self.__Input_Matrix(1)[key].conj().T for key in key_in]), self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
-                    k_sum = sum(self.__ratio.values())
+                    k_sum = list(self.__ratio.values())
+                    k_str = [''.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != '' else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
                     I = np.eye(qcs.__Dim[n_exc])
                     if type(ome_list) not in number_type:
-                        return [(abs(C @ inv(H0 - ome * I) @ B / k_sum) ** 2)[0, 0] for ome in ome_list]
+                        return [(abs(C @ inv(H0 - ome * I) @ B) ** 2 / k_sum)[0, 0] for ome in ome_list]
                     else:
-                        return (abs(C @ inv(H0 - ome_list * I) @ B / k_sum) ** 2)[0, 0]
+                        return (abs(C @ inv(H0 - ome_list * I) @ B) ** 2 / k_sum)[0, 0]
                 else:
                     B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, n_exc + 1)]
                     C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
@@ -755,7 +762,10 @@ class qcs:
                 ary = n_m_ary(n_exc, len(key_in))
                 comb_s = [covert_to_decimals(ary_i, len(key_in)) for ary_i in ary]
                 if n_exc == 1:
-                    k_sum = sum(self.__ratio.values())
+                    k_sum = list(self.__ratio.values())
+                    k_str = [''.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != '' else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
                     B = [self.__Input_Matrix(1)[key].conj().T for k, key in enumerate(key_in)]
                     if type(tlist) not in number_type:
                         T_t = []
@@ -763,12 +773,12 @@ class qcs:
                         for t in tlist:
                             N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
                             Blist = [N[k] * B[k] for k in range(len(B))]
-                            append((abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / abs(k_sum) ** 2)[0, 0])
+                            append((abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0])
                         return T_t
                     else:
                         N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
                         Blist = [N[k] * B[k] for k in range(len(B))]
-                        return (abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / abs(k_sum) ** 2)[0, 0]
+                        return (abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0]
                 else:
                     C_tot = left_prod(C)
                     B = [[self.__Input_Matrix(n)[key].conj().T for key in key_in] for n in range(1, n_exc + 1)]
@@ -805,12 +815,15 @@ class qcs:
                 ome_list = ome_list[0]
                 if n_exc == 1:
                     B, C, H0 = sum([self.__ratio[key] * self.__Input_Matrix(1)[key].conj().T for key in key_in]), self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
-                    k_sum = sum(self.__ratio.values())
+                    k_sum = list(self.__ratio.values())
+                    k_str = [''.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != '' else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
                     I = np.eye(qcs.__Dim[n_exc])
                     if type(ome_list) not in number_type:
-                        return [(abs((self.__ratio[key_out] + 1j * C @ inv(H0 - ome * I) @ B) / k_sum) ** 2)[0, 0] for ome in ome_list]
+                        return [(abs(self.__ratio[key_out] + 1j * C @ inv(H0 - ome * I) @ B) ** 2 / k_sum)[0, 0] for ome in ome_list]
                     else:
-                        return (abs((self.__ratio[key_out] + 1j * C @ inv(H0 - ome_list * I) @ B) / k_sum) ** 2)[0, 0]
+                        return (abs(self.__ratio[key_out] + 1j * C @ inv(H0 - ome_list * I) @ B) ** 2 / k_sum)[0, 0]
                 else:
                     B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, n_exc + 1)]
                     C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
@@ -832,7 +845,10 @@ class qcs:
                 C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
                 loc = key_in.index(key_out)
                 if n_exc == 1:
-                    k_sum = sum(self.__ratio.values())
+                    k_sum = list(self.__ratio.values())
+                    k_str = [''.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != '' else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
                     B = [self.__Input_Matrix(1)[key].conj().T for k, key in enumerate(key_in)]
                     if type(tlist) not in number_type:
                         T_t = []
@@ -840,12 +856,12 @@ class qcs:
                         for t in tlist:
                             N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
                             Blist = [N[k] * B[k] for k in range(len(B))]
-                            append((abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / abs(k_sum) ** 2)[0, 0])
+                            append((abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0])
                         return T_t
                     else:
                         N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
                         Blist = [N[k] * B[k] for k in range(len(B))]
-                        return (abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / abs(k_sum) ** 2)[0, 0]
+                        return (abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0]
                 else:
                     ary_s = [n_m_ary(n, len(key_in)) for n in range(1, n_exc + 1)]
                     comb_s = [[covert_to_decimals(ary_i, len(key_in)) for ary_i in ary] for ary in ary_s]
@@ -950,25 +966,30 @@ class qcs:
         else:  # many-to-many-same
             print("This function is not yet available")
 
-    def calculate_2nd_uETCF(self, channel_name: str, tau=0, zp=0):
+    def calculate_2nd_uETCF(self, Quantity: str, tau=0, zp=0):
         """Calculating the 2nd-order unequal-time coreelation function . For example,
                 \-----------------------------------------------------------------------------------------------\
-                channel_name = "c1" ==>
+                Quantity = "c1c1" ==>
 
                 g^{(2)}(\\\ tau) = <c1^{\\\dagger}(0)c1^{\\\dagger}(\\\ tau)c1(\\\ tau) c1(0)> / <c1^{\\\dagger} c1>^2
 
                 \-----------------------------------------------------------------------------------------------\
-                :param channel_name: the name of output channel
+                :param Quantity: physical quantity
                 :param tau: the delay time
                 :param zp: an infinitely small quantity
                 :return: the 2nd-order unequal-time coreelation function (uETCF)
         """
         inv, abs, expm = nlg.inv, np.abs, slg.expm  # Assign to a local variable
-        key_out = [channel_name for _ in range(2)]
+        photons = {}
+        for mode in self.__Output.keys():
+            photons[mode] = Quantity.count(mode)
+        key_out = [key for key in photons for _ in range(photons[key])]
         label = self.__classification(key_out)
+        if len(set(key_out)) == 1:
+            key_out = key_out[0]
         self.__excitation_number()
         if self.__Heff_v != qcs.__Judge_Heff:
-            qcs.__BasisList.clear()
+            qcs.__HeffList.clear()
             qcs.__Judge_Heff = self.__Heff_v
             qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
             for n in range(0, 3):
@@ -979,21 +1000,26 @@ class qcs:
         elif compare_dicts(self.__Input, qcs.__Judge_InOut) and compare_dicts(self.__Output, qcs.__Judge_InOut):
             pass
         else:
+            qcs.__InOutList.clear()
             qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
             for n in range(1, 3):
                 self.__prestore_InOutList(n)
         for n in range(1, 3):
-            if n not in list(qcs.__BasisList.keys()):
+            if n not in list(qcs.__HeffList.keys()):
                 self.__basis(n)
                 self.__prestore_HeffList(n)
                 self.__prestore_InOutList(n)
+            elif n not in list(qcs.__InOutList.keys()):
+                self.__basis(n)
+                self.__prestore_InOutList(n)
             else:
                 pass
+
         if label == -1:  # one-to-one-differnt
             key_in = list(self.__Input.keys())[0]
             ome = self.__Frequency[key_in]
             B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, 3)]
-            C = [self.__Output_Matrix(n)[channel_name] for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
             I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
             Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
             P1 = C[0] @ inv(Heff[0]) @ B[0]
@@ -1014,7 +1040,7 @@ class qcs:
             key_in = list(self.__Input.keys())[0]
             ome = self.__Frequency[key_in]
             B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, 3)]
-            C = [self.__Output_Matrix(n)[channel_name] for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
             I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
             Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
             P1 = C[0] @ inv(Heff[0]) @ B[0]
@@ -1035,7 +1061,7 @@ class qcs:
             key_in = list(self.__Input.keys())
             ome = list(self.__Frequency.values())[0]
             B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, 3)]
-            C = [self.__Output_Matrix(n)[channel_name] for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
             I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
             Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
             P1 = C[0] @ inv(Heff[0]) @ B[0]
@@ -1056,13 +1082,13 @@ class qcs:
             key_in = list(self.__Input.keys())
             ome = list(self.__Frequency.values())[0]
             B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, 3)]
-            C = [self.__Output_Matrix(n)[channel_name] for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
             I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
             Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
             P1 = C[0] @ inv(Heff[0]) @ B[0]
             P1_R = inv(Heff[0]) @ B[0]
             P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
-            ratio_c = self.__ratio[channel_name]
+            ratio_c = self.__ratio[key_out]
             if type(tau) not in number_type:
                 g2_t = []
                 append = g2_t.append
