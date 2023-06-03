@@ -67,3 +67,5 @@ QCS is licensed under the terms of the BSD license.
 `1.0.2` fixed the problem of the denominator about calculating the single-photon transmission and reflection when the collective spins are coherently driven 
 
 `1.0.3` fixed the formula of the single-photon transmission and reflection
+
+`1.0.4` updated the function: `calculate_2nd_uETCF`
