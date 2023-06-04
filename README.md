@@ -4,8 +4,9 @@
 [![PyPI - Status](https://img.shields.io/pypi/status/qcs_phy)](https://pypi.org/project/qcs-phy/)
 [![PyPI - License](https://img.shields.io/pypi/l/qcs_phy)](https://pypi.org/project/qcs-phy/)
 [![GitHub repo size](https://img.shields.io/github/repo-size/ZhiGuangLu/qcs)](https://github.com/ZhiGuangLu/qcs)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ZhiGuangLu/qcs)](https://github.com/ZhiGuangLu/qcs)
-[![GitHub Repo stars](https://img.shields.io/github/stars/ZhiGuangLu/qcs)](https://github.com/ZhiGuangLu/qcs)
+[![Downloads](https://static.pepy.tech/personalized-badge/qcs-phy?period=month&units=international_system&left_color=black&right_color=orange&left_text=Downloads)](https://pepy.tech/project/qcs-phy)
+
+
 
 QCS is an open-source Python code that allows to study the single-photon transmission and reflection, as well as the  *n*th-order equal-time correlation functions (ETCFs)
 in driven-dissipative quantum systems. The handbook about the package and example notebooks can be found in the current directory.
