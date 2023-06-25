@@ -24,7 +24,7 @@ ETCFs from exponential to polynomial when the system contains multiple optical c
 
 
 ## Installation
-We've uploaded the open source package to [PyPI](https://pypi.org/project/qcs-phy), and you can add this package into your Python with the command,
+We've uploaded the open source package to [PyPI](https://pypi.org/project/qcs-phy), and you can add this package to your Python with the command,
 ```
 pip install qcs_phy
 ```
@@ -35,26 +35,26 @@ If you have any problems installing the tool, please open an issue or write to u
 
 ```python
 from qcs_phy import qcs
-# creat the effective Hamiltonian
+# create the effective Hamiltonian
 ...Heff
-# creat the input and output channels
+# create the input and output channels
 ...Input
 ...Output
-# calculate physical quantity
+# calculate the physical quantity
 system = qcs(Heff, Input, Output)
 result = system.calculate_quantity(Quantity)
 ```
 
 For more details and examples on the use of *QCS* see the [handbook](https://github.com/ZhiGuangLu/qcs/tree/main/handbook) and [example](https://github.com/ZhiGuangLu/qcs/tree/main/examples) folder. Besides, 
-we've provided the numerical comparision results in [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder.
+we've provided the numerical comparison results in [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder.
 
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="965px">
 
 ## Citation
-The article is available at: http://arxiv.org/abs/2305.08923.
-
+There is an official article related to this package, and the article is available at: http://arxiv.org/abs/2305.08923.
+You can cite the article, if this package is greatly helpful for your research.
 ## Supplementary instruction
-Due to the limited level of my programming ability, I've optimized the code to the best of my ability, and I guarantee its corectness(see the [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder). Finally, If there are some bugs running the code, please immediately contact me.
+Due to the limited level of my programming ability, I've optimized the code to the best of my ability, and I guarantee its correctness (see the [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder). Finally, If there are some bugs running the code, please immediately contact me.
 
 ## License
 QCS is licensed under the terms of the BSD license.
