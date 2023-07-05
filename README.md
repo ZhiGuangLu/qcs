@@ -71,3 +71,5 @@ QCS is licensed under the terms of the BSD license.
 `1.0.4` updated the function: `calculate_2nd_uETCF`
 
 `1.0.5` deleted the function: `print_Dim`, and updated the function: `print_basis`
+
+`1.0.7` fixed the private function: `__prestore_HeffList`
