@@ -28,9 +28,12 @@ We've uploaded the open source package to [PyPI](https://pypi.org/project/qcs-ph
 ```
 pip install qcs_phy
 ```
-Before installing, please ensure you've added the Python packages: ``` numpy, scipy ```.
+Before installing, please ensure you've added the Python packages: ``` numpy, scipy ```. Besides, please use the latest version by updating your package with the command,
+```
+pip install qcs_phy -U
+```
+If you have any problems installing the tool, please open an issue or write to us. 
 
-If you have any problems installing the tool, please open an issue or write to us.
 ## Use
 
 ```python
