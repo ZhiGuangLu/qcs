@@ -29,8 +29,9 @@ number_type = [complex, int, float, np.int64, np.float64, np.complex128, np.comp
 
 def dagger(ope: str) -> str:
     """
-    :param ope: an operator: o
-    :return: o^{\\\dagger}
+    :param `ope`: an operator \(o\)
+
+    :return ` ` \(o^{\dagger}\)
     """
     if ope in ["a", "sm"]:
         if ope == "a":
@@ -54,10 +55,13 @@ def dagger(ope: str) -> str:
 
 def create_basis(n_exc: int, max_dims: list, k: list) -> list:
     """
-    :param n_exc: the excitation number
-    :param max_dims: the maximum dimension of each mode
-    :param k: the corresponding coefficient of each mode in the total excitation number operator
-    :return: all the possible basis vectors
+    :param `n_exc`: the excitation number
+
+    :param `max_dims`: the maximum dimension of each mode
+
+    :param `k`: the corresponding coefficient of each mode in the total excitation number operator
+
+    :return ` `all the possible basis vectors
     """
     Basis = []
     mod_num = len(k)
@@ -79,10 +83,13 @@ def create_basis(n_exc: int, max_dims: list, k: list) -> list:
 
 def basis_dot(m1: list, m2: np.ndarray, coff: np.ndarray) -> csr_matrix:
     """
-    :param m1: fixed basis vectors
-    :param m2: updated basis vectors after acted by all possible modes
-    :param coff: the coefficient created by all possible modes acted on fixed basis vectors
-    :return: a "dot" product between fixed basis vectors and updated basis vectors
+    :param `m1`: fixed basis vectors
+
+    :param `m2`: updated basis vectors after acted by all possible modes
+
+    :param `coff`: the coefficient created by all possible modes acted on fixed basis vectors
+
+    :return ` `a "dot" product between fixed basis vectors and updated basis vectors
     """
     line_1 = len(m1)
     line_2 = len(m2)
@@ -97,8 +104,9 @@ def basis_dot(m1: list, m2: np.ndarray, coff: np.ndarray) -> csr_matrix:
 
 def sum_sparse(m: list) -> np.ndarray:
     """
-    :param m: a list including multiple sparse matrices
-    :return: the summation of all sparse matrices in the list
+    :param `m`: a list including multiple sparse matrices
+
+    :return ` `the summation of all sparse matrices in the list
     """
     m_sum = np.zeros(m[0].shape, dtype=complex)
     for mi in m:
@@ -109,8 +117,9 @@ def sum_sparse(m: list) -> np.ndarray:
 
 def left_prod(C: list) -> np.ndarray:
     """
-    :param C: a list including multiple matrices, corresponding to the output operators in different excitation numbers
-    :return: the matrices product of all matrices in the list
+    :param `C`: a list including multiple matrices, corresponding to the output operators in different excitation numbers
+
+    :return ` `the matrices product of all matrices in the list
     """
     C_0 = C[0]
     for C_i in C[1:]:
@@ -120,12 +129,17 @@ def left_prod(C: list) -> np.ndarray:
 
 def right_prod(H: list, B: list, I: list, ome: float, zp: float or int) -> np.ndarray:
     """
-    :param H: a list including multiple matrices, corresponding to the effective Hamiltonian in different excitation numbers
-    :param B: a list including multiple matrices, corresponding to the input operators in different excitation numbers
-    :param I: a list including multiple matrices, corresponding to the identity operators in different excitation numbers
-    :param ome: the frequency of the incoming photon
-    :param zp: a coefficient for ensuring the invertibility of effective Hamiltonian
-    :return: a matrix acquired by a series of matrices multiplicatopm above
+    :param `H`: a list including multiple matrices, corresponding to the effective Hamiltonian in different excitation numbers
+
+    :param `B`: a list including multiple matrices, corresponding to the input operators in different excitation numbers
+
+    :param `I`: a list including multiple matrices, corresponding to the identity operators in different excitation numbers
+
+    :param `ome`: the frequency of the incoming photon
+
+    :param `zp`: a coefficient for ensuring the invertibility of effective Hamiltonian
+
+    :return ` `a matrix acquired by a series of matrices multiplicatopm above
     """
     inv = nlg.inv
     n_exc = len(B)
@@ -138,9 +152,11 @@ def right_prod(H: list, B: list, I: list, ome: float, zp: float or int) -> np.nd
 
 def sum_frequencies(omega: list or np.ndarray, n: int) -> list:
     """
-    :param omega: the frequencies of incoming photons, the corresponding type: list or np.ndarray
-    :param n: the total excitation number
-    :return: all possible frequencies combination in excitation number n
+    :param `omega`: the frequencies of incoming photons, the corresponding type: list or np.ndarray
+
+    :param `n`: the total excitation number
+
+    :return ` `all possible frequencies combination in excitation number n
     """
     sum_f = [[0]]
     for k in range(n):
@@ -150,9 +166,11 @@ def sum_frequencies(omega: list or np.ndarray, n: int) -> list:
 
 def n_m_ary(n: int, m: int) -> list:
     """
-    :param n: the total excitation number
-    :param m: the number of the input modes
-    :return: list
+    :param `n`: the total excitation number
+
+    :param `m`: the number of the input modes
+
+    :return ` `list
     """
     res = []
     for i in range(m ** n):
@@ -167,9 +185,11 @@ def n_m_ary(n: int, m: int) -> list:
 
 def covert_to_decimals(num_list: list, m: int) -> list:
     """
-    :param num_list: list
-    :param m: the number of input modes
-    :return: list
+    :param `num_list`: list
+
+    :param `m`: the number of input modes
+
+    :return ` `list
     """
     decimals = []
     n = len(num_list)
@@ -184,10 +204,13 @@ def covert_to_decimals(num_list: list, m: int) -> list:
 
 def compare_dicts(dict_a: dict, dict_b: dict) -> bool:
     """
-    In order to compare two dicts
-    :param dict_a: dict a
-    :param dict_b: dict b
-    :return: True or False
+        In order to compare two dicts
+
+    :param `dict_a`: dict a
+
+    :param `dict_b`: dict b
+
+    :return ` `True or False
     """
     for key in dict_a.keys():
         if key not in dict_b.keys() or [da[1:] for da in dict_a[key]] != [da[1:] for da in dict_b[key]]:
@@ -197,8 +220,9 @@ def compare_dicts(dict_a: dict, dict_b: dict) -> bool:
 
 def update_H(H: list) -> list:
     """
-    :param H: the effective Hamiltonian, list
-    :return: the nonredundant Hamiltonian terms
+    :param `H`: the effective Hamiltonian, list
+
+    :return ` ` the nonredundant Hamiltonian terms
     """
     H_c = [Hi[0] for Hi in H]
     H_v = [Hi[1:] for Hi in H]
@@ -224,44 +248,51 @@ class qcs:
 
     def __init__(self, Heff: list, Input: list, Output: list, ratio=None):
         """
-        Here, for each term in the effective Hamiltonian, such as Heff = E*a_1^\\\dagger*a_1, we use a list to represent it, i.e.,
-                                            Heff = [E, ("ad", 1), ("a", 1)],
-        where the first element represents the corresponding coefficient, and the last two elements represent the operator a_1^\\\dagger and a_1, respectively.
+        Here, for each term in the effective Hamiltonian, such as \(H_{eff} = E a_1^\dagger a_1\), we use a list to represent it, i.e.,
 
-        For example
-        \-----------------------------------------------------------------------------------------------\
-        Heff = E*a_1^\\\dagger*a_1 + U*a_1^\\\dagger*a_1^\\\dagger*a_1a_1
-        Heff = [[E, ("ad", 1), ("a", 1)], [U, ("ad", 1), ("ad", 1), ("a", 1), ("a", 1)]]
-        \-----------------------------------------------------------------------------------------------\
-        Note that the first and second elements in ("ad", 1) represent the operator and the corresponding subscript, respectively.
+                                        Heff = [E, ("ad", 1), ("a", 1)],
+
+        where the first element represents the corresponding coefficient, and the last two elements represent the operator \(a_1^\dagger\) and \(a_1\), respectively.
+
+        For example, \(H_{eff} = E a_1^\dagger a_1 + U a_1^\dagger a_1^\dagger a_1a_1\), and the python code is
+
+                    Heff = [[E, ("ad", 1), ("a", 1)], [U, ("ad", 1), ("ad", 1), ("a", 1), ("a", 1)]].
+
+        Note that the first and second elements in `("ad", 1)` represent the operator and the corresponding subscript, respectively.
 
         More importantly, we only give three symbols to represent the corresponding system's operators:
-        \-----------------------------------------------------------------------------------------------\
-        "ad" ==> bosonic creation operator, such as cavity field mode
 
-        "a"  ==> bosonic annilihlation operator, such as cavity field mode
+            "ad" ==> bosonic creation operator, such as cavity field mode
 
-        "sp" ==> raising operator: |e><g\|, such as two-level spin
+            "a"  ==> bosonic annilihlation operator, such as cavity field mode
 
-        "sm" ==> lowering operator: |g><e\|, such as two-level spin
+            "sp" ==> raising operator: |e><g|, such as two-level spin
 
-        "Sp_N" ==> Sp_N = \sum_{i=1}^{N}{sp_i}, N collective two-level spins
+            "sm" ==> lowering operator: |g><e|, such as two-level spin
 
-        "Sm_N" ==> Sm_N = \sum_{i=1}^{N}{sm_i}, N collective two-level spins
+            "Sp N=M" ==> Sp_M = \sum_{i=1}^{M}{sp_i}, M collective two-level spins
 
-        "Sz_N" ==> Sz_N = \sum_{i=1}^{N}{sp_i*sm_i}, N collective two-level spins
-        \-----------------------------------------------------------------------------------------------\
+            "Sm N=M" ==> Sm_M = \sum_{i=1}^{M}{sm_i}, M collective two-level spins
 
-        Meanwhile, the Input and Output variables must be acquired by the two functions Input_channel and Output_channel, respectively.
+            "Sz N=M" ==> Sz_M = \sum_{i=1}^{M}{sp_i*sm_i}, M collective two-level spins
+
+
+        Meanwhile, the Input and Output variables must be acquired by the two functions `Input_channel` and `Output_channel`, respectively.
 
         And the ratio variable represents that each input channel has a corresponding coherent amplitude,
-        e.g., b1==>\\beta_1, b2==>\\beta_2, b3==>\\beta_3, and we have ratio = [\\eta_1, \\eta_2, \\eta_3], where \\eta_k = \\beta_k / \\beta_1.
-        Of course, if there was only one input channel, we can ignore this variable, and the default value is [1,1,...,1].
+        e.g.,
+                \[b_1\Rightarrow β_1, b_2\Rightarrowβ_2, b_3\Rightarrowβ_3,\]
+        and we have
+                \[ratio = [β_1, β_2, β_3],\]
+        where \(η_k=β_k/β_1\). Of course, if there was only one input channel, we can ignore this variable, and the default value is `[1,1,...,1]`.
 
-        :param Heff: The effective Hamiltonian in the form of List[list].
-        :param Input: The input form is acquired by Input_channel function.
-        :param Output: The output form is acquired by Output_channel function.
-        :param ratio: The ratio between all input coherent amplitudes.
+        :param `Heff`: The effective Hamiltonian in the form of List[list].
+
+        :param `Input`: The input form is acquired by Input_channel function.
+
+        :param `Output`: The output form is acquired by Output_channel function.
+
+        :param `ratio`: The ratio between all input coherent amplitudes.
         """
         self.__Heff_c, self.__Heff_v = update_H(Heff)
         self.__Input = {}
@@ -294,18 +325,25 @@ class qcs:
 
     def Input_channel(channel_name: str, mode: list, frequency) -> dict:
         """
-        Assuming channel_name = "b1", the corresponding input-output formalism is
-                    b1_{out}(t) = b1_{in}(t) - i * mode.
-        For example, when mode is equal to \\sqrt{\\kappa} * a_1, it corresponds to
-                    mode = [\\sqrt{\\kappa}, ("a", 1)].
-        Obviously, if the mode could consist of multiple system's operators, such as
-                mode = \\sqrt{\\kappa_1} * a_1 + \sqrt{\\kappa_2} * a_2,
+        Assuming `channel_name = "b1"`, the corresponding input-output formalism is
+                    \[b_{1,out}(t) = b_{1,in}(t) - i  o_{b_1}.\]
+        For example, when \(o_{b_1}=\sqrt{κ} a_1\), it corresponds to
+
+                            o_b1 = [np.sqrt(κ), ("a", 1)].
+
+        Obviously, if \(o_{b_1}\) could consist of multiple system's operators, such as
+                \[o_{b_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,\]
         which corresponds to
-                mode = [[\\sqrt{\\kappa_1}, ("a", 1)], [\\sqrt{\\kappa_2}, ("a", 2)]]
-        :param channel_name: The input channel name, such as 'b1', 'b2', and etc.
-        :param mode: it consists of system's annihilation operator
-        :param frequency: driving frequency or incoming photon frequency
-        :return:
+
+                            o_b1 = [[np.sqrt(κ_1), ("a", 1)], [np.sqrt(κ_2), ("a", 2)]]
+
+        :param `channel_name`: The input channel name, such as `'b1', 'b2'`, and etc.
+
+        :param `mode`: it consists of system's annihilation operator, e.g., `o_b1`.
+
+        :param `frequency [number, list, array]`: driving frequency or incoming photon frequency.
+
+        :return ` `dict
         """
         Input = dict()
         if type(mode[0]) in number_type:
@@ -318,17 +356,23 @@ class qcs:
 
     def Output_channel(channel_name: str, mode: list) -> dict:
         """
-        Assuming channel_name = "c1", the corresponding input-output formalism is
-                    c1_{out}(t) = c1_{in}(t) - i * mode.
-        For example, when mode is equal to \\sqrt{\\kappa} * a_1, it corresponds to
-                    mode = [\\sqrt{\\kappa}, ("a", 1)].
-        Obviously, if the mode could consist of multiple system's operators, such as
-                mode = \\sqrt{\\kappa_1} * a_1 + \\sqrt{\\kappa_2} * a_2,
+        Assuming `channel_name = "c1"`, the corresponding input-output formalism is
+                    \[c_{1,out}(t) = c_{1,in}(t) - i o_{c_1}.\]
+        For example, when \(o_{c_1}=\sqrt{κ} a_1\), it corresponds to
+
+                            o_c1 = [np.sqrt(κ), ("a", 1)].
+
+        Obviously, if \(o_{c_1}\) could consist of multiple system's operators, such as
+                \[o_{c_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,\]
         which corresponds to
-                mode = [[\\sqrt{\\kappa_1}, ("a", 1)], [\\sqrt{\\kappa_2}, ("a", 2)]]
-        :param channel_name: The output channel name, such as 'c1', 'c2', and etc.
-        :param mode: It consists of system's annihilation operator
-        :return:
+
+                            o_c1 = [[np.sqrt(κ_1), ("a", 1)], [np.sqrt(κ_2), ("a", 2)]]
+
+        :param `channel_name`: The output channel name, such as `'c1', 'c2'`, and etc.
+
+        :param `mode`: It consists of system's annihilation operator, e.g., `o_c1`.
+
+        :return ` `dict
         """
         Output = dict()
         if type(mode[0]) in number_type:
@@ -420,32 +464,32 @@ class qcs:
 
             coff = np.ones((len(bas_fix),))
             bas_cor = np.array(bas_fix)
-            for H in Hi:
+            for H in Hi[::-1]:
                 if H[0] in ["a", "sm"]:
                     loc = self.__Ope_ani.index(H)
-                    bas_cor[:, loc] += 1
-                    coff = coff * emath.sqrt(bas_cor[:, loc])
-                elif H[0] in ["ad", "sp"]:
-                    loc = self.__Ope_cre.index(H)
                     coff = coff * emath.sqrt(bas_cor[:, loc])
                     bas_cor[:, loc] -= 1
+                elif H[0] in ["ad", "sp"]:
+                    loc = self.__Ope_cre.index(H)
+                    bas_cor[:, loc] += 1
+                    coff = coff * emath.sqrt(bas_cor[:, loc])
                 elif "Sm" in H[0]:
                     N_spin = int("".join(list(filter(str.isdigit, H[0]))))
                     loc = self.__Ope_ani.index(H)
-                    bas_cor[:, loc] += 1
                     coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+                    bas_cor[:, loc] -= 1
                 elif "Sp" in H[0]:
                     N_spin = int("".join(list(filter(str.isdigit, H[0]))))
                     loc = self.__Ope_cre.index(H)
+                    bas_cor[:, loc] += 1
                     coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
-                    bas_cor[:, loc] -= 1
                 elif "Sz" in H[0]:
                     N_spin = int("".join(list(filter(str.isdigit, H[0]))))
                     loc = self.__Ope_Szs.index(H)
                     coff = coff * bas_cor[:, loc]
                 else:
                     pass
-                Heff_nexc[tuple(Hi)] = basis_dot(bas_fix, bas_cor, coff)
+            Heff_nexc[tuple(Hi)] = basis_dot(bas_fix, bas_cor, coff)
         qcs.__HeffList[n_exc] = Heff_nexc
 
     def __prestore_InOutList(self, n_exc: int):
@@ -520,23 +564,13 @@ class qcs:
             Out_m[key] = sum_sparse([qcs.__InOutList[n_exc][x[1]] * x[0] for x in value])
         return Out_m
 
-    def print_Dim(self, n_exc: int):
-        """
-        This function is used to print the dimension, which corresponds to excitation number n_exc.
-        :param n_exc: the excitation number
-        """
-        self.__excitation_number()
-        if self.__Heff_v != qcs.__Judge_Heff:
-            qcs.__Dim.clear()
-            qcs.__Judge_Heff = self.__Heff_v
-        if n_exc not in qcs.__Dim.keys():
-            self.__basis(n_exc)
-        return self.__Dim[n_exc]
-
     def print_basis(self, n_exc: int):
         """
-        This function is used to print the basis vectors, which corresponds to excitation number (n_exc).
-        :param n_exc: the excitation number
+            This function is used to print the basis vectors, which corresponds to excitation number `n_exc`.
+
+        :param `n_exc`: the excitation number
+
+        :return ` `the information about the basis vector and all basis vectors in the excitation number (`n_exc`) subspace
         """
         self.__excitation_number()
         if self.__Heff_v != qcs.__Judge_Heff:
@@ -544,14 +578,18 @@ class qcs:
             qcs.__Judge_Heff = self.__Heff_v
         if n_exc not in qcs.__BasisList.keys():
             self.__basis(n_exc)
-        return qcs.__BasisList[n_exc]
+        return self.__Ope_ani, qcs.__BasisList[n_exc]
 
     def print_InOutput(self, n_exc: int, channel_name: str):
         """
-        This function is used to print the matrix, which corresponds to the projections of the input/output mode
-        onto the direct sum of the (n_exc-1)-th abd (n_exc)-th excitation subspace.
-        :param n_exc: the excitation number
-        :param channel_name: the name of channel
+                This function is used to print the matrix, which corresponds to the projections of the input/output mode
+                onto the direct sum of the (`n_exc-1`)-th abd (`n_exc`)-th excitation subspace.
+
+        :param `n_exc`: the excitation number
+
+        :param `channel_name`: the name of channel
+
+        :return ` `the input and output modes onto the direct sum of the (`n_exc-1`)-th abd (`n_exc`)-th excitation subspace.
         """
         self.__excitation_number()
         if self.__Heff_v != qcs.__Judge_Heff:
@@ -570,8 +608,11 @@ class qcs:
 
     def print_Heff(self, n_exc: int):
         """
-        This function is used to input the correspondint effective Hamiltonian in the excitation subspace (n_exc).
-        :param n_exc: the excitation number
+                This function is used to input the correspondint effective Hamiltonian in the excitation subspace `n_exc`.
+
+        :param `n_exc`: the excitation number
+
+        :return ` `the effective Hamiltonian in the excitation number (`n_exc`) subspace.
         """
         self.__excitation_number()
         if self.__Heff_v != qcs.__Judge_Heff:
@@ -612,33 +653,35 @@ class qcs:
 
     def calculate_quantity(self, Quantity: str, tlist=0, zp=0):
         """Calculating a series of physical quantities. For example,
-        \-----------------------------------------------------------------------------------------------\
-        Quantity = "c1" ==> single-photon transmission
 
-        Quantity = "c1c1" ==> 2nd-order equal-time correlation function
+            Quantity = "c1"     ==> The single-photon transmission
 
-        Quantity = "c1c2" ==> 2nd-order equal-time cross-correlation function
+            Quantity = "c1c1"   ==> The 2nd-order equal-time correlation function
 
-        Quantity = "c1c1c1" ==> 3rd-order equal-time correlation function
+            Quantity = "c1c2"   ==> The 2nd-order equal-time cross-correlation function
 
-        ...
-        \-----------------------------------------------------------------------------------------------\
+            Quantity = "c1c1c1" ==> The 3rd-order equal-time correlation function
+
         Note that these physical quantities describe the statistical properties of output light in the output channel.
 
-        When input channel is different from the output channel, e.g., input channel "b1" and output channel "c1", the
+        When input channel is different from the output channel, e.g., input channel `"b1"` and output channel `"c1"`, the
         physical quantity can represent the correlation function about system's modes based on the input-output formalism.
-        For example, the input-output relation about output channel "c1" is given by c1_{out} = c1_{in} - i * mode,
-        and we assume that mode = \\\sqrt{\\\kappa} * a_1 and Quantity = "c1c1". The 2nd-order equal-time correlation function
-        is equivalent to the correlation function of mode a_1.
+        For example, the input-output relation about output channel `"c1"` is given by
+        \[c_{1,out} = c_{1,in} - i o_{c_1},\]
+        and we assume that \(o_{c_1}=\sqrt{κ}a_1\) and `Quantity = "c1c1"`. The 2nd-order equal-time correlation function
+        is equivalent to the correlation function of mode \(a_1\).
 
         Here, we consider the presence of tlist only when the frequencies of incoming coherent states are not identical, and consider
-        zp only when the effective Hamiltonian is irreversible, i.e.,
+        `zp` only when the effective Hamiltonian is irreversible, i.e.,
+        \[ [H_{eff}^{(n)} - ω - i0^{+}]^{-1} ≠ 0 \Rightarrow zp = i0^{+}\]
 
-            inv(Heff^{(n)} - ome - i0^{+}) ≠ 0 ==> zp = i0^{+}
-        :param Quantity: physical quantity
-        :param tlist: a time lsit
-        :param zp: an infinitely small quantity
-        :return: the corresponding physical quantity
+        :param `Quantity`: physical quantity
+
+        :param `tlist [number, list, array]`: a time variable
+
+        :param `zp`: an infinitely small quantity
+
+        :return `[number, list]`the corresponding physical quantity. When the variable `frequency` or `tlist` is `[number, list/array]`, the output also is `[number, list]`
         """
         inv, exp, abs = nlg.inv, np.exp, np.abs
         photons = {}
@@ -968,16 +1011,16 @@ class qcs:
 
     def calculate_2nd_uETCF(self, Quantity: str, tau=0, zp=0):
         """Calculating the 2nd-order unequal-time coreelation function . For example,
-                \-----------------------------------------------------------------------------------------------\
-                Quantity = "c1c1" ==>
 
-                g^{(2)}(\\\ tau) = <c1^{\\\dagger}(0)c1^{\\\dagger}(\\\ tau)c1(\\\ tau) c1(0)> / <c1^{\\\dagger} c1>^2
+                Quantity = "c1c1" ==> The 2nd-order unequal-time correlation function
 
-                \-----------------------------------------------------------------------------------------------\
-                :param Quantity: physical quantity
-                :param tau: the delay time
-                :param zp: an infinitely small quantity
-                :return: the 2nd-order unequal-time coreelation function (uETCF)
+        :param `Quantity`: physical quantity
+
+        :param `tau [number, list, array]`: the delay time
+
+        :param `zp`: an infinitely small quantity
+
+        :return `[number, list]`the 2nd-order unequal-time coreelation function (uETCF). When the variable `frequency` or `tau` is `[number, list/array]`, the output also is `[number, list]`.
         """
         inv, abs, expm = nlg.inv, np.abs, slg.expm  # Assign to a local variable
         photons = {}
