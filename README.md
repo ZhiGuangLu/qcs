@@ -10,7 +10,7 @@
 QCS is an open-source Python code that allows to study the single-photon transmission and reflection, as well as the  *n*th-order equal-time correlation functions (ETCFs)
 in driven-dissipative quantum systems. The handbook about the package and example notebooks can be found in the current directory.
 ## Applicable conditions
-Here, the system needs to meet two conditions. One is that the system Hamiltonian that doesn't includes the coherent driving part must satisfy U(1) symmetry, namely the 
+Here, the system needs to meet two conditions. One is that the system Hamiltonian that doesn't include the coherent driving part must satisfy U(1) symmetry, namely the 
 total excitation number conservation. The other is that the driving strength must be small enough. Based on the two points, we could reduce the computation complexity of 
 ETCFs from exponential to polynomial when the system contains multiple optical cavities, emitters, and both.
 
@@ -66,7 +66,7 @@ http://arxiv.org/abs/2305.08923
 
 You can cite the article, if this package is greatly helpful for your research.
 ## Supplementary instruction
-Due to the limited level of my programming ability, I've optimized the code to the best of my ability, and I guarantee its correctness (see the [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder). Finally, If there are some bugs running the code, please immediately contact me.
+Due to the limited level of my programming ability, I've optimized the code to the best of my ability, and I guarantee its correctness (see the [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder). Finally, If there are some bugs running the code, please contact me as soon as possible.
 
 ## License
 QCS is licensed under the terms of the BSD license.
