@@ -54,7 +54,16 @@ we've provided the numerical comparison results in [tests](https://github.com/Zh
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="965px">
 
 ## Citation
-There is an official article related to this package, and the article is available at: http://arxiv.org/abs/2305.08923.
+There is an official article related to this package, and the article is available at: 
+
+*Phys. Rev. A 108, 053703 (2023)*
+
+http://journals.aps.org/pra/abstract/10.1103/PhysRevA.108.053703
+
+DOI: 10.1103/PhysRevA.108.053703
+
+http://arxiv.org/abs/2305.08923
+
 You can cite the article, if this package is greatly helpful for your research.
 ## Supplementary instruction
 Due to the limited level of my programming ability, I've optimized the code to the best of my ability, and I guarantee its correctness (see the [tests](https://github.com/ZhiGuangLu/qcs/tree/main/tests) folder). Finally, If there are some bugs running the code, please immediately contact me.
