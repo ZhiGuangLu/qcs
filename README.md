@@ -85,3 +85,5 @@ QCS is licensed under the terms of the BSD license.
 `1.0.5` deleted the function: `print_Dim`, and updated the function: `print_basis`
 
 `1.0.7` fixed the private function: `__prestore_HeffList`
+
+`1.0.9` updated a new function: `print_weight_N`, which is used to print the weight excitation number operator of the effective Hamiltonian; fixed the problem of constructing weight excitation number operator for tripartite and multipartite interactions
