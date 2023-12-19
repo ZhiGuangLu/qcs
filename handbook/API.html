@@ -1,0 +1,3506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>qcs_phy API documentation</title>
+<meta name="description" content="Quantum Correlation Solver (QCS)
+This module calculates the nth-order equal-time correlation functions, single-photon transmission and reflection in …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>qcs_phy</code></h1>
+</header>
+<section id="section-intro">
+<p>Quantum Correlation Solver (QCS)
+This module calculates the nth-order equal-time correlation functions, single-photon transmission and reflection in open quantum systems.
+First, the effective Hamiltonian must satisfy U(1) symmetry, namely the total excitation number conservation.
+Second, the incoming coherent state amplitude must be small enough, namely the weak driving approximation.
+Finally, this module allows multiple incoming coherent states no matter their frequencies are identical or not, namely the multi-drive case,
+and could be also used to calculate the cross-correlation function and the 2nd-order unequal-time correlation function.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Quantum Correlation Solver (QCS)
+This module calculates the nth-order equal-time correlation functions, single-photon transmission and reflection in open quantum systems.
+First, the effective Hamiltonian must satisfy U(1) symmetry, namely the total excitation number conservation.
+Second, the incoming coherent state amplitude must be small enough, namely the weak driving approximation.
+Finally, this module allows multiple incoming coherent states no matter their frequencies are identical or not, namely the multi-drive case,
+and could be also used to calculate the cross-correlation function and the 2nd-order unequal-time correlation function.
+&#34;&#34;&#34;
+
+# Authors: ZhiGuang Lu
+# Contact: youngq@hust.edu.cn
+
+from scipy.sparse import csr_matrix, lil_matrix
+from scipy.special import comb
+from fractions import Fraction
+import numpy.linalg as nlg
+import scipy.linalg as slg
+from numpy import emath
+import itertools as it
+import numpy as np
+import math, sys
+
+# from numpy import exp, abs
+# from numpy.linalg import inv, eig
+# from scipy.linalg import expm
+
+
+# all possible number types
+number_type = [complex, int, float, np.int64, np.float64, np.complex128, np.complex64]
+
+
+def dagger(ope: str) -&gt; str:
+    &#34;&#34;&#34;
+    :param `ope`: an operator \(o\)
+
+    :return ` ` \(o^{\dagger}\)
+    &#34;&#34;&#34;
+    if ope in [&#34;a&#34;, &#34;sm&#34;]:
+        if ope == &#34;a&#34;:
+            return &#34;ad&#34;
+        else:
+            return &#34;sp&#34;
+    elif ope in [&#34;ad&#34;, &#34;sp&#34;]:
+        if ope == &#34;ad&#34;:
+            return &#34;a&#34;
+        else:
+            return &#34;sm&#34;
+    elif &#34;Sm&#34; in ope:
+        return ope.replace(&#39;m&#39;, &#39;p&#39;)
+    elif &#34;Sp&#34; in ope:
+        return ope.replace(&#39;p&#39;, &#39;m&#39;)
+    elif &#34;Sz&#34; in ope:
+        return ope
+    else:
+        print(&#34;Please check your symbols again!!!&#34;)
+
+
+def create_basis(n_exc: int, max_dims: list, k: list) -&gt; list:
+    &#34;&#34;&#34;
+    :param `n_exc`: the excitation number
+
+    :param `max_dims`: the maximum dimension of each mode
+
+    :param `k`: the corresponding coefficient of each mode in the total excitation number operator
+
+    :return ` `all the possible basis vectors
+    &#34;&#34;&#34;
+    Basis = []
+    mod_num = len(k)
+
+    def dfs(idx, sum_, x):
+        if idx == mod_num:
+            if sum_ == n_exc:
+                Basis.append(x[:])
+            return
+        for i in range(max_dims[idx] + 1):
+            x[idx] = i
+            if sum_ + i * k[idx] &lt;= n_exc:
+                dfs(idx + 1, sum_ + i * k[idx], x)
+
+    dfs(0, 0, [0] * mod_num)
+    Basis.reverse()
+    if len(Basis) == 0:
+        print(&#34;Excitation number = %d : no corresponding basis vector!!!&#34; % n_exc)
+        sys.exit(0)
+    return Basis
+
+
+def basis_dot(m1: list, m2: np.ndarray, coff: np.ndarray) -&gt; csr_matrix:
+    &#34;&#34;&#34;
+    :param `m1`: fixed basis vectors
+
+    :param `m2`: updated basis vectors after acted by all possible modes
+
+    :param `coff`: the coefficient created by all possible modes acted on fixed basis vectors
+
+    :return ` `a &#34;dot&#34; product between fixed basis vectors and updated basis vectors
+    &#34;&#34;&#34;
+    line_1 = len(m1)
+    line_2 = len(m2)
+    m2_list = m2.tolist()
+    m3 = lil_matrix((line_1, line_2))
+    for i, m1_i in enumerate(m1):
+        if m1_i in m2_list:
+            j = m2_list.index(m1_i)
+            m3[i, j] = np.real(coff[j])
+    return csr_matrix(m3)
+
+
+def sum_sparse(m: list) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    :param `m`: a list including multiple sparse matrices
+
+    :return ` `the summation of all sparse matrices in the list
+    &#34;&#34;&#34;
+    m_sum = np.zeros(m[0].shape, dtype=complex)
+    for mi in m:
+        ri = np.repeat(np.arange(mi.shape[0]), np.diff(mi.indptr))
+        m_sum[ri, mi.indices] += mi.data
+    return m_sum
+
+
+def left_prod(C: list) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    :param `C`: a list including multiple matrices, corresponding to the output operators in different excitation numbers
+
+    :return ` `the matrices product of all matrices in the list
+    &#34;&#34;&#34;
+    C_0 = C[0]
+    for C_i in C[1:]:
+        C_0 = C_0 @ C_i
+    return C_0
+
+
+def right_prod(H: list, B: list, I: list, ome: float, zp: float or int) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    :param `H`: a list including multiple matrices, corresponding to the effective Hamiltonian in different excitation numbers
+
+    :param `B`: a list including multiple matrices, corresponding to the input operators in different excitation numbers
+
+    :param `I`: a list including multiple matrices, corresponding to the identity operators in different excitation numbers
+
+    :param `ome`: the frequency of the incoming photon
+
+    :param `zp`: a coefficient for ensuring the invertibility of effective Hamiltonian
+
+    :return ` `a matrix acquired by a series of matrices multiplicatopm above
+    &#34;&#34;&#34;
+    inv = nlg.inv
+    n_exc = len(B)
+    K = [1j * inv(H[n] - ((n + 1) * ome + zp) * I[n]) for n in range(n_exc)]
+    B_n = K[-1] @ B[-1]
+    for i in range(n_exc - 2, -1, -1):
+        B_n = B_n @ (K[i] @ B[i])
+    return B_n
+
+
+def sum_frequencies(omega: list or np.ndarray, n: int) -&gt; list:
+    &#34;&#34;&#34;
+    :param `omega`: the frequencies of incoming photons, the corresponding type: list or np.ndarray
+
+    :param `n`: the total excitation number
+
+    :return ` `all possible frequencies combination in excitation number n
+    &#34;&#34;&#34;
+    sum_f = [[0]]
+    for k in range(n):
+        sum_f.append([ome_1 + ome_2 for ome_1 in sum_f[k] for ome_2 in omega])
+    return sum_f[1:]
+
+
+def n_m_ary(n: int, m: int) -&gt; list:
+    &#34;&#34;&#34;
+    :param `n`: the total excitation number
+
+    :param `m`: the number of the input modes
+
+    :return ` `list
+    &#34;&#34;&#34;
+    res = []
+    for i in range(m ** n):
+        num = i
+        digits = []
+        for _ in range(n):
+            digits.append(num % m)
+            num //= m
+        res.append(digits[::-1])
+    return res
+
+
+def covert_to_decimals(num_list: list, m: int) -&gt; list:
+    &#34;&#34;&#34;
+    :param `num_list`: list
+
+    :param `m`: the number of input modes
+
+    :return ` `list
+    &#34;&#34;&#34;
+    decimals = []
+    n = len(num_list)
+    for k in range(1, n + 1):
+        num = num_list[:k]
+        decimal = 0
+        for i in range(k):
+            decimal += num[i] * (m ** (k - 1 - i))
+        decimals.append(decimal)
+    return decimals
+
+
+def compare_dicts(dict_a: dict, dict_b: dict) -&gt; bool:
+    &#34;&#34;&#34;
+        In order to compare two dicts
+
+    :param `dict_a`: dict a
+
+    :param `dict_b`: dict b
+
+    :return ` `True or False
+    &#34;&#34;&#34;
+    for key in dict_a.keys():
+        if key not in dict_b.keys() or [da[1:] for da in dict_a[key]] != [da[1:] for da in dict_b[key]]:
+            return False
+    return True
+
+
+def update_H(H: list) -&gt; list:
+    &#34;&#34;&#34;
+    :param `H`: the effective Hamiltonian, list
+
+    :return ` ` the nonredundant Hamiltonian terms
+    &#34;&#34;&#34;
+    H_c = [Hi[0] for Hi in H]
+    H_v = [Hi[1:] for Hi in H]
+    H_c_new = []
+    H_v_new = []
+    for k, Hi in enumerate(H_v):
+        if Hi in H_v_new:
+            loc = H_v_new.index(Hi)
+            H_c_new[loc] += H_c[k]
+        else:
+            H_v_new.append(Hi)
+            H_c_new.append(H_c[k])
+    return H_c_new, H_v_new
+
+
+def weight_coff(k: list) -&gt; list:
+    &#34;&#34;&#34;
+   :param `k`: the fractional weight cofficient, list
+
+   :return ` ` the integral weight cofficient
+   &#34;&#34;&#34;
+    lcm_value = 1
+    for fraction in k:
+        lcm_value = lcm(lcm_value, fraction.denominator)
+    return [int(ki * lcm_value) for ki in k]
+
+
+def gcd(a: int, b: int):
+    &#34;&#34;&#34;
+        Compute the function of the greatest common divisor
+
+    :param `a`: number a
+
+    :param `b`: number b
+
+    :return ` `greatest common divisor of number a and number b
+    &#34;&#34;&#34;
+    while b:
+        a, b = b, a % b
+    return a
+
+
+def lcm(a: int, b: int):
+    &#34;&#34;&#34;
+        Compute the function of least common multiples
+
+    :param `a`: number a
+
+    :param `b`: number b
+
+    :return ` `least common multiples of number a and number b
+    &#34;&#34;&#34;
+    return a * b // gcd(a, b)
+
+
+class qcs:
+    __Dim = dict()
+    __BasisList = dict()
+    __HeffList = dict()
+    __InOutList = dict()
+    __Judge_Heff = []
+    __Judge_InOut = dict()
+
+    def __init__(self, Heff: list, Input: list, Output: list, ratio=None):
+        &#34;&#34;&#34;
+        Here, for each term in the effective Hamiltonian, such as \(H_{eff} = E a_1^\dagger a_1\), we use a list to represent it, i.e.,
+
+                                        Heff = [E, (&#34;ad&#34;, 1), (&#34;a&#34;, 1)],
+
+        where the first element represents the corresponding coefficient, and the last two elements represent the operator \(a_1^\dagger\) and \(a_1\), respectively.
+
+        For example, \(H_{eff} = E a_1^\dagger a_1 + U a_1^\dagger a_1^\dagger a_1a_1\), and the python code is
+
+                    Heff = [[E, (&#34;ad&#34;, 1), (&#34;a&#34;, 1)], [U, (&#34;ad&#34;, 1), (&#34;ad&#34;, 1), (&#34;a&#34;, 1), (&#34;a&#34;, 1)]].
+
+        Note that the first and second elements in `(&#34;ad&#34;, 1)` represent the operator and the corresponding subscript, respectively.
+
+        More importantly, we only give three symbols to represent the corresponding system&#39;s operators:
+
+            &#34;ad&#34; ==&gt; bosonic creation operator, such as cavity field mode
+
+            &#34;a&#34;  ==&gt; bosonic annilihlation operator, such as cavity field mode
+
+            &#34;sp&#34; ==&gt; raising operator: |e&gt;&lt;g|, such as two-level spin
+
+            &#34;sm&#34; ==&gt; lowering operator: |g&gt;&lt;e|, such as two-level spin
+
+            &#34;Sp N=M&#34; ==&gt; Sp_M = \sum_{i=1}^{M}{sp_i}, M collective two-level spins
+
+            &#34;Sm N=M&#34; ==&gt; Sm_M = \sum_{i=1}^{M}{sm_i}, M collective two-level spins
+
+            &#34;Sz N=M&#34; ==&gt; Sz_M = \sum_{i=1}^{M}{sp_i*sm_i}, M collective two-level spins
+
+
+        Meanwhile, the Input and Output variables must be acquired by the two functions `Input_channel` and `Output_channel`, respectively.
+
+        And the ratio variable represents that each input channel has a corresponding coherent amplitude,
+        e.g.,
+                \[b_1\Rightarrow β_1, b_2\Rightarrowβ_2, b_3\Rightarrowβ_3,\]
+        and we have
+                \[ratio = [β_1, β_2, β_3],\]
+        where \(η_k=β_k/β_1\). Of course, if there was only one input channel, we can ignore this variable, and the default value is `[1,1,...,1]`.
+
+        :param `Heff`: The effective Hamiltonian in the form of List[list].
+
+        :param `Input`: The input form is acquired by Input_channel function.
+
+        :param `Output`: The output form is acquired by Output_channel function.
+
+        :param `ratio`: The ratio between all input coherent amplitudes.
+        &#34;&#34;&#34;
+        self.__Heff_c, self.__Heff_v = update_H(Heff)
+        self.__Input = {}
+        self.__ratio = {}
+        self.__Frequency = {}
+        loc, temp_in = 0, self.__combine_channel(Input)
+        for key, values in temp_in.items():
+            self.__Input[key] = values[0]
+            self.__Frequency[key] = values[1]
+            if ratio == None:
+                self.__ratio[key] = 1
+            else:
+                self.__ratio[key] = ratio[loc]
+            loc += 1
+        self.__Output = self.__combine_channel(Output)
+
+    def __combine_channel(self, channels: list or tuple) -&gt; dict:
+        &#34;&#34;&#34;
+        Let multiple channels fused into a dict
+        :param channels: a list including one or multiple (Input/Output) channel
+        :return: a dict
+        &#34;&#34;&#34;
+        if type(channels) == list or type(channels) == tuple:
+            channel_list = {}
+            for channel in channels:
+                channel_list.update(channel)
+            return channel_list
+        else:
+            return channels
+
+    def Input_channel(channel_name: str, mode: list, frequency) -&gt; dict:
+        &#34;&#34;&#34;
+        Assuming `channel_name = &#34;b1&#34;`, the corresponding input-output formalism is
+                    \[b_{1,out}(t) = b_{1,in}(t) - i  o_{b_1}.\]
+        For example, when \(o_{b_1}=\sqrt{κ} a_1\), it corresponds to
+
+                            o_b1 = [np.sqrt(κ), (&#34;a&#34;, 1)].
+
+        Obviously, if \(o_{b_1}\) could consist of multiple system&#39;s operators, such as
+                \[o_{b_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,\]
+        which corresponds to
+
+                            o_b1 = [[np.sqrt(κ_1), (&#34;a&#34;, 1)], [np.sqrt(κ_2), (&#34;a&#34;, 2)]]
+
+        :param `channel_name`: The input channel name, such as `&#39;b1&#39;, &#39;b2&#39;`, and etc.
+
+        :param `mode`: it consists of system&#39;s annihilation operator, e.g., `o_b1`.
+
+        :param `frequency [number, list, array]`: driving frequency or incoming photon frequency.
+
+        :return ` `dict
+        &#34;&#34;&#34;
+        Input = dict()
+        if type(mode[0]) in number_type:
+            mode = [mode]
+        if type(frequency) != list and type(frequency) not in number_type:
+            Input[channel_name] = [mode, list(frequency)]
+        else:
+            Input[channel_name] = [mode, frequency]
+        return Input
+
+    def Output_channel(channel_name: str, mode: list) -&gt; dict:
+        &#34;&#34;&#34;
+        Assuming `channel_name = &#34;c1&#34;`, the corresponding input-output formalism is
+                    \[c_{1,out}(t) = c_{1,in}(t) - i o_{c_1}.\]
+        For example, when \(o_{c_1}=\sqrt{κ} a_1\), it corresponds to
+
+                            o_c1 = [np.sqrt(κ), (&#34;a&#34;, 1)].
+
+        Obviously, if \(o_{c_1}\) could consist of multiple system&#39;s operators, such as
+                \[o_{c_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,\]
+        which corresponds to
+
+                            o_c1 = [[np.sqrt(κ_1), (&#34;a&#34;, 1)], [np.sqrt(κ_2), (&#34;a&#34;, 2)]]
+
+        :param `channel_name`: The output channel name, such as `&#39;c1&#39;, &#39;c2&#39;`, and etc.
+
+        :param `mode`: It consists of system&#39;s annihilation operator, e.g., `o_c1`.
+
+        :return ` `dict
+        &#34;&#34;&#34;
+        Output = dict()
+        if type(mode[0]) in number_type:
+            mode = [mode]
+        Output[channel_name] = mode
+        return Output
+
+    def __excitation_number(self):
+        &#34;&#34;&#34;
+        Calculating the total excitation number
+        &#34;&#34;&#34;
+        Ope_a = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if item[0] == &#39;a&#39;])), key=lambda x: x[1])
+        Ope_sm = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if item[0] == &#39;sm&#39;])), key=lambda x: x[1])
+        Ope_ad = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if item[0] == &#39;ad&#39;])), key=lambda x: x[1])
+        Ope_sp = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if item[0] == &#39;sp&#39;])), key=lambda x: x[1])
+        Ope_Sz = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if &#39;Sz&#39; in item[0]])), key=lambda x: x[1])
+        Ope_Sp = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if &#39;Sp&#39; in item[0]])), key=lambda x: x[1])
+        Ope_Sm = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if &#39;Sm&#39; in item[0]])), key=lambda x: x[1])
+
+        Ope_Szs = [0] * (len(Ope_a) + len(Ope_sm)) + Ope_Sz
+        Ope_ani = Ope_a + Ope_sm + Ope_Sm
+        Ope_cre = Ope_ad + Ope_sp + Ope_Sp
+        H_mp = [sublist for sublist in self.__Heff_v if len(sublist) &gt; 2]
+        ac_ratio = 1
+        for Hi in H_mp:
+            ani_ope = [x for x in Hi if x[0] in [&#34;a&#34;, &#34;sm&#34;] or &#34;Sm&#34; in x[0]]
+            cre_ope = [x for x in Hi if x[0] in [&#34;ad&#34;, &#34;sp&#34;] or &#34;Sp&#34; in x[0]]
+            if len(ani_ope) != len(cre_ope):
+                ac_ratio = 0
+                break
+        if len(H_mp) == 0 or ac_ratio == 1:
+            self.__k = [1] * len(Ope_ani)
+        else:
+            k = [Fraction(1, 1)] * len(Ope_ani)
+            Heff_v = self.__Heff_v
+            ord_ind = [0]
+            for kk in range(len(Ope_ani)):
+                if Heff_v != []:
+                    ari_ind = []
+                    Ha_mp = [sublist for sublist in Heff_v if Ope_ani[ord_ind[kk]] in sublist]
+                    Hc_mp = [sublist for sublist in Heff_v if Ope_cre[ord_ind[kk]] in sublist]
+                    Heff_v = [sublist for sublist in Heff_v if sublist not in Ha_mp + Hc_mp]
+                    for Hi in Ha_mp:
+                        ani_ope = [x for x in Hi if x[0] in [&#34;a&#34;, &#34;sm&#34;] or &#34;Sm&#34; in x[0]]
+                        cre_ope = [x for x in Hi if x[0] in [&#34;ad&#34;, &#34;sp&#34;] or &#34;Sp&#34; in x[0]]
+                        for ani_i in ani_ope:
+                            k[Ope_ani.index(ani_i)] = k[ord_ind[kk]]
+                        for cre_i in cre_ope:
+                            k[Ope_cre.index(cre_i)] = k[ord_ind[kk]] * Fraction(len(ani_ope), len(cre_ope))
+                        for x in Hi:
+                            if x[0] in [&#34;a&#34;, &#34;sm&#34;] or &#34;Sm&#34; in x[0]:
+                                if x != Ope_ani[ord_ind[kk]]:
+                                    ari_ind.append(Ope_ani.index(x))
+                            else:
+                                ari_ind.append(Ope_cre.index(x))
+                    ari_ind = list(set(ari_ind))
+                    ord_ind = ord_ind[:kk + 1] + ari_ind + ord_ind[kk + 1:]
+                else:
+                    break
+            self.__k = weight_coff(k)
+        if len(Ope_Sz) != 0:
+            self.__Ope_Szs = Ope_Szs
+        self.__Ope_ani = Ope_ani
+        self.__Ope_cre = Ope_cre
+        self.__BasisList[0] = [[0] * len(Ope_ani)]
+
+    def __basis(self, n_exc: int):
+        &#34;&#34;&#34;
+        Calculating all the basis vectors in certain excitation number.
+        :param n_exc: the excitation number
+        &#34;&#34;&#34;
+        max_dims = []
+        for O in self.__Ope_ani:
+            if O[0] == &#34;a&#34;:
+                max_dims.append(n_exc)
+            elif O[0] == &#34;sm&#34;:
+                max_dims.append(1)
+            elif &#34;Sm&#34; in O[0]:
+                N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, O[0]))))
+                if N_spin &lt;= n_exc:
+                    max_dims.append(N_spin)
+                else:
+                    max_dims.append(n_exc)
+            else:
+                pass
+
+        qcs.__BasisList[n_exc] = create_basis(n_exc, max_dims, self.__k)
+        qcs.__Dim[n_exc] = len(qcs.__BasisList[n_exc])
+
+    def __prestore_HeffList(self, n_exc: int):
+        &#34;&#34;&#34;
+        In order to decrease the runtime when user calculates a series of parameters, we
+        prestore the effective Hamiltonian matrix in the form of sparse matrices.
+        :param n_exc: the excitation number
+        &#34;&#34;&#34;
+        Heff_nexc = dict()
+        bas_fix = qcs.__BasisList[n_exc]
+        for Hi in self.__Heff_v:
+            H_ind = [cof[-1] for cof in Hi]
+            if H_ind.count(H_ind[0]) != len(H_ind):
+                Hi_per = list(map(list, set(it.permutations(Hi))))
+                rep = False
+                for H in Hi_per:
+                    H_d = [(dagger(Hk[0]), Hk[1]) for Hk in H]
+                    if tuple(H_d) in Heff_nexc:
+                        rep = True
+                        break
+                if rep:
+                    Heff_nexc[tuple(Hi)] = csr_matrix(Heff_nexc[tuple(H_d)].toarray().T)
+                    continue
+
+            coff = np.ones((len(bas_fix),))
+            bas_cor = np.array(bas_fix)
+            for H in Hi[::-1]:
+                if H[0] in [&#34;a&#34;, &#34;sm&#34;]:
+                    loc = self.__Ope_ani.index(H)
+                    coff = coff * emath.sqrt(bas_cor[:, loc])
+                    bas_cor[:, loc] -= 1
+                elif H[0] in [&#34;ad&#34;, &#34;sp&#34;]:
+                    loc = self.__Ope_cre.index(H)
+                    bas_cor[:, loc] += 1
+                    coff = coff * emath.sqrt(bas_cor[:, loc])
+                elif &#34;Sm&#34; in H[0]:
+                    N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, H[0]))))
+                    loc = self.__Ope_ani.index(H)
+                    coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+                    bas_cor[:, loc] -= 1
+                elif &#34;Sp&#34; in H[0]:
+                    N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, H[0]))))
+                    loc = self.__Ope_cre.index(H)
+                    bas_cor[:, loc] += 1
+                    coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+                elif &#34;Sz&#34; in H[0]:
+                    N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, H[0]))))
+                    loc = self.__Ope_Szs.index(H)
+                    coff = coff * bas_cor[:, loc]
+                else:
+                    pass
+            Heff_nexc[tuple(Hi)] = basis_dot(bas_fix, bas_cor, coff)
+        qcs.__HeffList[n_exc] = Heff_nexc
+
+    def __prestore_InOutList(self, n_exc: int):
+        &#34;&#34;&#34;
+        In order to decrease the runtime when user calculates a series of parameters, we
+        prestore the Input-Output mode&#39;s matrix in the form of sparse matrices.
+        :param n_exc: the excitation number
+        &#34;&#34;&#34;
+        InOut = dict()
+        In_Opes = [x[1] for InOpe in self.__Input.values() for x in InOpe]
+        Out_Opes = [x[1] for OutOpe in self.__Output.values() for x in OutOpe]
+        bas_1 = qcs.__BasisList[n_exc - 1]
+        bas_2 = qcs.__BasisList[n_exc]
+        for In in In_Opes:
+            coff = np.ones((len(bas_2),))
+            bas_cor = np.array(bas_2)
+            loc = self.__Ope_ani.index(In)
+            if &#34;Sm&#34; in In[0]:
+                N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, In[0]))))
+                coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+            else:
+                coff = coff * emath.sqrt(bas_cor[:, loc])
+            bas_cor[:, loc] -= 1
+            InOut[In] = basis_dot(bas_1, bas_cor, coff)
+        for Out in Out_Opes:
+            coff = np.ones((len(bas_2),))
+            bas_cor = np.array(bas_2)
+            if Out not in InOut:
+                loc = self.__Ope_ani.index(Out)
+                if &#34;Sm&#34; in In[0]:
+                    N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, In[0]))))
+                    coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+                else:
+                    coff = coff * emath.sqrt(bas_cor[:, loc])
+                bas_cor[:, loc] -= 1
+                InOut[Out] = basis_dot(bas_1, bas_cor, coff)
+        qcs.__InOutList[n_exc] = InOut
+
+    def __Heff_Matrix(self, n_exc: int):
+        &#34;&#34;&#34;
+        By using an appropriate basis vectors in excitation subspace, we can acquire the matrix, Heff^{(n_exc)}.
+        :param n_exc: the excitation number
+        :return: the effective Hamiltonian in the form of matrix at the certain excitation subspace
+        &#34;&#34;&#34;
+        Heff_List = [qcs.__HeffList[n_exc][tuple(Hv)] * self.__Heff_c[k] for k, Hv in enumerate(self.__Heff_v)]
+        Heff_m = sum_sparse(Heff_List)
+        return Heff_m
+
+    def __Input_Matrix(self, n_exc: int):
+        &#34;&#34;&#34;
+        We assume that the input channel is b, and the input-output formalism can be written as
+                                b_out(t) = b_in(t) - i * o_b(t).
+        Thus, the function will return the matrix, O^{b}_{n_exc-1, n_exc}.
+        :param n_exc: the excitation number
+        :return: the modes of input channel in the form of matrix
+        &#34;&#34;&#34;
+        Int_m = {}
+        for key, value in self.__Input.items():
+            Int_m[key] = sum_sparse([qcs.__InOutList[n_exc][x[1]] * x[0] for x in value])
+        return Int_m
+
+    def __Output_Matrix(self, n_exc: int):
+        &#34;&#34;&#34;
+        We assume that the input channel is c, and the input-output formalism can be written as
+                                c_out(t) = c_in(t) - i * o_c(t).
+        Thus, the function will return the matrix, O^{c}_{n_exc-1, n_exc}.
+        :param n_exc: the excitation number
+        :return: the modes of output channel in the form of matrix
+        &#34;&#34;&#34;
+        Out_m = {}
+        for key, value in self.__Output.items():
+            Out_m[key] = sum_sparse([qcs.__InOutList[n_exc][x[1]] * x[0] for x in value])
+        return Out_m
+
+    def print_weight_N(self):
+        &#34;&#34;&#34;
+            This function is used to print the weight excitation number operator of the effective Hamiltonian.
+
+        :return ` `Returns a string representation of the weight excitation number operator.
+        &#34;&#34;&#34;
+        self.__excitation_number()
+        weignt_N = []
+        for kk, cr in enumerate(self.__Ope_cre):
+            weignt_N.append(str(self.__k[kk]) + &#39;\u00D7&#39; + cr[0] + self.__Ope_ani[kk][0] + &#39;_&#39; + str(cr[1]))
+            if &#39;Sp&#39; in weignt_N[kk]:
+                weignt_N[kk] = weignt_N[kk].replace(cr[0] + self.__Ope_ani[kk][0], &#39;(&#39; + cr[0].replace(&#39;Sp&#39;, &#39;Sz&#39;) + &#39;)&#39;)
+        return &#39;N = &#39; + &#39;+&#39;.join(weignt_N)
+
+    def print_basis(self, n_exc: int):
+        &#34;&#34;&#34;
+            This function is used to print the basis vectors, which corresponds to excitation number `n_exc`.
+
+        :param `n_exc`: the excitation number
+
+        :return ` `the information about the basis vector and all basis vectors in the excitation number (`n_exc`) subspace
+        &#34;&#34;&#34;
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__BasisList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+        if n_exc not in qcs.__BasisList.keys():
+            self.__basis(n_exc)
+        return self.__Ope_ani, qcs.__BasisList[n_exc]
+
+    def print_InOutput(self, n_exc: int, channel_name: str):
+        &#34;&#34;&#34;
+                This function is used to print the matrix, which corresponds to the projections of the input/output mode
+                onto the direct sum of the (`n_exc-1`)-th abd (`n_exc`)-th excitation subspace.
+
+        :param `n_exc`: the excitation number
+
+        :param `channel_name`: the name of channel
+
+        :return ` `the input and output modes onto the direct sum of the (`n_exc-1`)-th abd (`n_exc`)-th excitation subspace.
+        &#34;&#34;&#34;
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__InOutList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+        if n_exc not in qcs.__InOutList.keys():
+            if n_exc - 1 not in qcs.__BasisList.keys():
+                self.__basis(n_exc - 1)
+            self.__basis(n_exc)
+            self.__prestore_InOutList(n_exc)
+        if channel_name in self.__Input:
+            return self.__Input_Matrix(n_exc)[channel_name]
+        elif channel_name in self.__Output:
+            return self.__Output_Matrix(n_exc)[channel_name]
+        else:
+            print(&#34;Sorry, the channel name %s does not exist.&#34; % channel_name)
+
+    def print_Heff(self, n_exc: int):
+        &#34;&#34;&#34;
+                This function is used to input the correspondint effective Hamiltonian in the excitation subspace `n_exc`.
+
+        :param `n_exc`: the excitation number
+
+        :return ` `the effective Hamiltonian in the excitation number (`n_exc`) subspace.
+        &#34;&#34;&#34;
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__HeffList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+        if n_exc not in qcs.__HeffList.keys():
+            self.__basis(n_exc)
+            self.__prestore_HeffList(n_exc)
+        return self.__Heff_Matrix(n_exc)
+
+    def __classification(self, photons: list):
+        &#34;&#34;&#34;
+        :param photons: the output modes
+        :return: the classification label
+        &#34;&#34;&#34;
+        In_list, Out_list = set(self.__Input.keys()), set(photons)
+        cover_part = In_list &amp; Out_list
+        if len(In_list) == 1 and len(Out_list) == 1:
+            if cover_part:
+                return 1  # one-to-one-same
+            else:
+                return -1  # one-to-one-differnt
+        elif len(In_list) &gt; 1 and len(Out_list) == 1:
+            if cover_part:
+                return 2  # many-to-one-same
+            else:
+                return -2  # many-to-one-differnt
+        elif len(In_list) == 1 and len(Out_list) &gt; 1:
+            if cover_part:
+                return 3  # one-to-many-same
+            else:
+                return -3  # one-to-many-differnt
+        else:
+            if cover_part:
+                return 4  # many-to-many-same
+            else:
+                return -4  # many-to-many-differnt
+
+    def calculate_quantity(self, Quantity: str, tlist=0, zp=0):
+        &#34;&#34;&#34;Calculating a series of physical quantities. For example,
+
+            Quantity = &#34;c1&#34;     ==&gt; The single-photon transmission
+
+            Quantity = &#34;c1c1&#34;   ==&gt; The 2nd-order equal-time correlation function
+
+            Quantity = &#34;c1c2&#34;   ==&gt; The 2nd-order equal-time cross-correlation function
+
+            Quantity = &#34;c1c1c1&#34; ==&gt; The 3rd-order equal-time correlation function
+
+        Note that these physical quantities describe the statistical properties of output light in the output channel.
+
+        When input channel is different from the output channel, e.g., input channel `&#34;b1&#34;` and output channel `&#34;c1&#34;`, the
+        physical quantity can represent the correlation function about system&#39;s modes based on the input-output formalism.
+        For example, the input-output relation about output channel `&#34;c1&#34;` is given by
+        \[c_{1,out} = c_{1,in} - i o_{c_1},\]
+        and we assume that \(o_{c_1}=\sqrt{κ}a_1\) and `Quantity = &#34;c1c1&#34;`. The 2nd-order equal-time correlation function
+        is equivalent to the correlation function of mode \(a_1\).
+
+        Here, we consider the presence of tlist only when the frequencies of incoming coherent states are not identical, and consider
+        `zp` only when the effective Hamiltonian is irreversible, i.e.,
+        \[ [H_{eff}^{(n)} - ω - i0^{+}]^{-1} ≠ 0 \Rightarrow zp = i0^{+}\]
+
+        :param `Quantity`: physical quantity
+
+        :param `tlist [number, list, array]`: a time variable
+
+        :param `zp`: an infinitely small quantity
+
+        :return `[number, list]`the corresponding physical quantity. When the variable `frequency` or `tlist` is `[number, list/array]`, the output also is `[number, list]`
+        &#34;&#34;&#34;
+        inv, exp, abs = nlg.inv, np.exp, np.abs
+        photons = {}
+        for mode in self.__Output.keys():
+            photons[mode] = Quantity.count(mode)
+        key_out = [key for key in photons for _ in range(photons[key])]
+        label = self.__classification(key_out)
+        if len(set(key_out)) == 1:
+            key_out = key_out[0]
+        n_exc = sum(photons.values())
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__HeffList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+            qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+            for n in range(1, n_exc + 1):
+                self.__basis(n)
+                self.__prestore_HeffList(n)
+                self.__prestore_InOutList(n)
+        elif compare_dicts(self.__Input, qcs.__Judge_InOut) and compare_dicts(self.__Output, qcs.__Judge_InOut):
+            pass
+        else:
+            qcs.__InOutList.clear()
+            qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+            for n in range(1, n_exc + 1):
+                if n not in list(qcs.__HeffList.keys()):
+                    self.__basis(n)
+                self.__prestore_InOutList(n)
+        for n in range(1, n_exc + 1):
+            if n not in list(qcs.__HeffList.keys()):
+                self.__basis(n)
+                self.__prestore_HeffList(n)
+                self.__prestore_InOutList(n)
+            elif n not in list(qcs.__InOutList.keys()):
+                self.__basis(n)
+                self.__prestore_InOutList(n)
+            else:
+                pass
+
+        if label == -1:  # one-to-one-differnt
+            key_in = list(self.__Input.keys())[0]
+            ome_list = self.__Frequency[key_in]
+            if n_exc == 1:
+                k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key_in][0][1][0])))]
+                k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                B, C, H0 = self.__Input_Matrix(1)[key_in].conj().T, self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                I = np.eye(qcs.__Dim[n_exc])
+                if type(ome_list) not in number_type:
+                    return [(abs(C @ inv(H0 - (ome + zp) * I) @ B) ** 2 / k_int[0])[0, 0] for ome in ome_list]
+                else:
+                    return (abs(C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2 / k_int[0])[0, 0]
+            else:
+                B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                C_tot = left_prod(C)
+                if type(ome_list) not in number_type:
+                    return [(abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+                else:
+                    return (abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+
+        elif label == 1:  # one-to-one-same
+            key_in = list(self.__Input.keys())[0]
+            ome_list = self.__Frequency[key_in]
+            if n_exc == 1:
+                k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key_in][0][1][0])))]
+                k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                B, C, H0 = self.__Input_Matrix(1)[key_in].conj().T, self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                I = np.eye(qcs.__Dim[n_exc])
+                if type(ome_list) not in number_type:
+                    return [(abs(1 + 1j * C @ inv(H0 - (ome + zp) * I) @ B) ** 2 / k_int[0])[0, 0] for ome in ome_list]
+                else:
+                    return (abs(1 + 1j * C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2 / k_int[0])[0, 0]
+            else:
+                B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                C_tot = [comb(n_exc, n) * left_prod(C[:n]) for n in range(1, n_exc + 1)]
+                if type(ome_list) not in number_type:
+                    return [(abs(1 + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                             abs(1 + 1j * C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+                else:
+                    return (abs(1 + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome_list, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                            abs(1 + 1j * C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+
+        elif label == -2:  # many-to-one-differnt
+            key_in = list(self.__Input.keys())
+            ome_list = list(self.__Frequency.values())
+            ty_n = ome_list.count(ome_list[0]) == len(ome_list)
+            if ty_n == True:  # the identical incoming photon frequencies
+                ome_list = ome_list[0]
+                if n_exc == 1:
+                    B, C, H0 = sum([self.__ratio[key] * self.__Input_Matrix(1)[key].conj().T for key in key_in]), self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                    k_sum = list(self.__ratio.values())
+                    k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                    I = np.eye(qcs.__Dim[n_exc])
+                    if type(ome_list) not in number_type:
+                        return [(abs(C @ inv(H0 - ome * I) @ B) ** 2 / k_sum)[0, 0] for ome in ome_list]
+                    else:
+                        return (abs(C @ inv(H0 - ome_list * I) @ B) ** 2 / k_sum)[0, 0]
+                else:
+                    B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, n_exc + 1)]
+                    C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                    H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                    I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                    C_tot = left_prod(C)
+                    if type(ome_list) not in number_type:
+                        return [(abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome
+                                in ome_list]
+                    else:
+                        return (abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+            else:  # the different incoming photon frequencies
+                sum_f = sum_frequencies(ome_list, n_exc)
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                Klist = [[inv(H0[n - 1] - (ome + zp) * I[n - 1]) for ome in sum_f[n - 1]] for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                ary = n_m_ary(n_exc, len(key_in))
+                comb_s = [covert_to_decimals(ary_i, len(key_in)) for ary_i in ary]
+                if n_exc == 1:
+                    k_sum = list(self.__ratio.values())
+                    k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                    B = [self.__Input_Matrix(1)[key].conj().T for k, key in enumerate(key_in)]
+                    if type(tlist) not in number_type:
+                        T_t = []
+                        append = T_t.append
+                        for t in tlist:
+                            N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                            Blist = [N[k] * B[k] for k in range(len(B))]
+                            append((abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0])
+                        return T_t
+                    else:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                        Blist = [N[k] * B[k] for k in range(len(B))]
+                        return (abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0]
+                else:
+                    C_tot = left_prod(C)
+                    B = [[self.__Input_Matrix(n)[key].conj().T for key in key_in] for n in range(1, n_exc + 1)]
+                    if type(tlist) not in number_type:
+                        gn_t = []
+                        append = gn_t.append
+                        for t in tlist:
+                            N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                            Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                            Gn_0 = 0
+                            for j, c in enumerate(comb_s):
+                                C_tot_c = C_tot.copy()
+                                for k, ci in enumerate(c[::-1]):
+                                    C_tot_c = C_tot_c @ Klist[n_exc - k - 1][ci] @ Blist[n_exc - k - 1][ary[j][n_exc - k - 1]]
+                                Gn_0 += C_tot_c
+                            append((abs(Gn_0) ** 2 / abs(C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0])
+                        return gn_t
+                    else:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                        Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                        Gn_0 = 0
+                        for c in comb_s:
+                            C_tot_c = C_tot.copy()
+                            for k, ci in enumerate(c[::-1]):
+                                C_tot_c = C_tot_c @ Klist[n_exc - k - 1][ci] @ Blist[n_exc - k - 1][ci]
+                            Gn_0 += C_tot_c
+                        return (abs(Gn_0) ** 2 / abs(C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0]
+
+        elif label == 2:  # many-to-one-same
+            key_in = list(self.__Input.keys())
+            ome_list = list(self.__Frequency.values())
+            ty_n = ome_list.count(ome_list[0]) == len(ome_list)
+            if ty_n == True:  # the identical incoming photon frequencies
+                ome_list = ome_list[0]
+                if n_exc == 1:
+                    B, C, H0 = sum([self.__ratio[key] * self.__Input_Matrix(1)[key].conj().T for key in key_in]), self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                    k_sum = list(self.__ratio.values())
+                    k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                    I = np.eye(qcs.__Dim[n_exc])
+                    if type(ome_list) not in number_type:
+                        return [(abs(self.__ratio[key_out] + 1j * C @ inv(H0 - ome * I) @ B) ** 2 / k_sum)[0, 0] for ome in ome_list]
+                    else:
+                        return (abs(self.__ratio[key_out] + 1j * C @ inv(H0 - ome_list * I) @ B) ** 2 / k_sum)[0, 0]
+                else:
+                    B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, n_exc + 1)]
+                    C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                    H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                    I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                    C_tot = [self.__ratio[key_out] ** (n_exc - n) * comb(n_exc, n) * left_prod(C[:n]) for n in range(1, n_exc + 1)]
+                    coff_free = self.__ratio[key_out] ** n_exc
+                    if type(ome_list) not in number_type:
+                        return [(abs(coff_free + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                                 abs(self.__ratio[key_out] + 1j * C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+                    else:
+                        return (abs(coff_free + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome_list, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                                abs(self.__ratio[key_out] + 1j * C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+            else:  # the identical incoming photon frequencies
+                sum_f = sum_frequencies(ome_list, n_exc)
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                Klist = [[inv(H0[n - 1] - (ome + zp) * I[n - 1]) for ome in sum_f[n - 1]] for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                loc = key_in.index(key_out)
+                if n_exc == 1:
+                    k_sum = list(self.__ratio.values())
+                    k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                    B = [self.__Input_Matrix(1)[key].conj().T for k, key in enumerate(key_in)]
+                    if type(tlist) not in number_type:
+                        T_t = []
+                        append = T_t.append
+                        for t in tlist:
+                            N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                            Blist = [N[k] * B[k] for k in range(len(B))]
+                            append((abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0])
+                        return T_t
+                    else:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                        Blist = [N[k] * B[k] for k in range(len(B))]
+                        return (abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0]
+                else:
+                    ary_s = [n_m_ary(n, len(key_in)) for n in range(1, n_exc + 1)]
+                    comb_s = [[covert_to_decimals(ary_i, len(key_in)) for ary_i in ary] for ary in ary_s]
+                    C_tot = [left_prod(C[:n]) for n in range(1, n_exc + 1)]
+                    B = [[self.__Input_Matrix(n)[key].conj().T for key in key_in] for n in range(1, n_exc + 1)]
+                    if type(tlist) not in number_type:
+                        gn_t = []
+                        append = gn_t.append
+                        for t in tlist:
+                            N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                            coff_free = [comb(n_exc, n) * N[loc] ** (n_exc - n) for n in range(n_exc + 1)]
+                            Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                            Gn_0 = coff_free[0]
+                            for n in range(1, n_exc + 1):
+                                G_tot = 0
+                                for j, c in enumerate(comb_s[n - 1]):
+                                    C_tot_c = C_tot[n - 1].copy()
+                                    for k, ci in enumerate(c[::-1]):
+                                        C_tot_c = C_tot_c @ Klist[n - k - 1][ci] @ Blist[n - k - 1][ary_s[n - 1][j][n - k - 1]]
+                                    G_tot += C_tot_c
+                                Gn_0 += (1j) ** n * coff_free[n] * G_tot
+                            append((abs(Gn_0) ** 2 / abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0])
+                        return gn_t
+                    else:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                        coff_free = [comb(n_exc, n) * N[loc] ** (n_exc - n) for n in range(n_exc + 1)]
+                        Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                        Gn_0 = coff_free[0]
+                        for n in range(1, n_exc + 1):
+                            G_tot = 0
+                            for j, c in enumerate(comb_s[n - 1]):
+                                C_tot_c = C_tot[n - 1].copy()
+                                for k, ci in enumerate(c[::-1]):
+                                    C_tot_c = C_tot_c @ Klist[n - k - 1][ci] @ Blist[n - k - 1][ary_s[n - 1][j][n - k - 1]]
+                                G_tot += C_tot_c
+                            Gn_0 += (1j) ** n * coff_free[n] * G_tot
+                        return (abs(Gn_0) ** 2 / abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0]
+
+        elif label == -3:  # one-to-many-differnt
+            key_in = list(self.__Input.keys())[0]
+            ome_list = self.__Frequency[key_in]
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+            C = [self.__Output_Matrix(n)[key_out[n - 1]] for n in range(1, n_exc + 1)]
+            H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+            C_tot = left_prod(C)
+            if type(ome_list) not in number_type:
+                correlation = []
+                append = correlation.append
+                for ome in ome_list:
+                    G = abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2
+                    K1 = inv(H0[0] - (ome + zp) * I[0]) @ B[0]
+                    for key in photons:
+                        G /= abs((self.__Output_Matrix(1)[key] @ K1) ** (photons[key])) ** 2
+                    append(G[0, 0])
+                return correlation
+            else:
+                correlation = abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2
+                K1 = inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]
+                for key in photons:
+                    correlation /= abs((self.__Output_Matrix(1)[key] @ K1) ** (photons[key])) ** 2
+                return correlation[0, 0]
+
+        elif label == 3:  # one-to-many-same
+            key_in = list(self.__Input.keys())[0]
+            loc = key_out.index(key_in)
+            key_out_new = key_out[: loc] + key_out[loc + photons[key_in]:] + key_out[loc: loc + photons[key_in]]
+            ome_list = self.__Frequency[key_in]
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+            C = [self.__Output_Matrix(n)[key_out_new[n - 1]] for n in range(1, n_exc + 1)]
+            H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+            C_tot = [comb(photons[key_in], n) * left_prod(C[:n_exc - n]) for n in range(photons[key_in] + 1)]
+            C1_out = {}
+            for key in key_out_new:
+                C1_out[key] = self.__Output_Matrix(1)[key]
+            if type(ome_list) not in number_type:
+                correlation = []
+                append = correlation.append
+                for ome in ome_list:
+                    G = abs(sum([C_tot[n] @ right_prod(H0[:n_exc - n], B[:n_exc - n], I[:n_exc - n], ome, zp) for n in range(photons[key_in] + 1)])) ** 2
+                    K1 = inv(H0[0] - (ome + zp) * I[0]) @ B[0]
+                    for key in photons:
+                        if key == key_in:
+                            G /= abs((1 + 1j * C1_out[key] @ K1) ** (photons[key])) ** 2
+                        else:
+                            G /= abs((C1_out[key] @ K1) ** (photons[key])) ** 2
+                    append(G[0, 0])
+                return correlation
+            else:
+                G = abs(sum([C_tot[n] @ right_prod(H0[:n_exc - n], B[:n_exc - n], I[:n_exc - n], ome_list, zp) for n in range(photons[key_in] + 1)])) ** 2
+                K1 = inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]
+                for key in photons:
+                    if key == key_in:
+                        G /= abs((1 + 1j * C1_out[key] @ K1) ** (photons[key])) ** 2
+                    else:
+                        G /= abs((C1_out[key] @ K1) ** (photons[key])) ** 2
+                return G[0, 0]
+
+        elif label == -4:  # many-to-many-different
+            print(&#34;This function is not yet available&#34;)
+        else:  # many-to-many-same
+            print(&#34;This function is not yet available&#34;)
+
+    def calculate_2nd_uETCF(self, Quantity: str, tau=0, zp=0):
+        &#34;&#34;&#34;Calculating the 2nd-order unequal-time coreelation function . For example,
+
+                Quantity = &#34;c1c1&#34; ==&gt; The 2nd-order unequal-time correlation function
+
+        :param `Quantity`: physical quantity
+
+        :param `tau [number, list, array]`: the delay time
+
+        :param `zp`: an infinitely small quantity
+
+        :return `[number, list]`the 2nd-order unequal-time coreelation function (uETCF). When the variable `frequency` or `tau` is `[number, list/array]`, the output also is `[number, list]`.
+        &#34;&#34;&#34;
+        inv, abs, expm = nlg.inv, np.abs, slg.expm  # Assign to a local variable
+        photons = {}
+        for mode in self.__Output.keys():
+            photons[mode] = Quantity.count(mode)
+        key_out = [key for key in photons for _ in range(photons[key])]
+        label = self.__classification(key_out)
+        if len(set(key_out)) == 1:
+            key_out = key_out[0]
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__HeffList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+            qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+            for n in range(0, 3):
+                self.__basis(n)
+                if n != 0:
+                    self.__prestore_HeffList(n)
+                    self.__prestore_InOutList(n)
+        elif compare_dicts(self.__Input, qcs.__Judge_InOut) and compare_dicts(self.__Output, qcs.__Judge_InOut):
+            pass
+        else:
+            qcs.__InOutList.clear()
+            qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+            for n in range(1, 3):
+                self.__prestore_InOutList(n)
+        for n in range(1, 3):
+            if n not in list(qcs.__HeffList.keys()):
+                self.__basis(n)
+                self.__prestore_HeffList(n)
+                self.__prestore_InOutList(n)
+            elif n not in list(qcs.__InOutList.keys()):
+                self.__basis(n)
+                self.__prestore_InOutList(n)
+            else:
+                pass
+
+        if label == -1:  # one-to-one-differnt
+            key_in = list(self.__Input.keys())[0]
+            ome = self.__Frequency[key_in]
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+            Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+            P1 = C[0] @ inv(Heff[0]) @ B[0]
+            P1_R = inv(Heff[0]) @ B[0]
+            P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+            if type(tau) not in number_type:
+                g2_t = []
+                append = g2_t.append
+                for t in tau:
+                    P1_t = expm(-1j * Heff[0] * abs(t))
+                    append((abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0])
+                return g2_t
+            else:
+                P1_t = expm(-1j * Heff[0] * abs(tau))
+                return (abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0]
+
+        elif label == 1:  # one-to-one-same
+            key_in = list(self.__Input.keys())[0]
+            ome = self.__Frequency[key_in]
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+            Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+            P1 = C[0] @ inv(Heff[0]) @ B[0]
+            P1_R = inv(Heff[0]) @ B[0]
+            P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+            if type(tau) not in number_type:
+                g2_t = []
+                append = g2_t.append
+                for t in tau:
+                    P1_t = expm(-1j * Heff[0] * abs(t))
+                    append((abs((1 + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(1 + 1j * P1) ** 4)[0, 0])
+                return g2_t
+            else:
+                P1_t = expm(-1j * Heff[0] * abs(tau))
+                return (abs((1 + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(1 + 1j * P1) ** 4)[0, 0]
+
+        elif label == -2:  # many-to-one-differnt
+            key_in = list(self.__Input.keys())
+            ome = list(self.__Frequency.values())[0]
+            B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+            Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+            P1 = C[0] @ inv(Heff[0]) @ B[0]
+            P1_R = inv(Heff[0]) @ B[0]
+            P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+            if type(tau) not in number_type:
+                g2_t = []
+                append = g2_t.append
+                for t in tau:
+                    P1_t = expm(-1j * Heff[0] * abs(t))
+                    append((abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0])
+                return g2_t
+            else:
+                P1_t = expm(-1j * Heff[0] * abs(tau))
+                return (abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0]
+
+        elif label == 2:  # many-to-one-same
+            key_in = list(self.__Input.keys())
+            ome = list(self.__Frequency.values())[0]
+            B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+            Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+            P1 = C[0] @ inv(Heff[0]) @ B[0]
+            P1_R = inv(Heff[0]) @ B[0]
+            P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+            ratio_c = self.__ratio[key_out]
+            if type(tau) not in number_type:
+                g2_t = []
+                append = g2_t.append
+                for t in tau:
+                    P1_t = expm(-1j * Heff[0] * abs(t))
+                    append((abs((ratio_c + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(ratio_c + 1j * P1) ** 4)[0, 0])
+                return g2_t
+            else:
+                P1_t = expm(-1j * Heff[0] * abs(tau))
+                return (abs((ratio_c + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(ratio_c + 1j * P1) ** 4)[0, 0]
+
+        else:
+            print(&#34;This function is not yet available&#34;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="qcs_phy.basis_dot"><code class="name flex">
+<span>def <span class="ident">basis_dot</span></span>(<span>m1: list, m2: numpy.ndarray, coff: numpy.ndarray) ‑> scipy.sparse._csr.csr_matrix</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>m1</code>: fixed basis vectors</p>
+<p>:param <code>m2</code>: updated basis vectors after acted by all possible modes</p>
+<p>:param <code>coff</code>: the coefficient created by all possible modes acted on fixed basis vectors</p>
+<p>:return <code> </code>a "dot" product between fixed basis vectors and updated basis vectors</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def basis_dot(m1: list, m2: np.ndarray, coff: np.ndarray) -&gt; csr_matrix:
+    &#34;&#34;&#34;
+    :param `m1`: fixed basis vectors
+
+    :param `m2`: updated basis vectors after acted by all possible modes
+
+    :param `coff`: the coefficient created by all possible modes acted on fixed basis vectors
+
+    :return ` `a &#34;dot&#34; product between fixed basis vectors and updated basis vectors
+    &#34;&#34;&#34;
+    line_1 = len(m1)
+    line_2 = len(m2)
+    m2_list = m2.tolist()
+    m3 = lil_matrix((line_1, line_2))
+    for i, m1_i in enumerate(m1):
+        if m1_i in m2_list:
+            j = m2_list.index(m1_i)
+            m3[i, j] = np.real(coff[j])
+    return csr_matrix(m3)</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.compare_dicts"><code class="name flex">
+<span>def <span class="ident">compare_dicts</span></span>(<span>dict_a: dict, dict_b: dict) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>In order to compare two dicts</p>
+<p>:param <code>dict_a</code>: dict a</p>
+<p>:param <code>dict_b</code>: dict b</p>
+<p>:return <code> </code>True or False</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compare_dicts(dict_a: dict, dict_b: dict) -&gt; bool:
+    &#34;&#34;&#34;
+        In order to compare two dicts
+
+    :param `dict_a`: dict a
+
+    :param `dict_b`: dict b
+
+    :return ` `True or False
+    &#34;&#34;&#34;
+    for key in dict_a.keys():
+        if key not in dict_b.keys() or [da[1:] for da in dict_a[key]] != [da[1:] for da in dict_b[key]]:
+            return False
+    return True</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.covert_to_decimals"><code class="name flex">
+<span>def <span class="ident">covert_to_decimals</span></span>(<span>num_list: list, m: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>num_list</code>: list</p>
+<p>:param <code>m</code>: the number of input modes</p>
+<p>:return <code> </code>list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def covert_to_decimals(num_list: list, m: int) -&gt; list:
+    &#34;&#34;&#34;
+    :param `num_list`: list
+
+    :param `m`: the number of input modes
+
+    :return ` `list
+    &#34;&#34;&#34;
+    decimals = []
+    n = len(num_list)
+    for k in range(1, n + 1):
+        num = num_list[:k]
+        decimal = 0
+        for i in range(k):
+            decimal += num[i] * (m ** (k - 1 - i))
+        decimals.append(decimal)
+    return decimals</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.create_basis"><code class="name flex">
+<span>def <span class="ident">create_basis</span></span>(<span>n_exc: int, max_dims: list, k: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>n_exc</code>: the excitation number</p>
+<p>:param <code>max_dims</code>: the maximum dimension of each mode</p>
+<p>:param <code>k</code>: the corresponding coefficient of each mode in the total excitation number operator</p>
+<p>:return <code> </code>all the possible basis vectors</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_basis(n_exc: int, max_dims: list, k: list) -&gt; list:
+    &#34;&#34;&#34;
+    :param `n_exc`: the excitation number
+
+    :param `max_dims`: the maximum dimension of each mode
+
+    :param `k`: the corresponding coefficient of each mode in the total excitation number operator
+
+    :return ` `all the possible basis vectors
+    &#34;&#34;&#34;
+    Basis = []
+    mod_num = len(k)
+
+    def dfs(idx, sum_, x):
+        if idx == mod_num:
+            if sum_ == n_exc:
+                Basis.append(x[:])
+            return
+        for i in range(max_dims[idx] + 1):
+            x[idx] = i
+            if sum_ + i * k[idx] &lt;= n_exc:
+                dfs(idx + 1, sum_ + i * k[idx], x)
+
+    dfs(0, 0, [0] * mod_num)
+    Basis.reverse()
+    if len(Basis) == 0:
+        print(&#34;Excitation number = %d : no corresponding basis vector!!!&#34; % n_exc)
+        sys.exit(0)
+    return Basis</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.dagger"><code class="name flex">
+<span>def <span class="ident">dagger</span></span>(<span>ope: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>ope</code>: an operator <span><span class="MathJax_Preview">o</span><script type="math/tex">o</script></span></p>
+<p>:return <code> </code> <span><span class="MathJax_Preview">o^{\dagger}</span><script type="math/tex">o^{\dagger}</script></span></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dagger(ope: str) -&gt; str:
+    &#34;&#34;&#34;
+    :param `ope`: an operator \(o\)
+
+    :return ` ` \(o^{\dagger}\)
+    &#34;&#34;&#34;
+    if ope in [&#34;a&#34;, &#34;sm&#34;]:
+        if ope == &#34;a&#34;:
+            return &#34;ad&#34;
+        else:
+            return &#34;sp&#34;
+    elif ope in [&#34;ad&#34;, &#34;sp&#34;]:
+        if ope == &#34;ad&#34;:
+            return &#34;a&#34;
+        else:
+            return &#34;sm&#34;
+    elif &#34;Sm&#34; in ope:
+        return ope.replace(&#39;m&#39;, &#39;p&#39;)
+    elif &#34;Sp&#34; in ope:
+        return ope.replace(&#39;p&#39;, &#39;m&#39;)
+    elif &#34;Sz&#34; in ope:
+        return ope
+    else:
+        print(&#34;Please check your symbols again!!!&#34;)</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.gcd"><code class="name flex">
+<span>def <span class="ident">gcd</span></span>(<span>a: int, b: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the function of the greatest common divisor</p>
+<p>:param <code>a</code>: number a</p>
+<p>:param <code>b</code>: number b</p>
+<p>:return <code> </code>greatest common divisor of number a and number b</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gcd(a: int, b: int):
+    &#34;&#34;&#34;
+        Compute the function of the greatest common divisor
+
+    :param `a`: number a
+
+    :param `b`: number b
+
+    :return ` `greatest common divisor of number a and number b
+    &#34;&#34;&#34;
+    while b:
+        a, b = b, a % b
+    return a</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.lcm"><code class="name flex">
+<span>def <span class="ident">lcm</span></span>(<span>a: int, b: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the function of least common multiples</p>
+<p>:param <code>a</code>: number a</p>
+<p>:param <code>b</code>: number b</p>
+<p>:return <code> </code>least common multiples of number a and number b</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def lcm(a: int, b: int):
+    &#34;&#34;&#34;
+        Compute the function of least common multiples
+
+    :param `a`: number a
+
+    :param `b`: number b
+
+    :return ` `least common multiples of number a and number b
+    &#34;&#34;&#34;
+    return a * b // gcd(a, b)</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.left_prod"><code class="name flex">
+<span>def <span class="ident">left_prod</span></span>(<span>C: list) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>C</code>: a list including multiple matrices, corresponding to the output operators in different excitation numbers</p>
+<p>:return <code> </code>the matrices product of all matrices in the list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def left_prod(C: list) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    :param `C`: a list including multiple matrices, corresponding to the output operators in different excitation numbers
+
+    :return ` `the matrices product of all matrices in the list
+    &#34;&#34;&#34;
+    C_0 = C[0]
+    for C_i in C[1:]:
+        C_0 = C_0 @ C_i
+    return C_0</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.n_m_ary"><code class="name flex">
+<span>def <span class="ident">n_m_ary</span></span>(<span>n: int, m: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>n</code>: the total excitation number</p>
+<p>:param <code>m</code>: the number of the input modes</p>
+<p>:return <code> </code>list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def n_m_ary(n: int, m: int) -&gt; list:
+    &#34;&#34;&#34;
+    :param `n`: the total excitation number
+
+    :param `m`: the number of the input modes
+
+    :return ` `list
+    &#34;&#34;&#34;
+    res = []
+    for i in range(m ** n):
+        num = i
+        digits = []
+        for _ in range(n):
+            digits.append(num % m)
+            num //= m
+        res.append(digits[::-1])
+    return res</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.right_prod"><code class="name flex">
+<span>def <span class="ident">right_prod</span></span>(<span>H: list, B: list, I: list, ome: float, zp: float) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>H</code>: a list including multiple matrices, corresponding to the effective Hamiltonian in different excitation numbers</p>
+<p>:param <code>B</code>: a list including multiple matrices, corresponding to the input operators in different excitation numbers</p>
+<p>:param <code>I</code>: a list including multiple matrices, corresponding to the identity operators in different excitation numbers</p>
+<p>:param <code>ome</code>: the frequency of the incoming photon</p>
+<p>:param <code>zp</code>: a coefficient for ensuring the invertibility of effective Hamiltonian</p>
+<p>:return <code> </code>a matrix acquired by a series of matrices multiplicatopm above</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def right_prod(H: list, B: list, I: list, ome: float, zp: float or int) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    :param `H`: a list including multiple matrices, corresponding to the effective Hamiltonian in different excitation numbers
+
+    :param `B`: a list including multiple matrices, corresponding to the input operators in different excitation numbers
+
+    :param `I`: a list including multiple matrices, corresponding to the identity operators in different excitation numbers
+
+    :param `ome`: the frequency of the incoming photon
+
+    :param `zp`: a coefficient for ensuring the invertibility of effective Hamiltonian
+
+    :return ` `a matrix acquired by a series of matrices multiplicatopm above
+    &#34;&#34;&#34;
+    inv = nlg.inv
+    n_exc = len(B)
+    K = [1j * inv(H[n] - ((n + 1) * ome + zp) * I[n]) for n in range(n_exc)]
+    B_n = K[-1] @ B[-1]
+    for i in range(n_exc - 2, -1, -1):
+        B_n = B_n @ (K[i] @ B[i])
+    return B_n</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.sum_frequencies"><code class="name flex">
+<span>def <span class="ident">sum_frequencies</span></span>(<span>omega: list, n: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>omega</code>: the frequencies of incoming photons, the corresponding type: list or np.ndarray</p>
+<p>:param <code>n</code>: the total excitation number</p>
+<p>:return <code> </code>all possible frequencies combination in excitation number n</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sum_frequencies(omega: list or np.ndarray, n: int) -&gt; list:
+    &#34;&#34;&#34;
+    :param `omega`: the frequencies of incoming photons, the corresponding type: list or np.ndarray
+
+    :param `n`: the total excitation number
+
+    :return ` `all possible frequencies combination in excitation number n
+    &#34;&#34;&#34;
+    sum_f = [[0]]
+    for k in range(n):
+        sum_f.append([ome_1 + ome_2 for ome_1 in sum_f[k] for ome_2 in omega])
+    return sum_f[1:]</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.sum_sparse"><code class="name flex">
+<span>def <span class="ident">sum_sparse</span></span>(<span>m: list) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>m</code>: a list including multiple sparse matrices</p>
+<p>:return <code> </code>the summation of all sparse matrices in the list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sum_sparse(m: list) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    :param `m`: a list including multiple sparse matrices
+
+    :return ` `the summation of all sparse matrices in the list
+    &#34;&#34;&#34;
+    m_sum = np.zeros(m[0].shape, dtype=complex)
+    for mi in m:
+        ri = np.repeat(np.arange(mi.shape[0]), np.diff(mi.indptr))
+        m_sum[ri, mi.indices] += mi.data
+    return m_sum</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.update_H"><code class="name flex">
+<span>def <span class="ident">update_H</span></span>(<span>H: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>H</code>: the effective Hamiltonian, list</p>
+<p>:return <code> </code> the nonredundant Hamiltonian terms</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_H(H: list) -&gt; list:
+    &#34;&#34;&#34;
+    :param `H`: the effective Hamiltonian, list
+
+    :return ` ` the nonredundant Hamiltonian terms
+    &#34;&#34;&#34;
+    H_c = [Hi[0] for Hi in H]
+    H_v = [Hi[1:] for Hi in H]
+    H_c_new = []
+    H_v_new = []
+    for k, Hi in enumerate(H_v):
+        if Hi in H_v_new:
+            loc = H_v_new.index(Hi)
+            H_c_new[loc] += H_c[k]
+        else:
+            H_v_new.append(Hi)
+            H_c_new.append(H_c[k])
+    return H_c_new, H_v_new</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.weight_coff"><code class="name flex">
+<span>def <span class="ident">weight_coff</span></span>(<span>k: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param <code>k</code>: the fractional weight cofficient, list</p>
+<p>:return <code> </code> the integral weight cofficient</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def weight_coff(k: list) -&gt; list:
+    &#34;&#34;&#34;
+   :param `k`: the fractional weight cofficient, list
+
+   :return ` ` the integral weight cofficient
+   &#34;&#34;&#34;
+    lcm_value = 1
+    for fraction in k:
+        lcm_value = lcm(lcm_value, fraction.denominator)
+    return [int(ki * lcm_value) for ki in k]</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="qcs_phy.qcs"><code class="flex name class">
+<span>class <span class="ident">qcs</span></span>
+<span>(</span><span>Heff: list, Input: list, Output: list, ratio=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Here, for each term in the effective Hamiltonian, such as <span><span class="MathJax_Preview">H_{eff} = E a_1^\dagger a_1</span><script type="math/tex">H_{eff} = E a_1^\dagger a_1</script></span>, we use a list to represent it, i.e.,</p>
+<pre><code>                            Heff = [E, ("ad", 1), ("a", 1)],
+</code></pre>
+<p>where the first element represents the corresponding coefficient, and the last two elements represent the operator <span><span class="MathJax_Preview">a_1^\dagger</span><script type="math/tex">a_1^\dagger</script></span> and <span><span class="MathJax_Preview">a_1</span><script type="math/tex">a_1</script></span>, respectively.</p>
+<p>For example, <span><span class="MathJax_Preview">H_{eff} = E a_1^\dagger a_1 + U a_1^\dagger a_1^\dagger a_1a_1</span><script type="math/tex">H_{eff} = E a_1^\dagger a_1 + U a_1^\dagger a_1^\dagger a_1a_1</script></span>, and the python code is</p>
+<pre><code>        Heff = [[E, ("ad", 1), ("a", 1)], [U, ("ad", 1), ("ad", 1), ("a", 1), ("a", 1)]].
+</code></pre>
+<p>Note that the first and second elements in <code>("ad", 1)</code> represent the operator and the corresponding subscript, respectively.</p>
+<p>More importantly, we only give three symbols to represent the corresponding system's operators:</p>
+<pre><code>"ad" ==&gt; bosonic creation operator, such as cavity field mode
+
+"a"  ==&gt; bosonic annilihlation operator, such as cavity field mode
+
+"sp" ==&gt; raising operator: |e&gt;&lt;g|, such as two-level spin
+
+"sm" ==&gt; lowering operator: |g&gt;&lt;e|, such as two-level spin
+
+"Sp N=M" ==&gt; Sp_M = \sum_{i=1}^{M}{sp_i}, M collective two-level spins
+
+"Sm N=M" ==&gt; Sm_M = \sum_{i=1}^{M}{sm_i}, M collective two-level spins
+
+"Sz N=M" ==&gt; Sz_M = \sum_{i=1}^{M}{sp_i*sm_i}, M collective two-level spins
+</code></pre>
+<p>Meanwhile, the Input and Output variables must be acquired by the two functions <code>Input_channel</code> and <code>Output_channel</code>, respectively.</p>
+<p>And the ratio variable represents that each input channel has a corresponding coherent amplitude,
+e.g.,
+<span><span class="MathJax_Preview">b_1\Rightarrow β_1, b_2\Rightarrowβ_2, b_3\Rightarrowβ_3,</span><script type="math/tex; mode=display">b_1\Rightarrow β_1, b_2\Rightarrowβ_2, b_3\Rightarrowβ_3,</script></span>
+and we have
+<span><span class="MathJax_Preview">ratio = [β_1, β_2, β_3],</span><script type="math/tex; mode=display">ratio = [β_1, β_2, β_3],</script></span>
+where <span><span class="MathJax_Preview">η_k=β_k/β_1</span><script type="math/tex">η_k=β_k/β_1</script></span>. Of course, if there was only one input channel, we can ignore this variable, and the default value is <code>[1,1,&hellip;,1]</code>.</p>
+<p>:param <code>Heff</code>: The effective Hamiltonian in the form of List[list].</p>
+<p>:param <code>Input</code>: The input form is acquired by Input_channel function.</p>
+<p>:param <code>Output</code>: The output form is acquired by Output_channel function.</p>
+<p>:param <code>ratio</code>: The ratio between all input coherent amplitudes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class qcs:
+    __Dim = dict()
+    __BasisList = dict()
+    __HeffList = dict()
+    __InOutList = dict()
+    __Judge_Heff = []
+    __Judge_InOut = dict()
+
+    def __init__(self, Heff: list, Input: list, Output: list, ratio=None):
+        &#34;&#34;&#34;
+        Here, for each term in the effective Hamiltonian, such as \(H_{eff} = E a_1^\dagger a_1\), we use a list to represent it, i.e.,
+
+                                        Heff = [E, (&#34;ad&#34;, 1), (&#34;a&#34;, 1)],
+
+        where the first element represents the corresponding coefficient, and the last two elements represent the operator \(a_1^\dagger\) and \(a_1\), respectively.
+
+        For example, \(H_{eff} = E a_1^\dagger a_1 + U a_1^\dagger a_1^\dagger a_1a_1\), and the python code is
+
+                    Heff = [[E, (&#34;ad&#34;, 1), (&#34;a&#34;, 1)], [U, (&#34;ad&#34;, 1), (&#34;ad&#34;, 1), (&#34;a&#34;, 1), (&#34;a&#34;, 1)]].
+
+        Note that the first and second elements in `(&#34;ad&#34;, 1)` represent the operator and the corresponding subscript, respectively.
+
+        More importantly, we only give three symbols to represent the corresponding system&#39;s operators:
+
+            &#34;ad&#34; ==&gt; bosonic creation operator, such as cavity field mode
+
+            &#34;a&#34;  ==&gt; bosonic annilihlation operator, such as cavity field mode
+
+            &#34;sp&#34; ==&gt; raising operator: |e&gt;&lt;g|, such as two-level spin
+
+            &#34;sm&#34; ==&gt; lowering operator: |g&gt;&lt;e|, such as two-level spin
+
+            &#34;Sp N=M&#34; ==&gt; Sp_M = \sum_{i=1}^{M}{sp_i}, M collective two-level spins
+
+            &#34;Sm N=M&#34; ==&gt; Sm_M = \sum_{i=1}^{M}{sm_i}, M collective two-level spins
+
+            &#34;Sz N=M&#34; ==&gt; Sz_M = \sum_{i=1}^{M}{sp_i*sm_i}, M collective two-level spins
+
+
+        Meanwhile, the Input and Output variables must be acquired by the two functions `Input_channel` and `Output_channel`, respectively.
+
+        And the ratio variable represents that each input channel has a corresponding coherent amplitude,
+        e.g.,
+                \[b_1\Rightarrow β_1, b_2\Rightarrowβ_2, b_3\Rightarrowβ_3,\]
+        and we have
+                \[ratio = [β_1, β_2, β_3],\]
+        where \(η_k=β_k/β_1\). Of course, if there was only one input channel, we can ignore this variable, and the default value is `[1,1,...,1]`.
+
+        :param `Heff`: The effective Hamiltonian in the form of List[list].
+
+        :param `Input`: The input form is acquired by Input_channel function.
+
+        :param `Output`: The output form is acquired by Output_channel function.
+
+        :param `ratio`: The ratio between all input coherent amplitudes.
+        &#34;&#34;&#34;
+        self.__Heff_c, self.__Heff_v = update_H(Heff)
+        self.__Input = {}
+        self.__ratio = {}
+        self.__Frequency = {}
+        loc, temp_in = 0, self.__combine_channel(Input)
+        for key, values in temp_in.items():
+            self.__Input[key] = values[0]
+            self.__Frequency[key] = values[1]
+            if ratio == None:
+                self.__ratio[key] = 1
+            else:
+                self.__ratio[key] = ratio[loc]
+            loc += 1
+        self.__Output = self.__combine_channel(Output)
+
+    def __combine_channel(self, channels: list or tuple) -&gt; dict:
+        &#34;&#34;&#34;
+        Let multiple channels fused into a dict
+        :param channels: a list including one or multiple (Input/Output) channel
+        :return: a dict
+        &#34;&#34;&#34;
+        if type(channels) == list or type(channels) == tuple:
+            channel_list = {}
+            for channel in channels:
+                channel_list.update(channel)
+            return channel_list
+        else:
+            return channels
+
+    def Input_channel(channel_name: str, mode: list, frequency) -&gt; dict:
+        &#34;&#34;&#34;
+        Assuming `channel_name = &#34;b1&#34;`, the corresponding input-output formalism is
+                    \[b_{1,out}(t) = b_{1,in}(t) - i  o_{b_1}.\]
+        For example, when \(o_{b_1}=\sqrt{κ} a_1\), it corresponds to
+
+                            o_b1 = [np.sqrt(κ), (&#34;a&#34;, 1)].
+
+        Obviously, if \(o_{b_1}\) could consist of multiple system&#39;s operators, such as
+                \[o_{b_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,\]
+        which corresponds to
+
+                            o_b1 = [[np.sqrt(κ_1), (&#34;a&#34;, 1)], [np.sqrt(κ_2), (&#34;a&#34;, 2)]]
+
+        :param `channel_name`: The input channel name, such as `&#39;b1&#39;, &#39;b2&#39;`, and etc.
+
+        :param `mode`: it consists of system&#39;s annihilation operator, e.g., `o_b1`.
+
+        :param `frequency [number, list, array]`: driving frequency or incoming photon frequency.
+
+        :return ` `dict
+        &#34;&#34;&#34;
+        Input = dict()
+        if type(mode[0]) in number_type:
+            mode = [mode]
+        if type(frequency) != list and type(frequency) not in number_type:
+            Input[channel_name] = [mode, list(frequency)]
+        else:
+            Input[channel_name] = [mode, frequency]
+        return Input
+
+    def Output_channel(channel_name: str, mode: list) -&gt; dict:
+        &#34;&#34;&#34;
+        Assuming `channel_name = &#34;c1&#34;`, the corresponding input-output formalism is
+                    \[c_{1,out}(t) = c_{1,in}(t) - i o_{c_1}.\]
+        For example, when \(o_{c_1}=\sqrt{κ} a_1\), it corresponds to
+
+                            o_c1 = [np.sqrt(κ), (&#34;a&#34;, 1)].
+
+        Obviously, if \(o_{c_1}\) could consist of multiple system&#39;s operators, such as
+                \[o_{c_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,\]
+        which corresponds to
+
+                            o_c1 = [[np.sqrt(κ_1), (&#34;a&#34;, 1)], [np.sqrt(κ_2), (&#34;a&#34;, 2)]]
+
+        :param `channel_name`: The output channel name, such as `&#39;c1&#39;, &#39;c2&#39;`, and etc.
+
+        :param `mode`: It consists of system&#39;s annihilation operator, e.g., `o_c1`.
+
+        :return ` `dict
+        &#34;&#34;&#34;
+        Output = dict()
+        if type(mode[0]) in number_type:
+            mode = [mode]
+        Output[channel_name] = mode
+        return Output
+
+    def __excitation_number(self):
+        &#34;&#34;&#34;
+        Calculating the total excitation number
+        &#34;&#34;&#34;
+        Ope_a = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if item[0] == &#39;a&#39;])), key=lambda x: x[1])
+        Ope_sm = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if item[0] == &#39;sm&#39;])), key=lambda x: x[1])
+        Ope_ad = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if item[0] == &#39;ad&#39;])), key=lambda x: x[1])
+        Ope_sp = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if item[0] == &#39;sp&#39;])), key=lambda x: x[1])
+        Ope_Sz = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if &#39;Sz&#39; in item[0]])), key=lambda x: x[1])
+        Ope_Sp = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if &#39;Sp&#39; in item[0]])), key=lambda x: x[1])
+        Ope_Sm = sorted(list(set([item for sublist in self.__Heff_v for item in sublist if &#39;Sm&#39; in item[0]])), key=lambda x: x[1])
+
+        Ope_Szs = [0] * (len(Ope_a) + len(Ope_sm)) + Ope_Sz
+        Ope_ani = Ope_a + Ope_sm + Ope_Sm
+        Ope_cre = Ope_ad + Ope_sp + Ope_Sp
+        H_mp = [sublist for sublist in self.__Heff_v if len(sublist) &gt; 2]
+        ac_ratio = 1
+        for Hi in H_mp:
+            ani_ope = [x for x in Hi if x[0] in [&#34;a&#34;, &#34;sm&#34;] or &#34;Sm&#34; in x[0]]
+            cre_ope = [x for x in Hi if x[0] in [&#34;ad&#34;, &#34;sp&#34;] or &#34;Sp&#34; in x[0]]
+            if len(ani_ope) != len(cre_ope):
+                ac_ratio = 0
+                break
+        if len(H_mp) == 0 or ac_ratio == 1:
+            self.__k = [1] * len(Ope_ani)
+        else:
+            k = [Fraction(1, 1)] * len(Ope_ani)
+            Heff_v = self.__Heff_v
+            ord_ind = [0]
+            for kk in range(len(Ope_ani)):
+                if Heff_v != []:
+                    ari_ind = []
+                    Ha_mp = [sublist for sublist in Heff_v if Ope_ani[ord_ind[kk]] in sublist]
+                    Hc_mp = [sublist for sublist in Heff_v if Ope_cre[ord_ind[kk]] in sublist]
+                    Heff_v = [sublist for sublist in Heff_v if sublist not in Ha_mp + Hc_mp]
+                    for Hi in Ha_mp:
+                        ani_ope = [x for x in Hi if x[0] in [&#34;a&#34;, &#34;sm&#34;] or &#34;Sm&#34; in x[0]]
+                        cre_ope = [x for x in Hi if x[0] in [&#34;ad&#34;, &#34;sp&#34;] or &#34;Sp&#34; in x[0]]
+                        for ani_i in ani_ope:
+                            k[Ope_ani.index(ani_i)] = k[ord_ind[kk]]
+                        for cre_i in cre_ope:
+                            k[Ope_cre.index(cre_i)] = k[ord_ind[kk]] * Fraction(len(ani_ope), len(cre_ope))
+                        for x in Hi:
+                            if x[0] in [&#34;a&#34;, &#34;sm&#34;] or &#34;Sm&#34; in x[0]:
+                                if x != Ope_ani[ord_ind[kk]]:
+                                    ari_ind.append(Ope_ani.index(x))
+                            else:
+                                ari_ind.append(Ope_cre.index(x))
+                    ari_ind = list(set(ari_ind))
+                    ord_ind = ord_ind[:kk + 1] + ari_ind + ord_ind[kk + 1:]
+                else:
+                    break
+            self.__k = weight_coff(k)
+        if len(Ope_Sz) != 0:
+            self.__Ope_Szs = Ope_Szs
+        self.__Ope_ani = Ope_ani
+        self.__Ope_cre = Ope_cre
+        self.__BasisList[0] = [[0] * len(Ope_ani)]
+
+    def __basis(self, n_exc: int):
+        &#34;&#34;&#34;
+        Calculating all the basis vectors in certain excitation number.
+        :param n_exc: the excitation number
+        &#34;&#34;&#34;
+        max_dims = []
+        for O in self.__Ope_ani:
+            if O[0] == &#34;a&#34;:
+                max_dims.append(n_exc)
+            elif O[0] == &#34;sm&#34;:
+                max_dims.append(1)
+            elif &#34;Sm&#34; in O[0]:
+                N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, O[0]))))
+                if N_spin &lt;= n_exc:
+                    max_dims.append(N_spin)
+                else:
+                    max_dims.append(n_exc)
+            else:
+                pass
+
+        qcs.__BasisList[n_exc] = create_basis(n_exc, max_dims, self.__k)
+        qcs.__Dim[n_exc] = len(qcs.__BasisList[n_exc])
+
+    def __prestore_HeffList(self, n_exc: int):
+        &#34;&#34;&#34;
+        In order to decrease the runtime when user calculates a series of parameters, we
+        prestore the effective Hamiltonian matrix in the form of sparse matrices.
+        :param n_exc: the excitation number
+        &#34;&#34;&#34;
+        Heff_nexc = dict()
+        bas_fix = qcs.__BasisList[n_exc]
+        for Hi in self.__Heff_v:
+            H_ind = [cof[-1] for cof in Hi]
+            if H_ind.count(H_ind[0]) != len(H_ind):
+                Hi_per = list(map(list, set(it.permutations(Hi))))
+                rep = False
+                for H in Hi_per:
+                    H_d = [(dagger(Hk[0]), Hk[1]) for Hk in H]
+                    if tuple(H_d) in Heff_nexc:
+                        rep = True
+                        break
+                if rep:
+                    Heff_nexc[tuple(Hi)] = csr_matrix(Heff_nexc[tuple(H_d)].toarray().T)
+                    continue
+
+            coff = np.ones((len(bas_fix),))
+            bas_cor = np.array(bas_fix)
+            for H in Hi[::-1]:
+                if H[0] in [&#34;a&#34;, &#34;sm&#34;]:
+                    loc = self.__Ope_ani.index(H)
+                    coff = coff * emath.sqrt(bas_cor[:, loc])
+                    bas_cor[:, loc] -= 1
+                elif H[0] in [&#34;ad&#34;, &#34;sp&#34;]:
+                    loc = self.__Ope_cre.index(H)
+                    bas_cor[:, loc] += 1
+                    coff = coff * emath.sqrt(bas_cor[:, loc])
+                elif &#34;Sm&#34; in H[0]:
+                    N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, H[0]))))
+                    loc = self.__Ope_ani.index(H)
+                    coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+                    bas_cor[:, loc] -= 1
+                elif &#34;Sp&#34; in H[0]:
+                    N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, H[0]))))
+                    loc = self.__Ope_cre.index(H)
+                    bas_cor[:, loc] += 1
+                    coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+                elif &#34;Sz&#34; in H[0]:
+                    N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, H[0]))))
+                    loc = self.__Ope_Szs.index(H)
+                    coff = coff * bas_cor[:, loc]
+                else:
+                    pass
+            Heff_nexc[tuple(Hi)] = basis_dot(bas_fix, bas_cor, coff)
+        qcs.__HeffList[n_exc] = Heff_nexc
+
+    def __prestore_InOutList(self, n_exc: int):
+        &#34;&#34;&#34;
+        In order to decrease the runtime when user calculates a series of parameters, we
+        prestore the Input-Output mode&#39;s matrix in the form of sparse matrices.
+        :param n_exc: the excitation number
+        &#34;&#34;&#34;
+        InOut = dict()
+        In_Opes = [x[1] for InOpe in self.__Input.values() for x in InOpe]
+        Out_Opes = [x[1] for OutOpe in self.__Output.values() for x in OutOpe]
+        bas_1 = qcs.__BasisList[n_exc - 1]
+        bas_2 = qcs.__BasisList[n_exc]
+        for In in In_Opes:
+            coff = np.ones((len(bas_2),))
+            bas_cor = np.array(bas_2)
+            loc = self.__Ope_ani.index(In)
+            if &#34;Sm&#34; in In[0]:
+                N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, In[0]))))
+                coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+            else:
+                coff = coff * emath.sqrt(bas_cor[:, loc])
+            bas_cor[:, loc] -= 1
+            InOut[In] = basis_dot(bas_1, bas_cor, coff)
+        for Out in Out_Opes:
+            coff = np.ones((len(bas_2),))
+            bas_cor = np.array(bas_2)
+            if Out not in InOut:
+                loc = self.__Ope_ani.index(Out)
+                if &#34;Sm&#34; in In[0]:
+                    N_spin = int(&#34;&#34;.join(list(filter(str.isdigit, In[0]))))
+                    coff = coff * emath.sqrt((N_spin - bas_cor[:, loc] + 1) * bas_cor[:, loc])
+                else:
+                    coff = coff * emath.sqrt(bas_cor[:, loc])
+                bas_cor[:, loc] -= 1
+                InOut[Out] = basis_dot(bas_1, bas_cor, coff)
+        qcs.__InOutList[n_exc] = InOut
+
+    def __Heff_Matrix(self, n_exc: int):
+        &#34;&#34;&#34;
+        By using an appropriate basis vectors in excitation subspace, we can acquire the matrix, Heff^{(n_exc)}.
+        :param n_exc: the excitation number
+        :return: the effective Hamiltonian in the form of matrix at the certain excitation subspace
+        &#34;&#34;&#34;
+        Heff_List = [qcs.__HeffList[n_exc][tuple(Hv)] * self.__Heff_c[k] for k, Hv in enumerate(self.__Heff_v)]
+        Heff_m = sum_sparse(Heff_List)
+        return Heff_m
+
+    def __Input_Matrix(self, n_exc: int):
+        &#34;&#34;&#34;
+        We assume that the input channel is b, and the input-output formalism can be written as
+                                b_out(t) = b_in(t) - i * o_b(t).
+        Thus, the function will return the matrix, O^{b}_{n_exc-1, n_exc}.
+        :param n_exc: the excitation number
+        :return: the modes of input channel in the form of matrix
+        &#34;&#34;&#34;
+        Int_m = {}
+        for key, value in self.__Input.items():
+            Int_m[key] = sum_sparse([qcs.__InOutList[n_exc][x[1]] * x[0] for x in value])
+        return Int_m
+
+    def __Output_Matrix(self, n_exc: int):
+        &#34;&#34;&#34;
+        We assume that the input channel is c, and the input-output formalism can be written as
+                                c_out(t) = c_in(t) - i * o_c(t).
+        Thus, the function will return the matrix, O^{c}_{n_exc-1, n_exc}.
+        :param n_exc: the excitation number
+        :return: the modes of output channel in the form of matrix
+        &#34;&#34;&#34;
+        Out_m = {}
+        for key, value in self.__Output.items():
+            Out_m[key] = sum_sparse([qcs.__InOutList[n_exc][x[1]] * x[0] for x in value])
+        return Out_m
+
+    def print_weight_N(self):
+        &#34;&#34;&#34;
+            This function is used to print the weight excitation number operator of the effective Hamiltonian.
+
+        :return ` `Returns a string representation of the weight excitation number operator.
+        &#34;&#34;&#34;
+        self.__excitation_number()
+        weignt_N = []
+        for kk, cr in enumerate(self.__Ope_cre):
+            weignt_N.append(str(self.__k[kk]) + &#39;\u00D7&#39; + cr[0] + self.__Ope_ani[kk][0] + &#39;_&#39; + str(cr[1]))
+            if &#39;Sp&#39; in weignt_N[kk]:
+                weignt_N[kk] = weignt_N[kk].replace(cr[0] + self.__Ope_ani[kk][0], &#39;(&#39; + cr[0].replace(&#39;Sp&#39;, &#39;Sz&#39;) + &#39;)&#39;)
+        return &#39;N = &#39; + &#39;+&#39;.join(weignt_N)
+
+    def print_basis(self, n_exc: int):
+        &#34;&#34;&#34;
+            This function is used to print the basis vectors, which corresponds to excitation number `n_exc`.
+
+        :param `n_exc`: the excitation number
+
+        :return ` `the information about the basis vector and all basis vectors in the excitation number (`n_exc`) subspace
+        &#34;&#34;&#34;
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__BasisList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+        if n_exc not in qcs.__BasisList.keys():
+            self.__basis(n_exc)
+        return self.__Ope_ani, qcs.__BasisList[n_exc]
+
+    def print_InOutput(self, n_exc: int, channel_name: str):
+        &#34;&#34;&#34;
+                This function is used to print the matrix, which corresponds to the projections of the input/output mode
+                onto the direct sum of the (`n_exc-1`)-th abd (`n_exc`)-th excitation subspace.
+
+        :param `n_exc`: the excitation number
+
+        :param `channel_name`: the name of channel
+
+        :return ` `the input and output modes onto the direct sum of the (`n_exc-1`)-th abd (`n_exc`)-th excitation subspace.
+        &#34;&#34;&#34;
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__InOutList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+        if n_exc not in qcs.__InOutList.keys():
+            if n_exc - 1 not in qcs.__BasisList.keys():
+                self.__basis(n_exc - 1)
+            self.__basis(n_exc)
+            self.__prestore_InOutList(n_exc)
+        if channel_name in self.__Input:
+            return self.__Input_Matrix(n_exc)[channel_name]
+        elif channel_name in self.__Output:
+            return self.__Output_Matrix(n_exc)[channel_name]
+        else:
+            print(&#34;Sorry, the channel name %s does not exist.&#34; % channel_name)
+
+    def print_Heff(self, n_exc: int):
+        &#34;&#34;&#34;
+                This function is used to input the correspondint effective Hamiltonian in the excitation subspace `n_exc`.
+
+        :param `n_exc`: the excitation number
+
+        :return ` `the effective Hamiltonian in the excitation number (`n_exc`) subspace.
+        &#34;&#34;&#34;
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__HeffList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+        if n_exc not in qcs.__HeffList.keys():
+            self.__basis(n_exc)
+            self.__prestore_HeffList(n_exc)
+        return self.__Heff_Matrix(n_exc)
+
+    def __classification(self, photons: list):
+        &#34;&#34;&#34;
+        :param photons: the output modes
+        :return: the classification label
+        &#34;&#34;&#34;
+        In_list, Out_list = set(self.__Input.keys()), set(photons)
+        cover_part = In_list &amp; Out_list
+        if len(In_list) == 1 and len(Out_list) == 1:
+            if cover_part:
+                return 1  # one-to-one-same
+            else:
+                return -1  # one-to-one-differnt
+        elif len(In_list) &gt; 1 and len(Out_list) == 1:
+            if cover_part:
+                return 2  # many-to-one-same
+            else:
+                return -2  # many-to-one-differnt
+        elif len(In_list) == 1 and len(Out_list) &gt; 1:
+            if cover_part:
+                return 3  # one-to-many-same
+            else:
+                return -3  # one-to-many-differnt
+        else:
+            if cover_part:
+                return 4  # many-to-many-same
+            else:
+                return -4  # many-to-many-differnt
+
+    def calculate_quantity(self, Quantity: str, tlist=0, zp=0):
+        &#34;&#34;&#34;Calculating a series of physical quantities. For example,
+
+            Quantity = &#34;c1&#34;     ==&gt; The single-photon transmission
+
+            Quantity = &#34;c1c1&#34;   ==&gt; The 2nd-order equal-time correlation function
+
+            Quantity = &#34;c1c2&#34;   ==&gt; The 2nd-order equal-time cross-correlation function
+
+            Quantity = &#34;c1c1c1&#34; ==&gt; The 3rd-order equal-time correlation function
+
+        Note that these physical quantities describe the statistical properties of output light in the output channel.
+
+        When input channel is different from the output channel, e.g., input channel `&#34;b1&#34;` and output channel `&#34;c1&#34;`, the
+        physical quantity can represent the correlation function about system&#39;s modes based on the input-output formalism.
+        For example, the input-output relation about output channel `&#34;c1&#34;` is given by
+        \[c_{1,out} = c_{1,in} - i o_{c_1},\]
+        and we assume that \(o_{c_1}=\sqrt{κ}a_1\) and `Quantity = &#34;c1c1&#34;`. The 2nd-order equal-time correlation function
+        is equivalent to the correlation function of mode \(a_1\).
+
+        Here, we consider the presence of tlist only when the frequencies of incoming coherent states are not identical, and consider
+        `zp` only when the effective Hamiltonian is irreversible, i.e.,
+        \[ [H_{eff}^{(n)} - ω - i0^{+}]^{-1} ≠ 0 \Rightarrow zp = i0^{+}\]
+
+        :param `Quantity`: physical quantity
+
+        :param `tlist [number, list, array]`: a time variable
+
+        :param `zp`: an infinitely small quantity
+
+        :return `[number, list]`the corresponding physical quantity. When the variable `frequency` or `tlist` is `[number, list/array]`, the output also is `[number, list]`
+        &#34;&#34;&#34;
+        inv, exp, abs = nlg.inv, np.exp, np.abs
+        photons = {}
+        for mode in self.__Output.keys():
+            photons[mode] = Quantity.count(mode)
+        key_out = [key for key in photons for _ in range(photons[key])]
+        label = self.__classification(key_out)
+        if len(set(key_out)) == 1:
+            key_out = key_out[0]
+        n_exc = sum(photons.values())
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__HeffList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+            qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+            for n in range(1, n_exc + 1):
+                self.__basis(n)
+                self.__prestore_HeffList(n)
+                self.__prestore_InOutList(n)
+        elif compare_dicts(self.__Input, qcs.__Judge_InOut) and compare_dicts(self.__Output, qcs.__Judge_InOut):
+            pass
+        else:
+            qcs.__InOutList.clear()
+            qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+            for n in range(1, n_exc + 1):
+                if n not in list(qcs.__HeffList.keys()):
+                    self.__basis(n)
+                self.__prestore_InOutList(n)
+        for n in range(1, n_exc + 1):
+            if n not in list(qcs.__HeffList.keys()):
+                self.__basis(n)
+                self.__prestore_HeffList(n)
+                self.__prestore_InOutList(n)
+            elif n not in list(qcs.__InOutList.keys()):
+                self.__basis(n)
+                self.__prestore_InOutList(n)
+            else:
+                pass
+
+        if label == -1:  # one-to-one-differnt
+            key_in = list(self.__Input.keys())[0]
+            ome_list = self.__Frequency[key_in]
+            if n_exc == 1:
+                k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key_in][0][1][0])))]
+                k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                B, C, H0 = self.__Input_Matrix(1)[key_in].conj().T, self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                I = np.eye(qcs.__Dim[n_exc])
+                if type(ome_list) not in number_type:
+                    return [(abs(C @ inv(H0 - (ome + zp) * I) @ B) ** 2 / k_int[0])[0, 0] for ome in ome_list]
+                else:
+                    return (abs(C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2 / k_int[0])[0, 0]
+            else:
+                B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                C_tot = left_prod(C)
+                if type(ome_list) not in number_type:
+                    return [(abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+                else:
+                    return (abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+
+        elif label == 1:  # one-to-one-same
+            key_in = list(self.__Input.keys())[0]
+            ome_list = self.__Frequency[key_in]
+            if n_exc == 1:
+                k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key_in][0][1][0])))]
+                k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                B, C, H0 = self.__Input_Matrix(1)[key_in].conj().T, self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                I = np.eye(qcs.__Dim[n_exc])
+                if type(ome_list) not in number_type:
+                    return [(abs(1 + 1j * C @ inv(H0 - (ome + zp) * I) @ B) ** 2 / k_int[0])[0, 0] for ome in ome_list]
+                else:
+                    return (abs(1 + 1j * C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2 / k_int[0])[0, 0]
+            else:
+                B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                C_tot = [comb(n_exc, n) * left_prod(C[:n]) for n in range(1, n_exc + 1)]
+                if type(ome_list) not in number_type:
+                    return [(abs(1 + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                             abs(1 + 1j * C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+                else:
+                    return (abs(1 + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome_list, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                            abs(1 + 1j * C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+
+        elif label == -2:  # many-to-one-differnt
+            key_in = list(self.__Input.keys())
+            ome_list = list(self.__Frequency.values())
+            ty_n = ome_list.count(ome_list[0]) == len(ome_list)
+            if ty_n == True:  # the identical incoming photon frequencies
+                ome_list = ome_list[0]
+                if n_exc == 1:
+                    B, C, H0 = sum([self.__ratio[key] * self.__Input_Matrix(1)[key].conj().T for key in key_in]), self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                    k_sum = list(self.__ratio.values())
+                    k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                    I = np.eye(qcs.__Dim[n_exc])
+                    if type(ome_list) not in number_type:
+                        return [(abs(C @ inv(H0 - ome * I) @ B) ** 2 / k_sum)[0, 0] for ome in ome_list]
+                    else:
+                        return (abs(C @ inv(H0 - ome_list * I) @ B) ** 2 / k_sum)[0, 0]
+                else:
+                    B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, n_exc + 1)]
+                    C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                    H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                    I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                    C_tot = left_prod(C)
+                    if type(ome_list) not in number_type:
+                        return [(abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome
+                                in ome_list]
+                    else:
+                        return (abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+            else:  # the different incoming photon frequencies
+                sum_f = sum_frequencies(ome_list, n_exc)
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                Klist = [[inv(H0[n - 1] - (ome + zp) * I[n - 1]) for ome in sum_f[n - 1]] for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                ary = n_m_ary(n_exc, len(key_in))
+                comb_s = [covert_to_decimals(ary_i, len(key_in)) for ary_i in ary]
+                if n_exc == 1:
+                    k_sum = list(self.__ratio.values())
+                    k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                    B = [self.__Input_Matrix(1)[key].conj().T for k, key in enumerate(key_in)]
+                    if type(tlist) not in number_type:
+                        T_t = []
+                        append = T_t.append
+                        for t in tlist:
+                            N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                            Blist = [N[k] * B[k] for k in range(len(B))]
+                            append((abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0])
+                        return T_t
+                    else:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                        Blist = [N[k] * B[k] for k in range(len(B))]
+                        return (abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0]
+                else:
+                    C_tot = left_prod(C)
+                    B = [[self.__Input_Matrix(n)[key].conj().T for key in key_in] for n in range(1, n_exc + 1)]
+                    if type(tlist) not in number_type:
+                        gn_t = []
+                        append = gn_t.append
+                        for t in tlist:
+                            N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                            Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                            Gn_0 = 0
+                            for j, c in enumerate(comb_s):
+                                C_tot_c = C_tot.copy()
+                                for k, ci in enumerate(c[::-1]):
+                                    C_tot_c = C_tot_c @ Klist[n_exc - k - 1][ci] @ Blist[n_exc - k - 1][ary[j][n_exc - k - 1]]
+                                Gn_0 += C_tot_c
+                            append((abs(Gn_0) ** 2 / abs(C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0])
+                        return gn_t
+                    else:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                        Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                        Gn_0 = 0
+                        for c in comb_s:
+                            C_tot_c = C_tot.copy()
+                            for k, ci in enumerate(c[::-1]):
+                                C_tot_c = C_tot_c @ Klist[n_exc - k - 1][ci] @ Blist[n_exc - k - 1][ci]
+                            Gn_0 += C_tot_c
+                        return (abs(Gn_0) ** 2 / abs(C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0]
+
+        elif label == 2:  # many-to-one-same
+            key_in = list(self.__Input.keys())
+            ome_list = list(self.__Frequency.values())
+            ty_n = ome_list.count(ome_list[0]) == len(ome_list)
+            if ty_n == True:  # the identical incoming photon frequencies
+                ome_list = ome_list[0]
+                if n_exc == 1:
+                    B, C, H0 = sum([self.__ratio[key] * self.__Input_Matrix(1)[key].conj().T for key in key_in]), self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                    k_sum = list(self.__ratio.values())
+                    k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                    I = np.eye(qcs.__Dim[n_exc])
+                    if type(ome_list) not in number_type:
+                        return [(abs(self.__ratio[key_out] + 1j * C @ inv(H0 - ome * I) @ B) ** 2 / k_sum)[0, 0] for ome in ome_list]
+                    else:
+                        return (abs(self.__ratio[key_out] + 1j * C @ inv(H0 - ome_list * I) @ B) ** 2 / k_sum)[0, 0]
+                else:
+                    B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, n_exc + 1)]
+                    C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                    H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                    I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                    C_tot = [self.__ratio[key_out] ** (n_exc - n) * comb(n_exc, n) * left_prod(C[:n]) for n in range(1, n_exc + 1)]
+                    coff_free = self.__ratio[key_out] ** n_exc
+                    if type(ome_list) not in number_type:
+                        return [(abs(coff_free + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                                 abs(self.__ratio[key_out] + 1j * C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+                    else:
+                        return (abs(coff_free + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome_list, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                                abs(self.__ratio[key_out] + 1j * C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+            else:  # the identical incoming photon frequencies
+                sum_f = sum_frequencies(ome_list, n_exc)
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                Klist = [[inv(H0[n - 1] - (ome + zp) * I[n - 1]) for ome in sum_f[n - 1]] for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                loc = key_in.index(key_out)
+                if n_exc == 1:
+                    k_sum = list(self.__ratio.values())
+                    k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                    k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                    k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                    B = [self.__Input_Matrix(1)[key].conj().T for k, key in enumerate(key_in)]
+                    if type(tlist) not in number_type:
+                        T_t = []
+                        append = T_t.append
+                        for t in tlist:
+                            N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                            Blist = [N[k] * B[k] for k in range(len(B))]
+                            append((abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0])
+                        return T_t
+                    else:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                        Blist = [N[k] * B[k] for k in range(len(B))]
+                        return (abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0]
+                else:
+                    ary_s = [n_m_ary(n, len(key_in)) for n in range(1, n_exc + 1)]
+                    comb_s = [[covert_to_decimals(ary_i, len(key_in)) for ary_i in ary] for ary in ary_s]
+                    C_tot = [left_prod(C[:n]) for n in range(1, n_exc + 1)]
+                    B = [[self.__Input_Matrix(n)[key].conj().T for key in key_in] for n in range(1, n_exc + 1)]
+                    if type(tlist) not in number_type:
+                        gn_t = []
+                        append = gn_t.append
+                        for t in tlist:
+                            N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                            coff_free = [comb(n_exc, n) * N[loc] ** (n_exc - n) for n in range(n_exc + 1)]
+                            Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                            Gn_0 = coff_free[0]
+                            for n in range(1, n_exc + 1):
+                                G_tot = 0
+                                for j, c in enumerate(comb_s[n - 1]):
+                                    C_tot_c = C_tot[n - 1].copy()
+                                    for k, ci in enumerate(c[::-1]):
+                                        C_tot_c = C_tot_c @ Klist[n - k - 1][ci] @ Blist[n - k - 1][ary_s[n - 1][j][n - k - 1]]
+                                    G_tot += C_tot_c
+                                Gn_0 += (1j) ** n * coff_free[n] * G_tot
+                            append((abs(Gn_0) ** 2 / abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0])
+                        return gn_t
+                    else:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                        coff_free = [comb(n_exc, n) * N[loc] ** (n_exc - n) for n in range(n_exc + 1)]
+                        Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                        Gn_0 = coff_free[0]
+                        for n in range(1, n_exc + 1):
+                            G_tot = 0
+                            for j, c in enumerate(comb_s[n - 1]):
+                                C_tot_c = C_tot[n - 1].copy()
+                                for k, ci in enumerate(c[::-1]):
+                                    C_tot_c = C_tot_c @ Klist[n - k - 1][ci] @ Blist[n - k - 1][ary_s[n - 1][j][n - k - 1]]
+                                G_tot += C_tot_c
+                            Gn_0 += (1j) ** n * coff_free[n] * G_tot
+                        return (abs(Gn_0) ** 2 / abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0]
+
+        elif label == -3:  # one-to-many-differnt
+            key_in = list(self.__Input.keys())[0]
+            ome_list = self.__Frequency[key_in]
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+            C = [self.__Output_Matrix(n)[key_out[n - 1]] for n in range(1, n_exc + 1)]
+            H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+            C_tot = left_prod(C)
+            if type(ome_list) not in number_type:
+                correlation = []
+                append = correlation.append
+                for ome in ome_list:
+                    G = abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2
+                    K1 = inv(H0[0] - (ome + zp) * I[0]) @ B[0]
+                    for key in photons:
+                        G /= abs((self.__Output_Matrix(1)[key] @ K1) ** (photons[key])) ** 2
+                    append(G[0, 0])
+                return correlation
+            else:
+                correlation = abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2
+                K1 = inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]
+                for key in photons:
+                    correlation /= abs((self.__Output_Matrix(1)[key] @ K1) ** (photons[key])) ** 2
+                return correlation[0, 0]
+
+        elif label == 3:  # one-to-many-same
+            key_in = list(self.__Input.keys())[0]
+            loc = key_out.index(key_in)
+            key_out_new = key_out[: loc] + key_out[loc + photons[key_in]:] + key_out[loc: loc + photons[key_in]]
+            ome_list = self.__Frequency[key_in]
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+            C = [self.__Output_Matrix(n)[key_out_new[n - 1]] for n in range(1, n_exc + 1)]
+            H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+            C_tot = [comb(photons[key_in], n) * left_prod(C[:n_exc - n]) for n in range(photons[key_in] + 1)]
+            C1_out = {}
+            for key in key_out_new:
+                C1_out[key] = self.__Output_Matrix(1)[key]
+            if type(ome_list) not in number_type:
+                correlation = []
+                append = correlation.append
+                for ome in ome_list:
+                    G = abs(sum([C_tot[n] @ right_prod(H0[:n_exc - n], B[:n_exc - n], I[:n_exc - n], ome, zp) for n in range(photons[key_in] + 1)])) ** 2
+                    K1 = inv(H0[0] - (ome + zp) * I[0]) @ B[0]
+                    for key in photons:
+                        if key == key_in:
+                            G /= abs((1 + 1j * C1_out[key] @ K1) ** (photons[key])) ** 2
+                        else:
+                            G /= abs((C1_out[key] @ K1) ** (photons[key])) ** 2
+                    append(G[0, 0])
+                return correlation
+            else:
+                G = abs(sum([C_tot[n] @ right_prod(H0[:n_exc - n], B[:n_exc - n], I[:n_exc - n], ome_list, zp) for n in range(photons[key_in] + 1)])) ** 2
+                K1 = inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]
+                for key in photons:
+                    if key == key_in:
+                        G /= abs((1 + 1j * C1_out[key] @ K1) ** (photons[key])) ** 2
+                    else:
+                        G /= abs((C1_out[key] @ K1) ** (photons[key])) ** 2
+                return G[0, 0]
+
+        elif label == -4:  # many-to-many-different
+            print(&#34;This function is not yet available&#34;)
+        else:  # many-to-many-same
+            print(&#34;This function is not yet available&#34;)
+
+    def calculate_2nd_uETCF(self, Quantity: str, tau=0, zp=0):
+        &#34;&#34;&#34;Calculating the 2nd-order unequal-time coreelation function . For example,
+
+                Quantity = &#34;c1c1&#34; ==&gt; The 2nd-order unequal-time correlation function
+
+        :param `Quantity`: physical quantity
+
+        :param `tau [number, list, array]`: the delay time
+
+        :param `zp`: an infinitely small quantity
+
+        :return `[number, list]`the 2nd-order unequal-time coreelation function (uETCF). When the variable `frequency` or `tau` is `[number, list/array]`, the output also is `[number, list]`.
+        &#34;&#34;&#34;
+        inv, abs, expm = nlg.inv, np.abs, slg.expm  # Assign to a local variable
+        photons = {}
+        for mode in self.__Output.keys():
+            photons[mode] = Quantity.count(mode)
+        key_out = [key for key in photons for _ in range(photons[key])]
+        label = self.__classification(key_out)
+        if len(set(key_out)) == 1:
+            key_out = key_out[0]
+        self.__excitation_number()
+        if self.__Heff_v != qcs.__Judge_Heff:
+            qcs.__HeffList.clear()
+            qcs.__Judge_Heff = self.__Heff_v
+            qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+            for n in range(0, 3):
+                self.__basis(n)
+                if n != 0:
+                    self.__prestore_HeffList(n)
+                    self.__prestore_InOutList(n)
+        elif compare_dicts(self.__Input, qcs.__Judge_InOut) and compare_dicts(self.__Output, qcs.__Judge_InOut):
+            pass
+        else:
+            qcs.__InOutList.clear()
+            qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+            for n in range(1, 3):
+                self.__prestore_InOutList(n)
+        for n in range(1, 3):
+            if n not in list(qcs.__HeffList.keys()):
+                self.__basis(n)
+                self.__prestore_HeffList(n)
+                self.__prestore_InOutList(n)
+            elif n not in list(qcs.__InOutList.keys()):
+                self.__basis(n)
+                self.__prestore_InOutList(n)
+            else:
+                pass
+
+        if label == -1:  # one-to-one-differnt
+            key_in = list(self.__Input.keys())[0]
+            ome = self.__Frequency[key_in]
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+            Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+            P1 = C[0] @ inv(Heff[0]) @ B[0]
+            P1_R = inv(Heff[0]) @ B[0]
+            P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+            if type(tau) not in number_type:
+                g2_t = []
+                append = g2_t.append
+                for t in tau:
+                    P1_t = expm(-1j * Heff[0] * abs(t))
+                    append((abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0])
+                return g2_t
+            else:
+                P1_t = expm(-1j * Heff[0] * abs(tau))
+                return (abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0]
+
+        elif label == 1:  # one-to-one-same
+            key_in = list(self.__Input.keys())[0]
+            ome = self.__Frequency[key_in]
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+            Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+            P1 = C[0] @ inv(Heff[0]) @ B[0]
+            P1_R = inv(Heff[0]) @ B[0]
+            P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+            if type(tau) not in number_type:
+                g2_t = []
+                append = g2_t.append
+                for t in tau:
+                    P1_t = expm(-1j * Heff[0] * abs(t))
+                    append((abs((1 + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(1 + 1j * P1) ** 4)[0, 0])
+                return g2_t
+            else:
+                P1_t = expm(-1j * Heff[0] * abs(tau))
+                return (abs((1 + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(1 + 1j * P1) ** 4)[0, 0]
+
+        elif label == -2:  # many-to-one-differnt
+            key_in = list(self.__Input.keys())
+            ome = list(self.__Frequency.values())[0]
+            B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+            Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+            P1 = C[0] @ inv(Heff[0]) @ B[0]
+            P1_R = inv(Heff[0]) @ B[0]
+            P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+            if type(tau) not in number_type:
+                g2_t = []
+                append = g2_t.append
+                for t in tau:
+                    P1_t = expm(-1j * Heff[0] * abs(t))
+                    append((abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0])
+                return g2_t
+            else:
+                P1_t = expm(-1j * Heff[0] * abs(tau))
+                return (abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0]
+
+        elif label == 2:  # many-to-one-same
+            key_in = list(self.__Input.keys())
+            ome = list(self.__Frequency.values())[0]
+            B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, 3)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+            Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+            P1 = C[0] @ inv(Heff[0]) @ B[0]
+            P1_R = inv(Heff[0]) @ B[0]
+            P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+            ratio_c = self.__ratio[key_out]
+            if type(tau) not in number_type:
+                g2_t = []
+                append = g2_t.append
+                for t in tau:
+                    P1_t = expm(-1j * Heff[0] * abs(t))
+                    append((abs((ratio_c + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(ratio_c + 1j * P1) ** 4)[0, 0])
+                return g2_t
+            else:
+                P1_t = expm(-1j * Heff[0] * abs(tau))
+                return (abs((ratio_c + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(ratio_c + 1j * P1) ** 4)[0, 0]
+
+        else:
+            print(&#34;This function is not yet available&#34;)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="qcs_phy.qcs.Input_channel"><code class="name flex">
+<span>def <span class="ident">Input_channel</span></span>(<span>channel_name: str, mode: list, frequency) ‑> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Assuming <code>channel_name = "b1"</code>, the corresponding input-output formalism is
+<span><span class="MathJax_Preview">b_{1,out}(t) = b_{1,in}(t) - i
+o_{b_1}.</span><script type="math/tex; mode=display">b_{1,out}(t) = b_{1,in}(t) - i
+o_{b_1}.</script></span>
+For example, when <span><span class="MathJax_Preview">o_{b_1}=\sqrt{κ} a_1</span><script type="math/tex">o_{b_1}=\sqrt{κ} a_1</script></span>, it corresponds to</p>
+<pre><code>                o_b1 = [np.sqrt(κ), ("a", 1)].
+</code></pre>
+<p>Obviously, if <span><span class="MathJax_Preview">o_{b_1}</span><script type="math/tex">o_{b_1}</script></span> could consist of multiple system's operators, such as
+<span><span class="MathJax_Preview">o_{b_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,</span><script type="math/tex; mode=display">o_{b_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,</script></span>
+which corresponds to</p>
+<pre><code>                o_b1 = [[np.sqrt(κ_1), ("a", 1)], [np.sqrt(κ_2), ("a", 2)]]
+</code></pre>
+<p>:param <code>channel_name</code>: The input channel name, such as <code>'b1', 'b2'</code>, and etc.</p>
+<p>:param <code>mode</code>: it consists of system's annihilation operator, e.g., <code>o_b1</code>.</p>
+<p>:param <code>frequency [number, list, array]</code>: driving frequency or incoming photon frequency.</p>
+<p>:return <code> </code>dict</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Input_channel(channel_name: str, mode: list, frequency) -&gt; dict:
+    &#34;&#34;&#34;
+    Assuming `channel_name = &#34;b1&#34;`, the corresponding input-output formalism is
+                \[b_{1,out}(t) = b_{1,in}(t) - i  o_{b_1}.\]
+    For example, when \(o_{b_1}=\sqrt{κ} a_1\), it corresponds to
+
+                        o_b1 = [np.sqrt(κ), (&#34;a&#34;, 1)].
+
+    Obviously, if \(o_{b_1}\) could consist of multiple system&#39;s operators, such as
+            \[o_{b_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,\]
+    which corresponds to
+
+                        o_b1 = [[np.sqrt(κ_1), (&#34;a&#34;, 1)], [np.sqrt(κ_2), (&#34;a&#34;, 2)]]
+
+    :param `channel_name`: The input channel name, such as `&#39;b1&#39;, &#39;b2&#39;`, and etc.
+
+    :param `mode`: it consists of system&#39;s annihilation operator, e.g., `o_b1`.
+
+    :param `frequency [number, list, array]`: driving frequency or incoming photon frequency.
+
+    :return ` `dict
+    &#34;&#34;&#34;
+    Input = dict()
+    if type(mode[0]) in number_type:
+        mode = [mode]
+    if type(frequency) != list and type(frequency) not in number_type:
+        Input[channel_name] = [mode, list(frequency)]
+    else:
+        Input[channel_name] = [mode, frequency]
+    return Input</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.qcs.Output_channel"><code class="name flex">
+<span>def <span class="ident">Output_channel</span></span>(<span>channel_name: str, mode: list) ‑> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Assuming <code>channel_name = "c1"</code>, the corresponding input-output formalism is
+<span><span class="MathJax_Preview">c_{1,out}(t) = c_{1,in}(t) - i o_{c_1}.</span><script type="math/tex; mode=display">c_{1,out}(t) = c_{1,in}(t) - i o_{c_1}.</script></span>
+For example, when <span><span class="MathJax_Preview">o_{c_1}=\sqrt{κ} a_1</span><script type="math/tex">o_{c_1}=\sqrt{κ} a_1</script></span>, it corresponds to</p>
+<pre><code>                o_c1 = [np.sqrt(κ), ("a", 1)].
+</code></pre>
+<p>Obviously, if <span><span class="MathJax_Preview">o_{c_1}</span><script type="math/tex">o_{c_1}</script></span> could consist of multiple system's operators, such as
+<span><span class="MathJax_Preview">o_{c_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,</span><script type="math/tex; mode=display">o_{c_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,</script></span>
+which corresponds to</p>
+<pre><code>                o_c1 = [[np.sqrt(κ_1), ("a", 1)], [np.sqrt(κ_2), ("a", 2)]]
+</code></pre>
+<p>:param <code>channel_name</code>: The output channel name, such as <code>'c1', 'c2'</code>, and etc.</p>
+<p>:param <code>mode</code>: It consists of system's annihilation operator, e.g., <code>o_c1</code>.</p>
+<p>:return <code> </code>dict</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Output_channel(channel_name: str, mode: list) -&gt; dict:
+    &#34;&#34;&#34;
+    Assuming `channel_name = &#34;c1&#34;`, the corresponding input-output formalism is
+                \[c_{1,out}(t) = c_{1,in}(t) - i o_{c_1}.\]
+    For example, when \(o_{c_1}=\sqrt{κ} a_1\), it corresponds to
+
+                        o_c1 = [np.sqrt(κ), (&#34;a&#34;, 1)].
+
+    Obviously, if \(o_{c_1}\) could consist of multiple system&#39;s operators, such as
+            \[o_{c_1} = \sqrt{κ_1} a_1 + \sqrt{κ_2} a_2,\]
+    which corresponds to
+
+                        o_c1 = [[np.sqrt(κ_1), (&#34;a&#34;, 1)], [np.sqrt(κ_2), (&#34;a&#34;, 2)]]
+
+    :param `channel_name`: The output channel name, such as `&#39;c1&#39;, &#39;c2&#39;`, and etc.
+
+    :param `mode`: It consists of system&#39;s annihilation operator, e.g., `o_c1`.
+
+    :return ` `dict
+    &#34;&#34;&#34;
+    Output = dict()
+    if type(mode[0]) in number_type:
+        mode = [mode]
+    Output[channel_name] = mode
+    return Output</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.qcs.calculate_2nd_uETCF"><code class="name flex">
+<span>def <span class="ident">calculate_2nd_uETCF</span></span>(<span>self, Quantity: str, tau=0, zp=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculating the 2nd-order unequal-time coreelation function . For example,</p>
+<pre><code>    Quantity = "c1c1" ==&gt; The 2nd-order unequal-time correlation function
+</code></pre>
+<p>:param <code>Quantity</code>: physical quantity</p>
+<p>:param <code>tau [number, list, array]</code>: the delay time</p>
+<p>:param <code>zp</code>: an infinitely small quantity</p>
+<p>:return <code>[number, list]</code>the 2nd-order unequal-time coreelation function (uETCF). When the variable <code>frequency</code> or <code>tau</code> is <code>[number, list/array]</code>, the output also is <code>[number, list]</code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_2nd_uETCF(self, Quantity: str, tau=0, zp=0):
+    &#34;&#34;&#34;Calculating the 2nd-order unequal-time coreelation function . For example,
+
+            Quantity = &#34;c1c1&#34; ==&gt; The 2nd-order unequal-time correlation function
+
+    :param `Quantity`: physical quantity
+
+    :param `tau [number, list, array]`: the delay time
+
+    :param `zp`: an infinitely small quantity
+
+    :return `[number, list]`the 2nd-order unequal-time coreelation function (uETCF). When the variable `frequency` or `tau` is `[number, list/array]`, the output also is `[number, list]`.
+    &#34;&#34;&#34;
+    inv, abs, expm = nlg.inv, np.abs, slg.expm  # Assign to a local variable
+    photons = {}
+    for mode in self.__Output.keys():
+        photons[mode] = Quantity.count(mode)
+    key_out = [key for key in photons for _ in range(photons[key])]
+    label = self.__classification(key_out)
+    if len(set(key_out)) == 1:
+        key_out = key_out[0]
+    self.__excitation_number()
+    if self.__Heff_v != qcs.__Judge_Heff:
+        qcs.__HeffList.clear()
+        qcs.__Judge_Heff = self.__Heff_v
+        qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+        for n in range(0, 3):
+            self.__basis(n)
+            if n != 0:
+                self.__prestore_HeffList(n)
+                self.__prestore_InOutList(n)
+    elif compare_dicts(self.__Input, qcs.__Judge_InOut) and compare_dicts(self.__Output, qcs.__Judge_InOut):
+        pass
+    else:
+        qcs.__InOutList.clear()
+        qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+        for n in range(1, 3):
+            self.__prestore_InOutList(n)
+    for n in range(1, 3):
+        if n not in list(qcs.__HeffList.keys()):
+            self.__basis(n)
+            self.__prestore_HeffList(n)
+            self.__prestore_InOutList(n)
+        elif n not in list(qcs.__InOutList.keys()):
+            self.__basis(n)
+            self.__prestore_InOutList(n)
+        else:
+            pass
+
+    if label == -1:  # one-to-one-differnt
+        key_in = list(self.__Input.keys())[0]
+        ome = self.__Frequency[key_in]
+        B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, 3)]
+        C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+        I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+        Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+        P1 = C[0] @ inv(Heff[0]) @ B[0]
+        P1_R = inv(Heff[0]) @ B[0]
+        P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+        if type(tau) not in number_type:
+            g2_t = []
+            append = g2_t.append
+            for t in tau:
+                P1_t = expm(-1j * Heff[0] * abs(t))
+                append((abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0])
+            return g2_t
+        else:
+            P1_t = expm(-1j * Heff[0] * abs(tau))
+            return (abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0]
+
+    elif label == 1:  # one-to-one-same
+        key_in = list(self.__Input.keys())[0]
+        ome = self.__Frequency[key_in]
+        B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, 3)]
+        C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+        I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+        Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+        P1 = C[0] @ inv(Heff[0]) @ B[0]
+        P1_R = inv(Heff[0]) @ B[0]
+        P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+        if type(tau) not in number_type:
+            g2_t = []
+            append = g2_t.append
+            for t in tau:
+                P1_t = expm(-1j * Heff[0] * abs(t))
+                append((abs((1 + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(1 + 1j * P1) ** 4)[0, 0])
+            return g2_t
+        else:
+            P1_t = expm(-1j * Heff[0] * abs(tau))
+            return (abs((1 + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(1 + 1j * P1) ** 4)[0, 0]
+
+    elif label == -2:  # many-to-one-differnt
+        key_in = list(self.__Input.keys())
+        ome = list(self.__Frequency.values())[0]
+        B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, 3)]
+        C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+        I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+        Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+        P1 = C[0] @ inv(Heff[0]) @ B[0]
+        P1_R = inv(Heff[0]) @ B[0]
+        P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+        if type(tau) not in number_type:
+            g2_t = []
+            append = g2_t.append
+            for t in tau:
+                P1_t = expm(-1j * Heff[0] * abs(t))
+                append((abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0])
+            return g2_t
+        else:
+            P1_t = expm(-1j * Heff[0] * abs(tau))
+            return (abs(P1 ** 2 + C[0] @ P1_t @ P2_R - C[0] @ P1_t @ P1_R * P1) ** 2 / abs(P1) ** 4)[0, 0]
+
+    elif label == 2:  # many-to-one-same
+        key_in = list(self.__Input.keys())
+        ome = list(self.__Frequency.values())[0]
+        B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, 3)]
+        C = [self.__Output_Matrix(n)[key_out] for n in range(1, 3)]
+        I = [np.eye(qcs.__Dim[n]) for n in range(1, 3)]
+        Heff = [self.__Heff_Matrix(n) - (n * ome + zp) * I[n - 1] for n in range(1, 3)]
+        P1 = C[0] @ inv(Heff[0]) @ B[0]
+        P1_R = inv(Heff[0]) @ B[0]
+        P2_R = C[1] @ inv(Heff[1]) @ B[1] @ P1_R
+        ratio_c = self.__ratio[key_out]
+        if type(tau) not in number_type:
+            g2_t = []
+            append = g2_t.append
+            for t in tau:
+                P1_t = expm(-1j * Heff[0] * abs(t))
+                append((abs((ratio_c + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(ratio_c + 1j * P1) ** 4)[0, 0])
+            return g2_t
+        else:
+            P1_t = expm(-1j * Heff[0] * abs(tau))
+            return (abs((ratio_c + 1j * P1) ** 2 - C[0] @ P1_t @ P2_R + C[0] @ P1_t @ P1_R * P1) ** 2 / abs(ratio_c + 1j * P1) ** 4)[0, 0]
+
+    else:
+        print(&#34;This function is not yet available&#34;)</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.qcs.calculate_quantity"><code class="name flex">
+<span>def <span class="ident">calculate_quantity</span></span>(<span>self, Quantity: str, tlist=0, zp=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculating a series of physical quantities. For example,</p>
+<pre><code>Quantity = "c1"     ==&gt; The single-photon transmission
+
+Quantity = "c1c1"   ==&gt; The 2nd-order equal-time correlation function
+
+Quantity = "c1c2"   ==&gt; The 2nd-order equal-time cross-correlation function
+
+Quantity = "c1c1c1" ==&gt; The 3rd-order equal-time correlation function
+</code></pre>
+<p>Note that these physical quantities describe the statistical properties of output light in the output channel.</p>
+<p>When input channel is different from the output channel, e.g., input channel <code>"b1"</code> and output channel <code>"c1"</code>, the
+physical quantity can represent the correlation function about system's modes based on the input-output formalism.
+For example, the input-output relation about output channel <code>"c1"</code> is given by
+<span><span class="MathJax_Preview">c_{1,out} = c_{1,in} - i o_{c_1},</span><script type="math/tex; mode=display">c_{1,out} = c_{1,in} - i o_{c_1},</script></span>
+and we assume that <span><span class="MathJax_Preview">o_{c_1}=\sqrt{κ}a_1</span><script type="math/tex">o_{c_1}=\sqrt{κ}a_1</script></span> and <code>Quantity = "c1c1"</code>. The 2nd-order equal-time correlation function
+is equivalent to the correlation function of mode <span><span class="MathJax_Preview">a_1</span><script type="math/tex">a_1</script></span>.</p>
+<p>Here, we consider the presence of tlist only when the frequencies of incoming coherent states are not identical, and consider
+<code>zp</code> only when the effective Hamiltonian is irreversible, i.e.,
+<span><span class="MathJax_Preview"> [H_{eff}^{(n)} - ω - i0^{+}]^{-1} ≠ 0 \Rightarrow zp = i0^{+}</span><script type="math/tex; mode=display"> [H_{eff}^{(n)} - ω - i0^{+}]^{-1} ≠ 0 \Rightarrow zp = i0^{+}</script></span></p>
+<p>:param <code>Quantity</code>: physical quantity</p>
+<p>:param <code>tlist [number, list, array]</code>: a time variable</p>
+<p>:param <code>zp</code>: an infinitely small quantity</p>
+<p>:return <code>[number, list]</code>the corresponding physical quantity. When the variable <code>frequency</code> or <code>tlist</code> is <code>[number, list/array]</code>, the output also is <code>[number, list]</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_quantity(self, Quantity: str, tlist=0, zp=0):
+    &#34;&#34;&#34;Calculating a series of physical quantities. For example,
+
+        Quantity = &#34;c1&#34;     ==&gt; The single-photon transmission
+
+        Quantity = &#34;c1c1&#34;   ==&gt; The 2nd-order equal-time correlation function
+
+        Quantity = &#34;c1c2&#34;   ==&gt; The 2nd-order equal-time cross-correlation function
+
+        Quantity = &#34;c1c1c1&#34; ==&gt; The 3rd-order equal-time correlation function
+
+    Note that these physical quantities describe the statistical properties of output light in the output channel.
+
+    When input channel is different from the output channel, e.g., input channel `&#34;b1&#34;` and output channel `&#34;c1&#34;`, the
+    physical quantity can represent the correlation function about system&#39;s modes based on the input-output formalism.
+    For example, the input-output relation about output channel `&#34;c1&#34;` is given by
+    \[c_{1,out} = c_{1,in} - i o_{c_1},\]
+    and we assume that \(o_{c_1}=\sqrt{κ}a_1\) and `Quantity = &#34;c1c1&#34;`. The 2nd-order equal-time correlation function
+    is equivalent to the correlation function of mode \(a_1\).
+
+    Here, we consider the presence of tlist only when the frequencies of incoming coherent states are not identical, and consider
+    `zp` only when the effective Hamiltonian is irreversible, i.e.,
+    \[ [H_{eff}^{(n)} - ω - i0^{+}]^{-1} ≠ 0 \Rightarrow zp = i0^{+}\]
+
+    :param `Quantity`: physical quantity
+
+    :param `tlist [number, list, array]`: a time variable
+
+    :param `zp`: an infinitely small quantity
+
+    :return `[number, list]`the corresponding physical quantity. When the variable `frequency` or `tlist` is `[number, list/array]`, the output also is `[number, list]`
+    &#34;&#34;&#34;
+    inv, exp, abs = nlg.inv, np.exp, np.abs
+    photons = {}
+    for mode in self.__Output.keys():
+        photons[mode] = Quantity.count(mode)
+    key_out = [key for key in photons for _ in range(photons[key])]
+    label = self.__classification(key_out)
+    if len(set(key_out)) == 1:
+        key_out = key_out[0]
+    n_exc = sum(photons.values())
+    self.__excitation_number()
+    if self.__Heff_v != qcs.__Judge_Heff:
+        qcs.__HeffList.clear()
+        qcs.__Judge_Heff = self.__Heff_v
+        qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+        for n in range(1, n_exc + 1):
+            self.__basis(n)
+            self.__prestore_HeffList(n)
+            self.__prestore_InOutList(n)
+    elif compare_dicts(self.__Input, qcs.__Judge_InOut) and compare_dicts(self.__Output, qcs.__Judge_InOut):
+        pass
+    else:
+        qcs.__InOutList.clear()
+        qcs.__Judge_InOut = dict(self.__Input, **self.__Output)
+        for n in range(1, n_exc + 1):
+            if n not in list(qcs.__HeffList.keys()):
+                self.__basis(n)
+            self.__prestore_InOutList(n)
+    for n in range(1, n_exc + 1):
+        if n not in list(qcs.__HeffList.keys()):
+            self.__basis(n)
+            self.__prestore_HeffList(n)
+            self.__prestore_InOutList(n)
+        elif n not in list(qcs.__InOutList.keys()):
+            self.__basis(n)
+            self.__prestore_InOutList(n)
+        else:
+            pass
+
+    if label == -1:  # one-to-one-differnt
+        key_in = list(self.__Input.keys())[0]
+        ome_list = self.__Frequency[key_in]
+        if n_exc == 1:
+            k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key_in][0][1][0])))]
+            k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+            B, C, H0 = self.__Input_Matrix(1)[key_in].conj().T, self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+            I = np.eye(qcs.__Dim[n_exc])
+            if type(ome_list) not in number_type:
+                return [(abs(C @ inv(H0 - (ome + zp) * I) @ B) ** 2 / k_int[0])[0, 0] for ome in ome_list]
+            else:
+                return (abs(C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2 / k_int[0])[0, 0]
+        else:
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+            H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+            C_tot = left_prod(C)
+            if type(ome_list) not in number_type:
+                return [(abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+            else:
+                return (abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+
+    elif label == 1:  # one-to-one-same
+        key_in = list(self.__Input.keys())[0]
+        ome_list = self.__Frequency[key_in]
+        if n_exc == 1:
+            k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key_in][0][1][0])))]
+            k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+            B, C, H0 = self.__Input_Matrix(1)[key_in].conj().T, self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+            I = np.eye(qcs.__Dim[n_exc])
+            if type(ome_list) not in number_type:
+                return [(abs(1 + 1j * C @ inv(H0 - (ome + zp) * I) @ B) ** 2 / k_int[0])[0, 0] for ome in ome_list]
+            else:
+                return (abs(1 + 1j * C @ inv(H0 - (ome_list + zp) * I) @ B) ** 2 / k_int[0])[0, 0]
+        else:
+            B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+            H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+            C_tot = [comb(n_exc, n) * left_prod(C[:n]) for n in range(1, n_exc + 1)]
+            if type(ome_list) not in number_type:
+                return [(abs(1 + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                         abs(1 + 1j * C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+            else:
+                return (abs(1 + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome_list, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                        abs(1 + 1j * C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+
+    elif label == -2:  # many-to-one-differnt
+        key_in = list(self.__Input.keys())
+        ome_list = list(self.__Frequency.values())
+        ty_n = ome_list.count(ome_list[0]) == len(ome_list)
+        if ty_n == True:  # the identical incoming photon frequencies
+            ome_list = ome_list[0]
+            if n_exc == 1:
+                B, C, H0 = sum([self.__ratio[key] * self.__Input_Matrix(1)[key].conj().T for key in key_in]), self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                k_sum = list(self.__ratio.values())
+                k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                I = np.eye(qcs.__Dim[n_exc])
+                if type(ome_list) not in number_type:
+                    return [(abs(C @ inv(H0 - ome * I) @ B) ** 2 / k_sum)[0, 0] for ome in ome_list]
+                else:
+                    return (abs(C @ inv(H0 - ome_list * I) @ B) ** 2 / k_sum)[0, 0]
+            else:
+                B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                C_tot = left_prod(C)
+                if type(ome_list) not in number_type:
+                    return [(abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome
+                            in ome_list]
+                else:
+                    return (abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2 / abs(C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+        else:  # the different incoming photon frequencies
+            sum_f = sum_frequencies(ome_list, n_exc)
+            H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+            Klist = [[inv(H0[n - 1] - (ome + zp) * I[n - 1]) for ome in sum_f[n - 1]] for n in range(1, n_exc + 1)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+            ary = n_m_ary(n_exc, len(key_in))
+            comb_s = [covert_to_decimals(ary_i, len(key_in)) for ary_i in ary]
+            if n_exc == 1:
+                k_sum = list(self.__ratio.values())
+                k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                B = [self.__Input_Matrix(1)[key].conj().T for k, key in enumerate(key_in)]
+                if type(tlist) not in number_type:
+                    T_t = []
+                    append = T_t.append
+                    for t in tlist:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                        Blist = [N[k] * B[k] for k in range(len(B))]
+                        append((abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0])
+                    return T_t
+                else:
+                    N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                    Blist = [N[k] * B[k] for k in range(len(B))]
+                    return (abs(C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0]
+            else:
+                C_tot = left_prod(C)
+                B = [[self.__Input_Matrix(n)[key].conj().T for key in key_in] for n in range(1, n_exc + 1)]
+                if type(tlist) not in number_type:
+                    gn_t = []
+                    append = gn_t.append
+                    for t in tlist:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                        Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                        Gn_0 = 0
+                        for j, c in enumerate(comb_s):
+                            C_tot_c = C_tot.copy()
+                            for k, ci in enumerate(c[::-1]):
+                                C_tot_c = C_tot_c @ Klist[n_exc - k - 1][ci] @ Blist[n_exc - k - 1][ary[j][n_exc - k - 1]]
+                            Gn_0 += C_tot_c
+                        append((abs(Gn_0) ** 2 / abs(C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0])
+                    return gn_t
+                else:
+                    N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                    Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                    Gn_0 = 0
+                    for c in comb_s:
+                        C_tot_c = C_tot.copy()
+                        for k, ci in enumerate(c[::-1]):
+                            C_tot_c = C_tot_c @ Klist[n_exc - k - 1][ci] @ Blist[n_exc - k - 1][ci]
+                        Gn_0 += C_tot_c
+                    return (abs(Gn_0) ** 2 / abs(C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0]
+
+    elif label == 2:  # many-to-one-same
+        key_in = list(self.__Input.keys())
+        ome_list = list(self.__Frequency.values())
+        ty_n = ome_list.count(ome_list[0]) == len(ome_list)
+        if ty_n == True:  # the identical incoming photon frequencies
+            ome_list = ome_list[0]
+            if n_exc == 1:
+                B, C, H0 = sum([self.__ratio[key] * self.__Input_Matrix(1)[key].conj().T for key in key_in]), self.__Output_Matrix(1)[key_out], self.__Heff_Matrix(1)
+                k_sum = list(self.__ratio.values())
+                k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                I = np.eye(qcs.__Dim[n_exc])
+                if type(ome_list) not in number_type:
+                    return [(abs(self.__ratio[key_out] + 1j * C @ inv(H0 - ome * I) @ B) ** 2 / k_sum)[0, 0] for ome in ome_list]
+                else:
+                    return (abs(self.__ratio[key_out] + 1j * C @ inv(H0 - ome_list * I) @ B) ** 2 / k_sum)[0, 0]
+            else:
+                B = [sum([self.__ratio[key] * self.__Input_Matrix(n)[key].conj().T for key in key_in]) for n in range(1, n_exc + 1)]
+                C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+                H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+                I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+                C_tot = [self.__ratio[key_out] ** (n_exc - n) * comb(n_exc, n) * left_prod(C[:n]) for n in range(1, n_exc + 1)]
+                coff_free = self.__ratio[key_out] ** n_exc
+                if type(ome_list) not in number_type:
+                    return [(abs(coff_free + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                             abs(self.__ratio[key_out] + 1j * C[0] @ inv(H0[0] - (ome + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0] for ome in ome_list]
+                else:
+                    return (abs(coff_free + sum([C_tot[n - 1] @ right_prod(H0[:n], B[:n], I[:n], ome_list, zp) for n in range(1, n_exc + 1)])) ** 2 / \
+                            abs(self.__ratio[key_out] + 1j * C[0] @ inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]) ** (2 * n_exc))[0, 0]
+        else:  # the identical incoming photon frequencies
+            sum_f = sum_frequencies(ome_list, n_exc)
+            H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+            I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+            Klist = [[inv(H0[n - 1] - (ome + zp) * I[n - 1]) for ome in sum_f[n - 1]] for n in range(1, n_exc + 1)]
+            C = [self.__Output_Matrix(n)[key_out] for n in range(1, n_exc + 1)]
+            loc = key_in.index(key_out)
+            if n_exc == 1:
+                k_sum = list(self.__ratio.values())
+                k_str = [&#39;&#39;.join(list(filter(str.isdigit, self.__Input[key][0][1][0]))) for key in key_in]
+                k_int = [int(ks) if ks != &#39;&#39; else 1 for ks in k_str]
+                k_sum = sum(np.multiply(abs(k_sum) ** 2, k_int))
+                B = [self.__Input_Matrix(1)[key].conj().T for k, key in enumerate(key_in)]
+                if type(tlist) not in number_type:
+                    T_t = []
+                    append = T_t.append
+                    for t in tlist:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                        Blist = [N[k] * B[k] for k in range(len(B))]
+                        append((abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0])
+                    return T_t
+                else:
+                    N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                    Blist = [N[k] * B[k] for k in range(len(B))]
+                    return (abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[i] for i in range(len(key_in))])) ** 2 / k_sum)[0, 0]
+            else:
+                ary_s = [n_m_ary(n, len(key_in)) for n in range(1, n_exc + 1)]
+                comb_s = [[covert_to_decimals(ary_i, len(key_in)) for ary_i in ary] for ary in ary_s]
+                C_tot = [left_prod(C[:n]) for n in range(1, n_exc + 1)]
+                B = [[self.__Input_Matrix(n)[key].conj().T for key in key_in] for n in range(1, n_exc + 1)]
+                if type(tlist) not in number_type:
+                    gn_t = []
+                    append = gn_t.append
+                    for t in tlist:
+                        N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * t) for key in key_in]
+                        coff_free = [comb(n_exc, n) * N[loc] ** (n_exc - n) for n in range(n_exc + 1)]
+                        Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                        Gn_0 = coff_free[0]
+                        for n in range(1, n_exc + 1):
+                            G_tot = 0
+                            for j, c in enumerate(comb_s[n - 1]):
+                                C_tot_c = C_tot[n - 1].copy()
+                                for k, ci in enumerate(c[::-1]):
+                                    C_tot_c = C_tot_c @ Klist[n - k - 1][ci] @ Blist[n - k - 1][ary_s[n - 1][j][n - k - 1]]
+                                G_tot += C_tot_c
+                            Gn_0 += (1j) ** n * coff_free[n] * G_tot
+                        append((abs(Gn_0) ** 2 / abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0])
+                    return gn_t
+                else:
+                    N = [self.__ratio[key] * exp(-1j * self.__Frequency[key] * tlist) for key in key_in]
+                    coff_free = [comb(n_exc, n) * N[loc] ** (n_exc - n) for n in range(n_exc + 1)]
+                    Blist = [[Bi[k] * N[k] for k in range(len(key_in))] for Bi in B]
+                    Gn_0 = coff_free[0]
+                    for n in range(1, n_exc + 1):
+                        G_tot = 0
+                        for j, c in enumerate(comb_s[n - 1]):
+                            C_tot_c = C_tot[n - 1].copy()
+                            for k, ci in enumerate(c[::-1]):
+                                C_tot_c = C_tot_c @ Klist[n - k - 1][ci] @ Blist[n - k - 1][ary_s[n - 1][j][n - k - 1]]
+                            G_tot += C_tot_c
+                        Gn_0 += (1j) ** n * coff_free[n] * G_tot
+                    return (abs(Gn_0) ** 2 / abs(N[loc] + 1j * C[0] @ sum([Klist[0][i] @ Blist[0][i] for i in range(len(key_in))])) ** (2 * n_exc))[0, 0]
+
+    elif label == -3:  # one-to-many-differnt
+        key_in = list(self.__Input.keys())[0]
+        ome_list = self.__Frequency[key_in]
+        B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+        C = [self.__Output_Matrix(n)[key_out[n - 1]] for n in range(1, n_exc + 1)]
+        H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+        I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+        C_tot = left_prod(C)
+        if type(ome_list) not in number_type:
+            correlation = []
+            append = correlation.append
+            for ome in ome_list:
+                G = abs(C_tot @ right_prod(H0, B, I, ome, zp)) ** 2
+                K1 = inv(H0[0] - (ome + zp) * I[0]) @ B[0]
+                for key in photons:
+                    G /= abs((self.__Output_Matrix(1)[key] @ K1) ** (photons[key])) ** 2
+                append(G[0, 0])
+            return correlation
+        else:
+            correlation = abs(C_tot @ right_prod(H0, B, I, ome_list, zp)) ** 2
+            K1 = inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]
+            for key in photons:
+                correlation /= abs((self.__Output_Matrix(1)[key] @ K1) ** (photons[key])) ** 2
+            return correlation[0, 0]
+
+    elif label == 3:  # one-to-many-same
+        key_in = list(self.__Input.keys())[0]
+        loc = key_out.index(key_in)
+        key_out_new = key_out[: loc] + key_out[loc + photons[key_in]:] + key_out[loc: loc + photons[key_in]]
+        ome_list = self.__Frequency[key_in]
+        B = [self.__Input_Matrix(n)[key_in].conj().T for n in range(1, n_exc + 1)]
+        C = [self.__Output_Matrix(n)[key_out_new[n - 1]] for n in range(1, n_exc + 1)]
+        H0 = [self.__Heff_Matrix(n) for n in range(1, n_exc + 1)]
+        I = [np.eye(qcs.__Dim[n]) for n in range(1, n_exc + 1)]
+        C_tot = [comb(photons[key_in], n) * left_prod(C[:n_exc - n]) for n in range(photons[key_in] + 1)]
+        C1_out = {}
+        for key in key_out_new:
+            C1_out[key] = self.__Output_Matrix(1)[key]
+        if type(ome_list) not in number_type:
+            correlation = []
+            append = correlation.append
+            for ome in ome_list:
+                G = abs(sum([C_tot[n] @ right_prod(H0[:n_exc - n], B[:n_exc - n], I[:n_exc - n], ome, zp) for n in range(photons[key_in] + 1)])) ** 2
+                K1 = inv(H0[0] - (ome + zp) * I[0]) @ B[0]
+                for key in photons:
+                    if key == key_in:
+                        G /= abs((1 + 1j * C1_out[key] @ K1) ** (photons[key])) ** 2
+                    else:
+                        G /= abs((C1_out[key] @ K1) ** (photons[key])) ** 2
+                append(G[0, 0])
+            return correlation
+        else:
+            G = abs(sum([C_tot[n] @ right_prod(H0[:n_exc - n], B[:n_exc - n], I[:n_exc - n], ome_list, zp) for n in range(photons[key_in] + 1)])) ** 2
+            K1 = inv(H0[0] - (ome_list + zp) * I[0]) @ B[0]
+            for key in photons:
+                if key == key_in:
+                    G /= abs((1 + 1j * C1_out[key] @ K1) ** (photons[key])) ** 2
+                else:
+                    G /= abs((C1_out[key] @ K1) ** (photons[key])) ** 2
+            return G[0, 0]
+
+    elif label == -4:  # many-to-many-different
+        print(&#34;This function is not yet available&#34;)
+    else:  # many-to-many-same
+        print(&#34;This function is not yet available&#34;)</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.qcs.print_Heff"><code class="name flex">
+<span>def <span class="ident">print_Heff</span></span>(<span>self, n_exc: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function is used to input the correspondint effective Hamiltonian in the excitation subspace <code>n_exc</code>.</p>
+<p>:param <code>n_exc</code>: the excitation number</p>
+<p>:return <code> </code>the effective Hamiltonian in the excitation number (<code>n_exc</code>) subspace.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_Heff(self, n_exc: int):
+    &#34;&#34;&#34;
+            This function is used to input the correspondint effective Hamiltonian in the excitation subspace `n_exc`.
+
+    :param `n_exc`: the excitation number
+
+    :return ` `the effective Hamiltonian in the excitation number (`n_exc`) subspace.
+    &#34;&#34;&#34;
+    self.__excitation_number()
+    if self.__Heff_v != qcs.__Judge_Heff:
+        qcs.__HeffList.clear()
+        qcs.__Judge_Heff = self.__Heff_v
+    if n_exc not in qcs.__HeffList.keys():
+        self.__basis(n_exc)
+        self.__prestore_HeffList(n_exc)
+    return self.__Heff_Matrix(n_exc)</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.qcs.print_InOutput"><code class="name flex">
+<span>def <span class="ident">print_InOutput</span></span>(<span>self, n_exc: int, channel_name: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function is used to print the matrix, which corresponds to the projections of the input/output mode
+onto the direct sum of the (<code>n_exc-1</code>)-th abd (<code>n_exc</code>)-th excitation subspace.</p>
+<p>:param <code>n_exc</code>: the excitation number</p>
+<p>:param <code>channel_name</code>: the name of channel</p>
+<p>:return <code> </code>the input and output modes onto the direct sum of the (<code>n_exc-1</code>)-th abd (<code>n_exc</code>)-th excitation subspace.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_InOutput(self, n_exc: int, channel_name: str):
+    &#34;&#34;&#34;
+            This function is used to print the matrix, which corresponds to the projections of the input/output mode
+            onto the direct sum of the (`n_exc-1`)-th abd (`n_exc`)-th excitation subspace.
+
+    :param `n_exc`: the excitation number
+
+    :param `channel_name`: the name of channel
+
+    :return ` `the input and output modes onto the direct sum of the (`n_exc-1`)-th abd (`n_exc`)-th excitation subspace.
+    &#34;&#34;&#34;
+    self.__excitation_number()
+    if self.__Heff_v != qcs.__Judge_Heff:
+        qcs.__InOutList.clear()
+        qcs.__Judge_Heff = self.__Heff_v
+    if n_exc not in qcs.__InOutList.keys():
+        if n_exc - 1 not in qcs.__BasisList.keys():
+            self.__basis(n_exc - 1)
+        self.__basis(n_exc)
+        self.__prestore_InOutList(n_exc)
+    if channel_name in self.__Input:
+        return self.__Input_Matrix(n_exc)[channel_name]
+    elif channel_name in self.__Output:
+        return self.__Output_Matrix(n_exc)[channel_name]
+    else:
+        print(&#34;Sorry, the channel name %s does not exist.&#34; % channel_name)</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.qcs.print_basis"><code class="name flex">
+<span>def <span class="ident">print_basis</span></span>(<span>self, n_exc: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function is used to print the basis vectors, which corresponds to excitation number <code>n_exc</code>.</p>
+<p>:param <code>n_exc</code>: the excitation number</p>
+<p>:return <code> </code>the information about the basis vector and all basis vectors in the excitation number (<code>n_exc</code>) subspace</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_basis(self, n_exc: int):
+    &#34;&#34;&#34;
+        This function is used to print the basis vectors, which corresponds to excitation number `n_exc`.
+
+    :param `n_exc`: the excitation number
+
+    :return ` `the information about the basis vector and all basis vectors in the excitation number (`n_exc`) subspace
+    &#34;&#34;&#34;
+    self.__excitation_number()
+    if self.__Heff_v != qcs.__Judge_Heff:
+        qcs.__BasisList.clear()
+        qcs.__Judge_Heff = self.__Heff_v
+    if n_exc not in qcs.__BasisList.keys():
+        self.__basis(n_exc)
+    return self.__Ope_ani, qcs.__BasisList[n_exc]</code></pre>
+</details>
+</dd>
+<dt id="qcs_phy.qcs.print_weight_N"><code class="name flex">
+<span>def <span class="ident">print_weight_N</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function is used to print the weight excitation number operator of the effective Hamiltonian.</p>
+<p>:return <code> </code>Returns a string representation of the weight excitation number operator.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_weight_N(self):
+    &#34;&#34;&#34;
+        This function is used to print the weight excitation number operator of the effective Hamiltonian.
+
+    :return ` `Returns a string representation of the weight excitation number operator.
+    &#34;&#34;&#34;
+    self.__excitation_number()
+    weignt_N = []
+    for kk, cr in enumerate(self.__Ope_cre):
+        weignt_N.append(str(self.__k[kk]) + &#39;\u00D7&#39; + cr[0] + self.__Ope_ani[kk][0] + &#39;_&#39; + str(cr[1]))
+        if &#39;Sp&#39; in weignt_N[kk]:
+            weignt_N[kk] = weignt_N[kk].replace(cr[0] + self.__Ope_ani[kk][0], &#39;(&#39; + cr[0].replace(&#39;Sp&#39;, &#39;Sz&#39;) + &#39;)&#39;)
+    return &#39;N = &#39; + &#39;+&#39;.join(weignt_N)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="qcs_phy.basis_dot" href="#qcs_phy.basis_dot">basis_dot</a></code></li>
+<li><code><a title="qcs_phy.compare_dicts" href="#qcs_phy.compare_dicts">compare_dicts</a></code></li>
+<li><code><a title="qcs_phy.covert_to_decimals" href="#qcs_phy.covert_to_decimals">covert_to_decimals</a></code></li>
+<li><code><a title="qcs_phy.create_basis" href="#qcs_phy.create_basis">create_basis</a></code></li>
+<li><code><a title="qcs_phy.dagger" href="#qcs_phy.dagger">dagger</a></code></li>
+<li><code><a title="qcs_phy.gcd" href="#qcs_phy.gcd">gcd</a></code></li>
+<li><code><a title="qcs_phy.lcm" href="#qcs_phy.lcm">lcm</a></code></li>
+<li><code><a title="qcs_phy.left_prod" href="#qcs_phy.left_prod">left_prod</a></code></li>
+<li><code><a title="qcs_phy.n_m_ary" href="#qcs_phy.n_m_ary">n_m_ary</a></code></li>
+<li><code><a title="qcs_phy.right_prod" href="#qcs_phy.right_prod">right_prod</a></code></li>
+<li><code><a title="qcs_phy.sum_frequencies" href="#qcs_phy.sum_frequencies">sum_frequencies</a></code></li>
+<li><code><a title="qcs_phy.sum_sparse" href="#qcs_phy.sum_sparse">sum_sparse</a></code></li>
+<li><code><a title="qcs_phy.update_H" href="#qcs_phy.update_H">update_H</a></code></li>
+<li><code><a title="qcs_phy.weight_coff" href="#qcs_phy.weight_coff">weight_coff</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="qcs_phy.qcs" href="#qcs_phy.qcs">qcs</a></code></h4>
+<ul class="two-column">
+<li><code><a title="qcs_phy.qcs.Input_channel" href="#qcs_phy.qcs.Input_channel">Input_channel</a></code></li>
+<li><code><a title="qcs_phy.qcs.Output_channel" href="#qcs_phy.qcs.Output_channel">Output_channel</a></code></li>
+<li><code><a title="qcs_phy.qcs.calculate_2nd_uETCF" href="#qcs_phy.qcs.calculate_2nd_uETCF">calculate_2nd_uETCF</a></code></li>
+<li><code><a title="qcs_phy.qcs.calculate_quantity" href="#qcs_phy.qcs.calculate_quantity">calculate_quantity</a></code></li>
+<li><code><a title="qcs_phy.qcs.print_Heff" href="#qcs_phy.qcs.print_Heff">print_Heff</a></code></li>
+<li><code><a title="qcs_phy.qcs.print_InOutput" href="#qcs_phy.qcs.print_InOutput">print_InOutput</a></code></li>
+<li><code><a title="qcs_phy.qcs.print_basis" href="#qcs_phy.qcs.print_basis">print_basis</a></code></li>
+<li><code><a title="qcs_phy.qcs.print_weight_N" href="#qcs_phy.qcs.print_weight_N">print_weight_N</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
