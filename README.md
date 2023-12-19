@@ -88,4 +88,6 @@ QCS is licensed under the terms of the BSD license.
 
 `1.0.9` updated a new function: `print_weight_N`, which is used to print the weight excitation number operator of the effective Hamiltonian; fixed the problem of constructing the weight excitation number operator for tripartite and multipartite interactions
 
-`1.1.0` fixed further the problem of constructing the weight excitation number operator for tripartite and multipartite interactions
+`1.1.0` further fixed the problem of constructing the weight excitation number operator for tripartite and multipartite interactions
+
+`1.1.1` fixed an issue where the `calculate_xxx` functions would not work properly when it appeared after the `print_xxx` functions
