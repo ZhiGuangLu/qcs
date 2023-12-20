@@ -91,3 +91,5 @@ QCS is licensed under the terms of the BSD license.
 `1.1.0` further fixed the problem of constructing the weight excitation number operator for tripartite and multipartite interactions
 
 `1.1.1` fixed an issue where the `calculate_xxx` functions would not work properly when it appeared after the `print_xxx` functions
+
+`1.1.2` improved the function: `calculate_2nd_uETCF`; *this is final version*
