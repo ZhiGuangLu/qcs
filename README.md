@@ -53,6 +53,10 @@ we've provided the numerical comparison results in [tests](https://github.com/Zh
 
 <img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Qcs.png" width="965px">
 
+## Supplementary formula
+
+<img src="https://github.com/ZhiGuangLu/Load-Figures/blob/main/Supp.png" width="965px">
+
 ## Citation
 There is an official article related to this package, and the article is available at: 
 
